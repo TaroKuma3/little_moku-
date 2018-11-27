@@ -1,0 +1,15 @@
+<h1>Work#index</h1>
+<h1><%= "#{@user.name}さんの成果物一覧" %></h1>
+
+  <% @works.each do |work| %>
+    <ul>
+      <li>
+        <%= link_to(work.title, user_work_path(work.user_id, work.id)) %>
+      </li>
+    </ul>
+  <% end %>
+
+<h4><%= link_to("成果物を登録(work#newへ遷移)", user_work_index_path(@user))%></h4>
+
+
+

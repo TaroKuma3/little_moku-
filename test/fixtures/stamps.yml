@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  moku_id: 1
+  work_id: 1
+
+two:
+  moku_id: 1
+  work_id: 1

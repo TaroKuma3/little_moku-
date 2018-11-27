@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  started_at: MyString
+  finished_at: MyString
+  stopped_second: 1
+  alart_minutes: MyString
+
+two:
+  started_at: MyString
+  finished_at: MyString
+  stopped_second: 1
+  alart_minutes: MyString

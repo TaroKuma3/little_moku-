@@ -1,0 +1,32 @@
+<h1>mokusコントローラの　editビュー</h1>
+
+<h2><%= "#{@user.name}さんが#{@moku.created_at}にMOKUった内容"%></h2>
+
+<h4><%= "MOKUること区分： #{@moku_type.name}" %></h4>
+<p>（プルダウン、moku_typeからuser_idに紐づくもの全部取得＋デフォ表示を前ページで選択したmoku_type_idと同じものにする）</p>
+<%#
+selectヘルパー(および類似のcollection_selectヘルパー、select_tagヘルパーなど)を使用して
+belongs_to関連付けを設定する場合は、関連付けそのものの名前ではなく、
+外部キーの名前(上の例であればcity_id)を渡す%>
+
+<h4><%= "やったことやめも： #{@moku.content}" %></h4>
+<textarea>@moku.contentの内容</textarea>
+
+<h4>【保存】（mokus#updateへ）</h4>
+
+
+<% if false %>
+  <select name="city_id" id="city_id">
+    <option value="1">Lisbon</option>
+    <option value="2">Madrid</option>
+    <option value="12">Berlin</option>
+  </select>
+
+  <p><%= select_tag(:city_id, '<option value="1">Lisbon</option>, <option value="2">Madrid</option>') %></p>
+
+  <p><%= options_for_select([['Lisbon', 1], ['Madrid', 2]]) %></p>
+
+  <p><%= select_tag(:city_id, options_for_select([['Lisbon', 1], ['Madrid', 2]])) %></p>
+
+  <p><%= select_tag(:city_id, options_for_select([['Lisbon', 1], ['Madrid', 2]], 2)) %></p>
+<% end %>

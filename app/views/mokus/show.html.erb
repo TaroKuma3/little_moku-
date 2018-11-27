@@ -1,0 +1,21 @@
+<h1>mokusコントローラの　showビュー</h1>
+
+<h1><%= "#{@user.name}さんが#{@moku.created_at}にMOKUった内容"%></h1>
+<h4><%= "MOKU 終了時刻：#{@moku.updated_at}" %></h4>
+<h4><%= "MOKU TIME （このMOKUの作業時間/カラム不要？）:○○分" %></h4>
+<h4><%= "MOKUること区分： #{@moku_type.name}" %></h4>
+<h4><%= "やったことやめも： #{@moku.content}" %></h4>
+<h4><%= "このMOKUの成果物一覧" %></h4>
+<% if @works %>
+  <% @works.each do |work| %>
+  <ul>
+    <li>
+      <%= link_to(work.title, user_work_path(work.user_id, work.id)) %>
+    </li>
+  </ul>
+  <% end %>
+<% end %>
+
+
+<%= link_to("【編集】", edit_user_moku_path(@user, @moku.id)) %>
+＊成果物は成果物のページから編集か…

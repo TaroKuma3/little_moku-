@@ -1,0 +1,10 @@
+<h1>Mokus#index</h1>
+<h1><%= "#{@user.name}さんのMOKUった一覧"%></h1>
+
+  <% @mokus.each do |moku| %>
+    <ul>
+      <li>
+        <p><%= link_to("#{moku.created_at} の MOKU", user_moku_path(moku.user_id, moku.id)) %></p>
+      </li>
+    </ul>
+  <% end %>

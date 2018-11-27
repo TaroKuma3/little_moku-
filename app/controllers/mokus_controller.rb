@@ -18,5 +18,18 @@ class MokusController < ApplicationController
     @works = Work.where(moku_id: @moku.id)
   end
 
+  def update
+    user = User.find_by(id: params[:user_id])
+    moku = Moku.find(params[:id])
+    moku.content = params[:moku][:content]
+
+    moku_type = MokuType.find(params[:moku][:moku_type])
+    moku.moku_type = moku_type
+
+    moku.save!
+
+    redirect_to action: :show, user_id: user.id, id: moku.id
+  end
+
 
 end

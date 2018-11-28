@@ -8,18 +8,16 @@
               url: {controller: :mokus, action: :update, user_id: @user.id, id: @moku.id},
               method: :patch,
               local: true) do |form| %>
-
-  <h4><%= "MOKUること区分： #{@moku_type.name}" %></h4>
-  <p>（プルダウン、moku_typeからuser_idに紐づくもの全部取得＋デフォ表示を前ページで選択したmoku_type_idと同じものにする）</p>
-
   <!--  https://qiita.com/colorrabbit/items/b58888506e41d1370fd1-->
-  <p>
+  <h4>
+    MOKUること区分：
     <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @moku.moku_type_id %>
-  </p>
+  </h4>
 
-  <h4><%= "やったことやめも： #{@moku.content}" %></h4>
-
-  <%= form.text_area :content %>
-
+  <h4>
+    やったことやめも：
+    <%= form.text_area :content %>
+  </h4>
+  
   <%= form.submit '保存' %>
 <% end %>

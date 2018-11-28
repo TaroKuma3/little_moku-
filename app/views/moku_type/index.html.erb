@@ -1,18 +1,16 @@
 <h1>MokuType#index</h1>
-<h1><%= "#{@user.name}さんのMOKUる一覧"%></h1>
+<h1><%= "#{@user.name}さんのMOKUタグ一覧"%></h1>
 
 <ul>
   <% @moku_type.each do |moku_type| %>
   <li>
     <%= moku_type.name %>
     <%= link_to("【MOKUったもの一覧】", user_moku_type_path(moku_type.user_id, moku_type.id)) %>
-    <%# = link_to("【編集】", edit_user_moku_type_path(@user, @moku_type))%>
-    <%# = link_to("【削除】")%>
+    <%= link_to("【編集】", edit_user_moku_type_path(moku_type.user_id, moku_type))%>
+    <%= link_to("【削除(リンク未設定)】")%>
   </li>
   <% end %>
 </ul>
-
-<%= link_to("【mokuる】を編集する", edit_user_moku_type_path(@user, @moku_type)) %>
 <p><%= link_to("TOPへ戻る", users_path)%></p>
 
 <%#

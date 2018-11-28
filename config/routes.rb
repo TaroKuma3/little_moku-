@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "/" => 'users#index'
+  get '/users/:user_id/mokus/:id/new' => 'work#new'
 
   resources :users do
     resources :mokus, :moku_type, :work

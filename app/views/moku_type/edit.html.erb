@@ -1,10 +1,6 @@
 <h1>Moku_type#edit</h1>
 
-<h1>【MOKUるもの】を編集する</h1>
-<ul>
-  <% @moku_type.each do |moku_type| %>
-  <li>
-    <%= moku_type.name %>
-  </li>
-  <% end %>
-</ul>
+<h1><%= "【MOKUタグ:#{@moku_type.name}】の内容を編集する" %></h1>
+<h4>MOKUタグのなまえ：<input value="<%= "#{@moku_type.name}"%>" ></h4>
+
+<p>紐付けについてはちょっと考えてから</p>

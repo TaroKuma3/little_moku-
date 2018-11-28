@@ -1,3 +1,15 @@
 <h1>Work#new</h1>
 
 <h1>成果物の登録</h1>
+
+<h3><%= "#{@user.name}さん、#{@moku.created_at}に#{@moku_type.name}でMOKUった時の成果物を登録してください。" %></h3>
+
+ここform_with（最後end忘れずに）
+<h3>制作物タイトル：<input></h3>
+<h3>画像<input type="file"></h3>
+<h3>テキストファイル<input type="file"></h3>
+<h3>コメント：<textarea></textarea></h3>
+<h4>他ユーザーへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
+<h4>PICK UP MOKUへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
+
+<input type="submit", value="登録する">cerateへ

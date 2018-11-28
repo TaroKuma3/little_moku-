@@ -16,6 +16,9 @@ class WorkController < MokusController
   end
 
   def new
+    @user = User.find_by(id: params[:user_id])
+    @moku = Moku.find_by(id: params[:id])
+    @moku_type = MokuType.find_by(id: @moku.moku_type)
   end
 
 end

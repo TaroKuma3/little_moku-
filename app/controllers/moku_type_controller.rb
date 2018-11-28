@@ -10,7 +10,7 @@ class MokuTypeController < ApplicationController
   end
 
   def edit
+    @moku_type = MokuType.find_by(id: params[:id])
     @user = User.find_by(id: params[:user_id])
-    @moku_type = MokuType.where(user_id: params[:user_id])
   end
 end

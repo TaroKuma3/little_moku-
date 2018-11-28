@@ -31,5 +31,8 @@ class MokusController < ApplicationController
     redirect_to action: :show, user_id: user.id, id: moku.id
   end
 
+  def new
+  end
+
 
 end

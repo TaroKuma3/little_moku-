@@ -4,7 +4,10 @@
   <% @mokus.each do |moku| %>
     <ul>
       <li>
-        <p><%= link_to("#{moku.created_at} の MOKU", user_moku_path(moku.user_id, moku.id)) %></p>
+        <p><%= link_to("#{moku.created_at} の MOKU", user_moku_path(moku.user_id, moku.id)) %>
+        <%= link_to("【成果物の登録】", new_user_work_path(moku.user_id) )%></p>
       </li>
     </ul>
   <% end %>
+
+  <%= link_to("TOPへ戻る", users_path)%>

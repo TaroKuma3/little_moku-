@@ -2,7 +2,7 @@
 <h1><%= @user.name%>さんのマイページ</h1>
 <ul>
   <li>
-    <%= link_to("MOKUる(mokus#newへ、かな)")%>
+    <%= link_to("MOKUる(PlanSheet:p10に移動して、そこで開始したら#new)")%>
   </li>
   <li>
     <%= link_to("MOKU一覧へ(カレンダーから)", user_mokus_path(@user))%>
@@ -15,3 +15,4 @@
   </li>
 </ul>
 <%= link_to("設定", edit_user_path(@user))%>
+<p><%= link_to("TOPへ戻る", users_path)%></p>

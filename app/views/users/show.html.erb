@@ -1,11 +1,11 @@
 <h1>Users#show</h1>
-<h1><%= @user.name%>さんのマイページ</h1>
+<h1>こんにちは、<%= @user.name%>さん!</h1>
 <ul>
   <li>
     <%= link_to("MOKUる(PlanSheet:p10に移動して、そこで開始したら#new)")%>
   </li>
   <li>
-    <%= link_to("MOKU一覧へ(カレンダーから)", user_mokus_path(@user))%>
+    <%= link_to("MOKU一覧へ(カレンダーのメガネから)", user_mokus_path(@user))%>
   </li>
   <li>
     <%= link_to("MOKUタグ一覧へ", user_moku_type_index_path(@user))%>
@@ -13,6 +13,17 @@
   <li>
     <%= link_to("成果物一覧へ（王冠から）", user_work_index_path(@user))%>
   </li>
+  <li>
+    <%= link_to("MOKUトモ")%>
+  </li>
+  <li>
+    <%= link_to("PICK UP MOKU")%>
+  </li>
+  <li>
+    <%= link_to("MOKU JUST NOW")%>
+  </li>
 </ul>
-<%= link_to("設定", edit_user_path(@user))%>
+<p><%= link_to("設定", edit_user_path(@user))%></p>
+<p><%= link_to("FAQ")%></p>
+
 <p><%= link_to("TOPへ戻る", users_path)%></p>

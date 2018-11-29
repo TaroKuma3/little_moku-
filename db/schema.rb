@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_061643) do
+ActiveRecord::Schema.define(version: 2018_11_29_121623) do
 
   create_table "book_marks", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "moku_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "work_id"
   end
 
   create_table "likes", force: :cascade do |t|

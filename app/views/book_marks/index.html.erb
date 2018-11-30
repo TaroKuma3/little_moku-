@@ -1,0 +1,21 @@
+<h1>BookMarks#index</h1>
+<h1><%= "#{@user.name}さんのブックマーク一覧" %></h1>
+
+<% @book_marks.each do |book_mark| %>
+  <ul>
+    <% work = Work.find_by(id: book_mark.work_id) %>
+    <% if @user.id == work.user_id %>
+      【My】
+      <li>
+        <%= work.title %>
+      </li>
+    <% elsif @user_id != work.user_id %>
+      【Some One】
+      <% work_user = User.find_by(id: work.user_id)%>
+      <li>
+        <%= work.title %>
+        <%= "製作者：#{work_user.name}さん"%>
+      </li>
+    <% end %>
+</ul>
+<% end %>

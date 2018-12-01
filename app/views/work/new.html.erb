@@ -4,12 +4,21 @@
 
 <h3><%= "#{@user.name}さん、#{@moku.created_at}に【#{@moku_type.name}】でMOKUった時の成果物を登録してください。" %></h3>
 
-ここform_with（最後end忘れずに）
-<h3>制作物タイトル：<input></h3>
-<h3>画像<input type="file"></h3>
-<h3>テキストファイル<input type="file"></h3>
-<h3>コメント：<textarea></textarea></h3>
-<h4>他ユーザーへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
-<h4>PICK UP MOKUへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
+<%= form_with(model: @work,
+url: {controller: :work, action: :create, user_id: @user.id},
+method: :post,
+local: true) do |form| %>
 
-<input type="submit", value="登録する">cerateへ
+<h3>制作物タイトル：<%= form.text_field :title %></h3>
+１：worksモデルにカラムを追加
+・公開設定＝public(1=open/ 0=close)
+
+<h3>画像</h3>
+<h3>テキストファイル</h3>
+<h3>コメント：<%= form.text_area :comment %></h3>
+<% if false %>
+  <h4>他ユーザーへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
+  <h4>PICK UP MOKUへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
+<% end %>
+<%= form.submit '登録する' %>
+<% end %>

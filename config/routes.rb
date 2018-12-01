@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get "/" => 'users#index'
   get '/users/:user_id/mokus/:id/new' => 'work#new'
+  post '/users/:user_id/mokus/:id/create' => 'work#create'
 
   resources :users do
     resources :mokus, :moku_type, :work, :book_marks

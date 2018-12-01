@@ -10,7 +10,7 @@
               local: true) do |form| %>
   <!--  https://qiita.com/colorrabbit/items/b58888506e41d1370fd1-->
   <h4>
-    MOKUること区分：
+    MOKUタグ：
     <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @moku.moku_type_id %>
   </h4>
 
@@ -18,6 +18,5 @@
     やったことやめも：
     <%= form.text_area :content %>
   </h4>
-  
   <%= form.submit '保存' %>
 <% end %>

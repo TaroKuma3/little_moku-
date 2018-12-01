@@ -9,7 +9,7 @@
       <li>
         <%= work.title %>
       </li>
-    <% elsif @user_id != work.user_id %>
+    <% else %>
       【Some One】
       <% work_user = User.find_by(id: work.user_id)%>
       <li>
@@ -19,3 +19,4 @@
     <% end %>
 </ul>
 <% end %>
+BookMarks#showで、第三者から見たページを作る

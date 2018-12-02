@@ -16,9 +16,11 @@ local: true) do |form| %>
 <h3>画像</h3>
 <h3>テキストファイル</h3>
 <h3>コメント：<%= form.text_area :comment %></h3>
-<% if false %>
-  <h4>他ユーザーへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
-  <h4>PICK UP MOKUへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
-<% end %>
+
+<h4>
+  【作成途中】他ユーザーへの公開設定：
+  <%= form.collection_select :public, @work.public, %></h4>
+<h4>PICK UP MOKUへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
+
 <%= form.submit '登録する' %>
 <% end %>

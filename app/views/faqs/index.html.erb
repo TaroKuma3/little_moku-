@@ -1,0 +1,12 @@
+<h1>Faqs#index</h1>
+<h1>よくある質問</h1>
+<% @faqs.each do |faq| %>
+  <ul>
+    <li>
+      <%= link_to(faq.questions, "/faqs/#{faq.id}/show") %>
+    </li>
+  </ul>
+<% end %>
+
+<p><%= link_to("TOPへ戻る", "/")%></p>
+※current_userの場合はマイページに戻るにする

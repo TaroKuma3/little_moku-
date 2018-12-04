@@ -2,11 +2,11 @@
 <h1>こんにちは、<%= @user.name%>さん!</h1>
 <ul>
   <li>
-    <%= link_to("MOKUる")%>
+    <%= link_to("MOKUる", new_user_moku_path(@user))%>
     Moku#newでP9MOKUる画面つくる。<br>
   </li>
   <li>
-    <%= link_to("MOKU一覧へ(カレンダーのメガネから)", user_mokus_path(@user))%>
+    <%= link_to("これまでのMOKU一覧へ(カレンダーのメガネから)", user_mokus_path(@user))%>
   </li>
   <li>
     <%= link_to("MOKUタグ一覧へ", user_moku_type_index_path(@user))%>
@@ -28,6 +28,6 @@
   </li>
 </ul>
 <p><%= link_to("設定", edit_user_path(@user))%></p>
-<p><%= link_to("FAQ")%></p>
+<h3><%= link_to("よくある質問",faqs_index_path) %></h3>
 
-<p><%= link_to("TOPへ戻る", users_path)%></p>
+<p><%= link_to("TOPへ戻る", "/")%></p>

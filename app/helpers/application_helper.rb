@@ -8,8 +8,7 @@ module ApplicationHelper
     def hello(name)
         "こんにちは #{name}さん"
     end
-    
-    
+
     def goodbye(name)
         "さようなら #{name}さん"
     end

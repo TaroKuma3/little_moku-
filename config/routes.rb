@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'faqs/index'
+  get 'faqs/:id/show' =>'faqs#show'
   get "/" => 'top#index'
+  get "top/about" => "top#about"
   get '/users/:user_id/mokus/:id/new' => 'work#new'
   post '/users/:user_id/mokus/:id/create' => 'work#create'
 

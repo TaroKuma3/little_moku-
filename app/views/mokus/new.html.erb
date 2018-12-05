@@ -1,9 +1,17 @@
 <h1>Moku#new</h1>
 
 <h1>MOKUる</h1>
-
+<%= form_with(model: @moku,
+              url: {controller: :mokus, action: :create, user_id: @user.id},
+              method: :post,
+              local: true) do |form| %>
 <h3>MOKUタグを教えてください</h3>
+<%= form.collection_select :moku_type_id, @user.moku_types, :id, :name, prompt: "とりあえずMOKUる" %>
+
 <h3>ストップアラートを設定しますか？</h3>
 <h3>MOKU JUST NOWに載せてもいいですか？</h3>
+
+<%= form.submit(["MOKU開始！（とりまユーザー一覧へ）"]) %>
+<% end %>
 
 <h3><%= link_to("マイページへ戻る", user_path(@user))%></h3>

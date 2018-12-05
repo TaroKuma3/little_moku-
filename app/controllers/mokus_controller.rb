@@ -11,11 +11,27 @@ class MokusController < ApplicationController
     @works = Work.where(moku_id: @moku.id)
   end
 
+  def new
+    @user = User.find_by(id: params[:user_id])
+    @moku = Moku.find_by(id: params[:id])
+  end
+
+  def create
+    moku = Moku.new(
+      user_id: params[:id],
+      moku_type_id: params[:moku_type_id],
+    )
+
+    moku.save!
+    redirect_to("/users")
+  end
+
+
   def edit
     @user = User.find_by(id: params[:user_id])
     @moku = Moku.find_by(id: params[:id])
-    @moku_type = MokuType.find_by(id: @moku.moku_type_id)
-    @works = Work.where(moku_id: @moku.id)
+    # @moku_type = MokuType.find_by(id: @moku.moku_type_id)
+    # @works = Work.where(moku_id: @moku.id)
   end
 
   def update
@@ -31,9 +47,7 @@ class MokusController < ApplicationController
     redirect_to action: :show, user_id: user.id, id: moku.id
   end
 
-  def new
-    @user = User.find_by(id: params[:user_id])
-  end
+  
 
 
 end

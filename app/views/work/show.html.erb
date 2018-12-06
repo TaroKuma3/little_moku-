@@ -5,8 +5,9 @@
 <h3>画像（小さめに画像を表示、クリックで拡大）</h3>
 <h3>テキストファイル（ファイル名を表示、クリックで詳細）</h3>
 <h3><%= "コメント：#{@work.comment}" %></h3>
-<h4>他ユーザーへの公開設定：(設定内容を拾って「公開」か「非公開」を出す)</h4>
-<h4>PICK UP MOKUへの公開設定：(設定内容を拾って「公開」か「非公開」を出す)</h4>
+<h4>他ユーザーへの公開設定：<%= @work.public %></h4>
+<h4>PICK UP MOKUへの公開設定：<%= @work.pick_up %></h4>
+★カラムの中身を読んでもダメ。公開・非公開を出すには？
 <h4> このが生まれたMOKU：<%=link_to(@moku.created_at, user_moku_path(@user, @moku)) %></h4>
 <p><%= link_to("【編集】", edit_user_work_path(@user, @work) ) %><%= link_to("【削除(link未設定)】") %></p>
 <p><%= link_to("TOPへ戻る", users_path)%></p>

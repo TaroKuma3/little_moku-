@@ -19,9 +19,17 @@
   </li>
   <li>
     <%= link_to("MOKUトモ")%>
-  </li>1
+  </li>
   <li>
-    <%= link_to("PICK UP MOKU")%>
+    PICK UP MOKU
+    <% @works_random.each do |work_random| %>
+      <ul>
+        <li>
+        <% work = Work.find_by(id: work_random.id)%>
+          <%= link_to(work_random.title, user_work_path(@user,work)) %>
+        </li>
+      </ul>
+    <% end %>
   </li>
   <li>
     <%= link_to("MOKU JUST NOW")%>

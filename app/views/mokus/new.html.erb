@@ -6,7 +6,7 @@
               method: :post,
               local: true) do |form| %>
 <h3>MOKUタグを教えてください</h3>
-<%= form.collection_select :moku_type_id, @user.moku_types, :id, :name, prompt: "とりあえずMOKUる" %>
+<%= form.collection_select :moku_type, @user.moku_types, :id, :name, prompt: "とりあえずMOKUる" %>
 
 <h3>ストップアラートを設定しますか？</h3>
 <h3>MOKU JUST NOWに載せてもいいですか？</h3>

@@ -18,6 +18,13 @@ local: true) do |form| %>
 <h3>コメント：<%= form.text_area :comment %></h3>
 
 <h4>
+<%# 【１】moku_typeの選択肢と違って、カラムの中身を使うのではなくyesかnoだけだから、f.collection_selectは向いてなかった %>
+<%# そこでf.selectで書くことにした。%>
+<%# 他のビューでも使いそうだから、部品化することにした。%>
+<%# パーシャルにするほどではないので、部品用フォルダをapp直下に作って、新しいRubyファイルを作った（app/lib/constants.rb）%>
+
+<%# 【４】f.selectの書き方(下の例に倣うと)%>
+<%# f.select :対象のカラム名, 選択肢が入ってるデーター名,オプション（あれ？） %>
   他ユーザーへの公開設定：
   <%# form.collection_select :public, @work.public, %>
   <%= form.select :public, options_for_public, selected: @work.public %>

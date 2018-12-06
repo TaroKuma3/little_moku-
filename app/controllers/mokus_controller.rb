@@ -17,13 +17,14 @@ class MokusController < ApplicationController
   end
 
   def create
+    @user = User.find_by(id: params[:user_id])
     moku = Moku.new(
-      user_id: params[:id],
-      moku_type_id: params[:moku_type_id],
+      user_id: @user.id
+      # moku_type_id: params[:moku_type_id],
     )
 
     moku.save!
-    redirect_to("/users")
+    redirect_to("/users/#{@user.id}")
   end
 
 

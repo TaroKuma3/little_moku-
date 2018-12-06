@@ -5,6 +5,7 @@
 <h3>テキストファイル　<input type="file"></h3>
 <h3>コメント</h3>
 <textarea></textarea>
-<h4>他ユーザーへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
-<h4>Pick Up MOKUへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %></h4>
+<h4>他ユーザーへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 0]], 0)) %></h4>
+<h4>Pick Up MOKUへの公開設定：<%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 0]], 0)) %></h4>
 <p><%= link_to("【更新】") %>
+ここはこれから直す

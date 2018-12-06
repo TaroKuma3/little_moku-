@@ -12,7 +12,7 @@
   <h4>
     MOKUタグ：
     <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @moku.moku_type_id %>
-  <%# form.collection_select :対象のカラム名,プルダウンに表示するデータの配列, :データー格納先カラム名, :データー格納先カラム名, selected: @moku.moku_type_id%>
+  <%# form.collection_select :対象のカラム名,プルダウンに表示するデータの配列, :データー格納先カラム名, :データー格納先カラム名, selected: そのmokuのmoku_type_idを拾ってそれに該当するMOKUタグを表示しておく%>
   </h4>
 
   <h4>

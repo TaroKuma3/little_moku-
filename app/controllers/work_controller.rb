@@ -20,7 +20,8 @@ class WorkController < MokusController
     @moku = Moku.find_by(id: params[:id])
     @moku_type = MokuType.find_by(id: @moku.moku_type)
     @work = Work.new
-
+    @work.public = Constants::PRIVATE
+    @work.pick_up = Constants::PRIVATE
     # @public_or_not = [['公開', Constants::PUBLIC], ['非公開', Constants::PRIVATE]]
     # @public_or_not = Constants.options_for_public
 

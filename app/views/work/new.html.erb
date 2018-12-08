@@ -10,9 +10,6 @@ method: :post,
 local: true) do |form| %>
 
 <h3>制作物タイトル：<%= form.text_field :title %></h3>
-１：worksモデルにカラムを追加
-・公開設定＝public(1=open/ 0=close)
-
 <h3>画像</h3>
 <h3>テキストファイル</h3>
 <h3>コメント：<%= form.text_area :comment %></h3>

@@ -5,7 +5,7 @@
     <ul>
       <li>
         <p><%= link_to("#{moku.created_at} の MOKU", user_moku_path(moku.user_id, moku.id)) %>
-        <%= link_to("【成果物の登録】", "/users/#{moku.user_id}/mokus/#{moku.id}/new") %></p>
+        <%= link_to("【成果物の登録】", "/users/#{moku.user_id}/mokus/#{moku.id}/work/new") %></p>
       </li>
     </ul>
   <% end %>

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   get 'faqs/index'
   get 'faqs/:id/show' =>'faqs#show'
-  get "/" => 'top#index'
+  get root to: 'top#index'
   get "top/about" => "top#about"
   get '/users/:user_id/mokus/:id/work/new' => 'work#new'
   post '/users/:user_id/mokus/:id/work/create' => 'work#create'

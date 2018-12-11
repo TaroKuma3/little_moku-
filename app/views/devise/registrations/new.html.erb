@@ -2,6 +2,17 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
+<%
+=begin
+apprication_controller.rb中の「.for」がundefinedになるので一旦コメントアウト
+参考にしたサイトはhttps://blog.otsukasatoshi.com/entry/2016/06/01/191739
+これも参考になりそうhttps://qiita.com/pieroplus/items/a2ca31ef06446fab0ee0
+  <div class="field">
+    <%= f.label :ニックネーム %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+<%
+=end %>
 
   <div class="field">
     <%= f.label :メールアドレス %><br />

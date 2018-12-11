@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'administrator/index'
   devise_for :users
   get 'faqs/index'
   get 'faqs/:id/show' =>'faqs#show'

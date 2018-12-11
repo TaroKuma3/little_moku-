@@ -6,14 +6,19 @@ class ApplicationController < ActionController::Base
   # devise/registratons/new.htmlもコメントアウト済み
 
   # ログインした後、そのユーザーの詳細ページへジャンプするためのコード
-  # idを入れたいが…？
+  # idを入れたいがindexに飛ぶとidが入らない。
   def after_sign_in_path_for(resource)
-    users_path
+    user = User.find_by(id: current_user.id)
+    if user.admin == 1
+      administrator_index
+    else
+      users_path #(user.id)
+    end
   end
 
 
   private
-  # ログインしているユーザーだけshowが見えるようにしている（本当はログイン
+  # ログインしているユーザーだけusers/indexが見えるようにしているらしい
   def sign_in_required
       redirect_to new_user_session_url unless user_signed_in?
   end

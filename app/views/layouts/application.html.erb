@@ -13,7 +13,7 @@
     <header>
       <nav>
         <% if user_signed_in? %>
-          <%= link_to("こんにちは、#{current_user.name}さん！", "/users/#{:id}") %>
+          <%= "こんにちは、#{current_user.name}さん！" %>
           <%= link_to("プロフ変更", edit_user_registration_path) %>
           <%= link_to("ログアウト", destroy_user_session_path, method: :delete) %>
         <% else %>

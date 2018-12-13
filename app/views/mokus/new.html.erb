@@ -6,12 +6,25 @@
               method: :post,
               local: true) do |form| %>
 <h3>MOKUタグを教えてください</h3>
-<%= form.collection_select :moku_type, @user.moku_types, :id, :name, prompt: "とりあえずMOKUる" %>
+<%= form.collection_select :moku_type, @select_moku_type, :id, :name, selected: 4 %>
+<%# form.collection_selectのメモ
+:moku_type...指定したモデル@mokuのどのカラムが対処？
+@user.moku_type...選択肢になるデーター。@user（そのユーザー）が持ってるmoku_type全部対象だかからmoku_types（っていうかmoku_typesテーブルだなこれ多分）
+:id...表示している選択肢のmoku_typeのid。多分前段でmoku_typesテーブル指定してて、だからidだけでmoku_type.idが拾えてる。これparamsで拾われる。
+:name...表示するmoku_typeのなまえ。これもmoku_typesテーブル参照されてて、moku_typeのなまえはnameにしたから取れるんだ。
+selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
+
+ここで出したいのは、user.id == 13のsisytemが持ってる、moku_type.id == 4の「とりま」。
+（ユーザーcreate時にとりまをもたせられなかったから）
+ID決めうちにだけどとりあえず表示はできてる。
+これやるとuser_idが書き変わるから、登録はできるけれどMOKUタグからのMOKU一覧で他人のMOKUが出ることになるのでNG
+%>
+
 
 <h3>ストップアラートを設定しますか？</h3>
 <h3>MOKU JUST NOWに載せてもいいですか？</h3>
 
-<%= form.submit(["MOKU開始！（とりまユーザー一覧へ）"]) %>
+<%= form.submit 'MOKU開始！（とりまユーザー一覧へ）'%>
 <% end %>
 
 <h3><%= link_to("マイページへ戻る", user_path(@user))%></h3>

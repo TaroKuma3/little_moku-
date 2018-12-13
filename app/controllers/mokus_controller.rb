@@ -1,11 +1,11 @@
 class MokusController < ApplicationController
   def index
-    @user = User.find_by(id: params[:user_id])
-    @mokus = Moku.where(user_id: params[:user_id])
+    @user = User.find_by(id: current_user.id)
+    @mokus = Moku.where(user_id: @user.id)
   end
 
   def show
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find_by(id: current_user.id)
     @moku = Moku.find_by(id: params[:id])
     @moku_type = MokuType.find_by(id: @moku.moku_type_id)
     @works = Work.where(moku_id: @moku.id)
@@ -14,13 +14,21 @@ class MokusController < ApplicationController
   def new
     @user = User.find_by(id: params[:user_id])
     @moku = Moku.find_by(id: params[:id])
+    @moku_type = MokuType.find_by(id: 4)
+
+    @select_moku_type = @user.moku_types << @moku_type
+    # ↑これ自体はできる。ただ、「とりあえずMOKUる」タグの所持者＝user_idがcurrent_userのIDに上書きされる。
+    # これにより選択肢データーをselect_moku_typeに書き換えると、選択肢の中には一応出る。
+    # ためしたら、user_idが書き変わるのでやっぱりだめだ。
+
   end
 
   def create
     @user = User.find_by(id: params[:user_id])
+    
     moku = Moku.new(
-      user_id: @user.id
-      # moku_type_id: params[:moku_type_id],
+      user_id: @user.id,
+      moku_type_id: params[:moku_type],
     )
 
     moku.save!

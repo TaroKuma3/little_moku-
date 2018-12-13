@@ -1,6 +1,7 @@
 <h1>Mokus#index</h1>
 <h1><%= "#{@user.name}さんのMOKUった一覧"%></h1>
 
+
   <% @mokus.each do |moku| %>
     <ul>
       <li>
@@ -11,3 +12,4 @@
   <% end %>
 
   <%= link_to("TOPへ戻る", users_path)%>
+

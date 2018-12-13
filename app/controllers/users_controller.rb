@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :sign_in_required, only: [:show]
+  # ↓application_controllerでprivateに書いた。ログインしてないならログイン画面に飛ばされるメソッド
+  # 最初は, only: [:index]が書かれていたけどindexだけにしなくていいと思うので外す
+  before_action :sign_in_required
 
   def index
     @user = User.find_by(id: current_user.id)

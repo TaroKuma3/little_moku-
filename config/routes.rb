@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'mypage/show'
+  get 'mypage/edit'
+  get 'mypage' => 'mypage#index'
   get 'administrator/index'
   devise_for :users
   get 'faqs/index'

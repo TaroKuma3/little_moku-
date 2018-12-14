@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   #   if user.admin == 1
   #     administrator_index
   #   else
-    "/users" #＜＝文字列でOKusers_pathはヘルパーメソッドであって結局文字列が返ってる
+  "/mypage"  #＜＝文字列でOKusers_pathはヘルパーメソッドであって結局文字列が返ってる
   #   end
   end
 

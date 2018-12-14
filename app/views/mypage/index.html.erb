@@ -1,5 +1,5 @@
-<h1>Users#show</h1>
-<h1>こんにちは、<%= @user.name%>さん!</h1>
+<h1>Mypage#index</h1>
+<h1><%= @user.name%>さんのマイページ</h1>
 <ul>
   <li>
     <%= link_to("MOKUる", new_user_moku_path(@user))%>
@@ -34,5 +34,11 @@
     <%= link_to("MOKU JUST NOW")%>
   </li>
 </ul>
-<p><%= link_to("設定", edit_user_path(@user))%></p>
+
+<% if @user.admin? %>
+管理者めぬー
+
+<% end %>
+
+<p><%= link_to("設定", mypage_edit_path)%></p>
 <h3><%= link_to("よくある質問",faqs_index_path) %></h3>

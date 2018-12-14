@@ -14,18 +14,12 @@ class MokusController < ApplicationController
   def new
     @user = User.find_by(id: params[:user_id])
     @moku = Moku.find_by(id: params[:id])
-    @moku_type = MokuType.find_by(id: 4)
-
-    @select_moku_type = @user.moku_types << @moku_type
-    # ↑これ自体はできる。ただ、「とりあえずMOKUる」タグの所持者＝user_idがcurrent_userのIDに上書きされる。
-    # これにより選択肢データーをselect_moku_typeに書き換えると、選択肢の中には一応出る。
-    # ためしたら、user_idが書き変わるのでやっぱりだめだ。
 
   end
 
   def create
     @user = User.find_by(id: params[:user_id])
-    
+
     moku = Moku.new(
       user_id: @user.id,
       moku_type_id: params[:moku_type],

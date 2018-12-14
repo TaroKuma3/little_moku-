@@ -11,14 +11,15 @@ class User < ApplicationRecord
   has_many :stamps
 
 
-  # after_commit :insert_default_moku_type
-
-  # private
-  # def insert_default_moku_type
-  #   moku_type = MokuType.new(
-  #     user_id: current_user.id,
-  #     name: "とりあえずMOKUる",
-  #   )
-  #   moku_type.save!
-  # end
+  after_create :insert_default_moku_type
+# user_idはcurrent_user.idだとエラーになる。current_userはビューかコントローラで使う。
+# ここはモデルなのでcurrent_userは使わない。そこでselfを使っている。
+  private
+  def insert_default_moku_type
+    moku_type = MokuType.new(
+      user_id: self.id,
+      name: "とりあえずMOKUる",
+    )
+    moku_type.save!
+  end
 end

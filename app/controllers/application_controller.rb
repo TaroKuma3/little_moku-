@@ -6,13 +6,15 @@ class ApplicationController < ActionController::Base
   # ログインした後、そのユーザーの詳細ページへジャンプするためのコード
   # after_sign_in_path_forはヘルパーで適当なメソッドとかではない。
   # ↓user.admin == 1が生きてない。管理者もusers_pathに飛ぶ
-  def after_sign_in_path_for(resource)
-    user = User.find_by(id: current_user.id)
-    if user.admin == 1
-      administrator_index
-    else
-      users_url(resource)
-    end
+  # ↓ログイン後にuser_idだすやつ、なし。
+  
+  def after_sign_in_path_for(resource)#→アクセスしてたページを覚えてて、セッションが切れた後もログインすることでそこに戻してくれる機能…かもしれない。勝手に変えるとその辺の挙動がおかしくなる。
+  #   user = User.find_by(id: current_user.id)
+  #   if user.admin == 1
+  #     administrator_index
+  #   else
+    "/users" #＜＝文字列でOKusers_pathはヘルパーメソッドであって結局文字列が返ってる
+  #   end
   end
 
 

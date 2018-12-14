@@ -6,12 +6,10 @@
       <%= link_to(faq.questions, "/faqs/#{faq.id}/show") %>
     </li>
   </ul>
-<%# eachの中にリンク書いてるから、FAQが１個でも登録ないと↓も出力されない%>
-  <% if current_user %>
-    <p><%= link_to("マイページへ戻る", user_path(current_user.id))%></p>
+<% end %>
 
+  <% if current_user %>
+    <p><%= link_to("マイページへ戻る", "/users")%></p>
   <% else %>
     <p><%= link_to("TOPへ戻る(ログインしてない場合表示)", "/")%></p>
   <% end %>
-
-<% end %>

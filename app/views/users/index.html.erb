@@ -34,5 +34,11 @@
     <%= link_to("MOKU JUST NOW")%>
   </li>
 </ul>
+
+<% if @user.admin? %>
+管理者めぬー
+
+<% end %>
+
 <p><%= link_to("設定", edit_user_path(@user))%></p>
 <h3><%= link_to("よくある質問",faqs_index_path) %></h3>

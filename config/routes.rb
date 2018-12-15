@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
   get 'mypage/show'
   get 'mypage/edit'
   get 'mypage' => 'mypage#index'
+
   get 'administrator/index'
-  devise_for :users
-  get 'faqs/index'
-  get 'faqs/:id/show' =>'faqs#show'
+# FAQのルーティングチェックしてもらう
+  get 'faqs/index'    => 'faqs#index'
+  get 'faqs/new'      => 'faqs#new'
+  get 'faqs/:id'      => 'faqs#show'
+  get 'faqs/:id/edit' => 'faqs#edit'
+  post 'faqs'         => 'faqs#create'
+  patch 'faqs'        => 'faqs#update'
+  delete "faqs/:id"   => 'faqs#destroy'
+
   get root to: 'top#index'
   get "top/about" => "top#about"
-  # get 'users/:id' => 'users#index'
-  # ↑試しに追加してみた。
+
   get '/users/:user_id/mokus/:id/work/new' => 'work#new'
   post '/users/:user_id/mokus/:id/work/create' => 'work#create'
 

@@ -16,9 +16,7 @@
   <li>
     <%= link_to("ブックマーク一覧へ", user_book_marks_path(@user))%>
   </li>
-  <li>
-    <%= link_to("MOKUトモ")%>
-  </li>
+
   <li>
     PICK UP MOKU
     <% @works_random.each do |work_random| %>
@@ -31,13 +29,17 @@
     <% end %>
   </li>
   <li>
-    <%= link_to("MOKU JUST NOW")%>
+    MOKU JUST NOW
   </li>
 </ul>
 
 <% if @user.admin? %>
-管理者めぬー
-
+<h2>管理者メニュー</h2>
+<ul>
+  <li>
+    <%= link_to("FAQの追加", faqs_new_path )%>
+  </li>
+</ul>
 <% end %>
 
 <p><%= link_to("設定", mypage_edit_path)%></p>

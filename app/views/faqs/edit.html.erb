@@ -1,0 +1,5 @@
+<h1>Faq#edit</h1>
+
+<% faqs.each do |faq| %>
+  <%= faq.questions %><% link_to("削除",faqs_path, {method: :delete})%>
+<% end %>

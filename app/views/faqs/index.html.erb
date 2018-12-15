@@ -1,15 +1,16 @@
 <h1>Faqs#index</h1>
 <h1>よくある質問</h1>
+
 <% @faqs.each do |faq| %>
   <ul>
     <li>
-      <%= link_to(faq.questions, "/faqs/#{faq.id}/show") %>
+      <%= link_to(faq.questions, "/faqs/#{faq.id}") %>
     </li>
   </ul>
 <% end %>
 
   <% if current_user %>
-    <p><%= link_to("マイページへ戻る", "/users")%></p>
+    <p><%= link_to("マイページへ戻る", "/mypage")%></p>
   <% else %>
-    <p><%= link_to("TOPへ戻る(ログインしてない場合表示)", "/")%></p>
+    <p><%= link_to("TOPへ戻る", "/")%></p>
   <% end %>

@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   get 'faqs/:id'      => 'faqs#show'
   get 'faqs/:id/edit' => 'faqs#edit'
   post 'faqs'         => 'faqs#create'
-  patch 'faqs'        => 'faqs#update'
-  delete "faqs/:id"   => 'faqs#destroy'
+  patch 'faqs/:id'    => 'faqs#update'
+  delete 'faqs/:id'   => 'faqs#destroy'
 
   get root to: 'top#index'
   get "top/about" => "top#about"

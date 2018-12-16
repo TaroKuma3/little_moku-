@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :likes
   has_many :book_marks
   has_many :stamps
+  has_many :faqs
 
   after_create :insert_default_moku_type
 

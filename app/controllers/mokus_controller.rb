@@ -24,7 +24,7 @@ class MokusController < ApplicationController
     )
 
     moku.save!
-    redirect_to(users_path)
+    redirect_to(mypage_path)
   end
 
 
@@ -47,8 +47,6 @@ class MokusController < ApplicationController
 
     redirect_to action: :show, user_id: user.id, id: moku.id
   end
-
-  
 
 
 end

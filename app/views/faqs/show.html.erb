@@ -2,9 +2,11 @@
 <h1><%= @faq.questions %></h1>
 <h3><%= @faq.answer %></h3>
 
-<% if @user.admin? %>
-  <%= link_to("編集", "/faqs/#{@faq.id}/edit") %>
-  <%= link_to("削除", "/faqs/#{@faq.id}", {method: :delete}) %>
+<% if current_user %>
+  <% user = User.find_by(id: current_user.id) %>
+  <% if user.admin? %>
+    <%= link_to("編集", "/faqs/#{@faq.id}/edit") %>
+    <%= link_to("削除", "/faqs/#{@faq.id}", {method: :delete}) %>
+  <% end %>
 <% end %>
-
 <%= link_to("よくある質問一覧に戻る", faqs_index_path)%>

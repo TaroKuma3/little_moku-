@@ -10,8 +10,7 @@ method: :post,
 local: true) do |form| %>
 
 <h3>制作物タイトル：<%= form.text_field :title %></h3>
-<h3>画像</h3>
-<h3>テキストファイル</h3>
+<h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>
 <h3>コメント：<%= form.text_area :comment %></h3>
 
 <h4>

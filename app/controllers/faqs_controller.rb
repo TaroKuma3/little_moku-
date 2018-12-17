@@ -1,12 +1,10 @@
 class FaqsController < ApplicationController
   def index
     @faqs = Faq.all
-    @user = User.find_by(id: current_user.id)
   end
 
   def show
     @faq = Faq.find_by(id: params[:id])
-    @user = User.find_by(id: current_user.id)
   end
 
   def new

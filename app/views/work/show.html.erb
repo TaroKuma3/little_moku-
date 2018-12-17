@@ -2,8 +2,14 @@
 
 <h1><%= "成果物タイトル：#{@work.title}" %></h1>
 <h3><%= "成果物登録日時：#{@work.created_at}" %></h3>
-<h3>画像（小さめに画像を表示、クリックで拡大）</h3>
-<h3>テキストファイル（ファイル名を表示、クリックで詳細）</h3>
+<h3>成果物の画像やファイル</h3>
+  <% if @work.images.attached? %>
+    <% @work.images.each do |image| %>
+      <%= image_tag image%>
+    <% end %>
+  <% end %>
+
+
 <h3><%= "コメント：#{@work.comment}" %></h3>
 <h4>他ユーザーへの公開設定：<%= @work.public %></h4>
 <h4>PICK UP MOKUへの公開設定：<%= @work.pick_up %></h4>

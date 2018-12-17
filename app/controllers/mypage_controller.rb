@@ -5,7 +5,7 @@ class MypageController < ApplicationController
   def index
     @user = User.find_by(id: current_user.id)
     @works_random = Work.all.order("RANDOM()").limit(3)
-    @faq = Faq.new
+    # @faq = Faq.new
   end
 
   def show

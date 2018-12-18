@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_124515) do
+ActiveRecord::Schema.define(version: 2018_12_18_113118) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_12_17_124515) do
     t.integer "user_id"
     t.string "content"
     t.integer "moku_type_id"
+    t.boolean "mjn_public", default: true, null: false
   end
 
   create_table "stamps", force: :cascade do |t|

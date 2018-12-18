@@ -5,8 +5,8 @@
               url: {controller: :mokus, action: :create, user_id: @user.id},
               method: :post,
               local: true) do |form| %>
-
-<h3>MOKUタグを教えてください</h3>
+<h3>なにをMOKUりますか？MOKUタグを教えてください</h3>
+<%# = form.label :"なにをMOKUりますか？MOKUタグを教えてください" %>
 <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
 <%# form.collection_selectのメモ
 :moku_type...指定したモデル@mokuのどのカラムが対処？
@@ -15,11 +15,11 @@
 :name...表示するmoku_typeのなまえ。これもmoku_typesテーブル参照されてて、moku_typeのなまえはnameにしたから取れるんだ。
 selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
 %>
-
-
-<h3>ストップアラートを設定しますか？</h3>
 <h3>MOKU JUST NOWに載せてもいいですか？</h3>
+<%# = form.label :"MOKU JUST NOWに載せてもいいですか？" %>
+　<%= form.select :mjn_public, options_for_mjn %>
 
+<p>MOKU開始を押す前に２つの選択肢に答えてもらうことが必須になる。答えてないと押せないように制御が必要</p>
 <%= form.submit 'MOKU開始！'%>
 <% end %>
 

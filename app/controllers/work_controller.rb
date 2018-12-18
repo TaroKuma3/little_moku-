@@ -58,7 +58,7 @@ class WorkController < MokusController
   private
   # workのストロングパラメータ
   def work_params
-    params.require(:work).permit(:comment, :titile, :images)
+    params.require(:work).permit(:comment, :title, :images)
   end
 
 end

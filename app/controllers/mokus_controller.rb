@@ -14,13 +14,13 @@ class MokusController < ApplicationController
   def new
     @user = User.find_by(id: params[:user_id])
     @moku = Moku.find_by(id: params[:id])
-
   end
 
   def create
     moku = Moku.new(
       user_id: current_user.id,
       moku_type_id: params[:moku_type],
+      mjn_public: params[:mjn_public],
     )
 
     moku.save!

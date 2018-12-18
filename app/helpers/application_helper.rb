@@ -17,7 +17,6 @@ module ApplicationHelper
         Constants.options_for_public
     end
 
-
     def hello(name)
         "こんにちは #{name}さん"
     end

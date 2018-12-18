@@ -1,7 +1,7 @@
 <h1>Work#edit</h1>
 
 <%= form_with(model: @work,
-url: {controller: :work, action: :update, user_id: @user.id},
+url: {controller: :work, action: :update, user_id: @user.id, id: @work},
 method: :patch,
 local: true) do |form| %>
 
@@ -11,5 +11,5 @@ local: true) do |form| %>
 
   <h4>他ユーザーへの公開設定：<%= form.select :public, options_for_public, selected: @work.public %></h4>
   <h4>Pick Up MOKUへの公開設定：<%= form.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
-  <p><%= form.submit %>
+  <p><%= form.submit "更新する"%>
  <% end %>

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'administrator/index'
 # FAQのルーティングチェックしてもらう
-  get 'faqs/index'    => 'faqs#index'
+  get 'faqs'          => 'faqs#index'  #直したので他の部分修正する
   get 'faqs/new'      => 'faqs#new'
   get 'faqs/:id'      => 'faqs#show'
   get 'faqs/:id/edit' => 'faqs#edit'
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get "top/about" => "top#about"
 
   get '/users/:user_id/mokus/:id/work/new' => 'work#new'
-  post '/users/:user_id/mokus/:id/work/create' => 'work#create'
+  post '/users/:user_id/mokus/:moku_id/work/create' => 'work#create'
 
   resources :users do
     resources :mokus, :moku_type, :work, :book_marks

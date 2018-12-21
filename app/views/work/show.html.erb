@@ -10,9 +10,11 @@
   <% end %>
 
 <h3><%= "コメント：#{@work.comment}" %></h3>
-<h4>他ユーザーへの公開設定：<%= @work.public %></h4>
-<h4>PICK UP MOKUへの公開設定：<%= @work.pick_up %></h4>
-
+<h4>他ユーザーへの公開設定：<%= public_to_s(@work.public) %></h4>
+<h4>PICK UP MOKUへの公開設定：<%=public_to_s(@work.pick_up) %></h4>
+<%# モデルにメソッド書いて、@work.public_to_sにすることもできる。どっちでも。
+他の部分でも使うなら、モデルに定義するよりはこのやり方の方がいいだろう
+%>
 
 
 <h4> このが生まれたMOKU：<%=link_to(@moku.created_at, user_moku_path(@user, @moku)) %></h4>

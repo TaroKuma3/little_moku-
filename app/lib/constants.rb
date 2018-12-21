@@ -10,17 +10,21 @@ class Constants
     PRIVATE = 0
     PUBLIC = 1
 
+    PRIVATE_VALUE = "非公開"
+    PUBLIC_VALUE = "公開"
+
     # 選択肢として表示する内容をメソッドとして作成。
     # 表示文字列（キー）が"公開"のものは、定数（値）：PUBLIC。定数：PUBLICは、カラム内では１として管理される。
     # この後はapplication_herlperでお呼び出しする
     def self.options_for_public
-        [['公開', PUBLIC], ['非公開', PRIVATE]]
+        [[PUBLIC_VALUE, PUBLIC], [PRIVATE_VALUE, PRIVATE]]
     end
 
     # ↑をまねて、mokus#newでMJNの選択肢選ぶのを作ってみる
     FALSE = 0
     TRUE = 1
 
+    # 別の箇所でも出てくるようなら↑と同じように定数にすることも考える
     def self.options_for_mjn
         [['もちろん!', TRUE], ['遠慮します', FALSE]]
     end

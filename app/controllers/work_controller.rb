@@ -25,18 +25,19 @@ class WorkController < MokusController
 
   def create
     @user = User.find_by(id: current_user.id)
-    @moku = Moku.find_by(id: params[:id])
-    @moku_type = MokuType.find_by(id: @moku.moku_type)
+    # @moku = Moku.find_by(id: params[:id])
+    # @moku_type = MokuType.find_by(id: @moku.moku_type)
 
     work = Work.new(work_params)
     # title: params[:work][:title],
     # comment: params[:work][:comment],
     # public: params[:work][:public],
     # pick_up: params[:work][:pick_up],
-    # moku_id: params[:id],
+    # moku_id: params[:moku_id],
     # user_id: params[:user_id],
     # )
-
+    work.moku = Moku.find(params[:moku_id])
+    work.user = current_user
     work.save!
     redirect_to(user_work_index_path(@user))
   end
@@ -52,13 +53,16 @@ class WorkController < MokusController
     @work.update(work_params)
 
     @work.save!
-    redirect_to(user_work_index_path(@user))
+    redirect_to(user_work_path(@user,@work))
   end
 
   private
   # workのストロングパラメータ
   def work_params
-    params.require(:work).permit(:comment, :title, :images)
+    params.require(:work).permit(:comment, :title, :images, :user_id, :moku_id)
+    # ★公開設定の値を追加
   end
-
+# permitに書くこと・・・create/updateに入れるべき属性名。意図しない項目が変に更新されないようにするためのもの
+# paramsでとってくる項目で受け取りたいものをリストアプする。routesで設定しているURLに必要なIDとかは拾う必要がある
+# ので
 end

@@ -14,9 +14,10 @@ class User < ApplicationRecord
   after_create :insert_default_moku_type
 
 # 管理者かどうか判断
-def admin?
-  self.admin == true
-end
+# booleanは？のメソッドが必要なので、むしろ書かずともどこかに生えている。（Railsに限る）
+# def admin?
+#   self.admin
+# end
 
 # user_idはcurrent_user.idだとエラーになる。current_userはビューかコントローラで使う。
 # ここはモデルなのでcurrent_userは使わない。そこでselfを使っている。

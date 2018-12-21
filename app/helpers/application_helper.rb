@@ -17,12 +17,45 @@ module ApplicationHelper
         Constants.options_for_public
     end
 
+    def public_to_s(value)
+        if value == Constants::PUBLIC
+            Constants::PUBLIC_VALUE
+        else
+            Constants::PRIVATE_VALUE
+        end
+    end
+
     def hello(name)
         "こんにちは #{name}さん"
     end
 
     def goodbye(name)
         "さようなら #{name}さん"
+    end
+
+    def greeting
+        now = Time.now.hour
+        # morning = 5 <= now && now < 12 #真偽値がかえる
+        # lunchtime = 12 <= now && now < 15
+        # evening = 15 <= now && now < 19
+        # night = 19 <= now || now < 5 elseだからいらない
+
+        morning = (5..11).include?(now) #(nowの（）はあってもなくてもいい)
+        lunchtime = (12..14).include?(now)
+        evening = (15..18).include?(now)
+
+        if morning #tureかfalseが入っているので == tureはいらない
+            "おはようございます"
+        elsif lunchtime
+            "こんにちは"
+        elsif evening
+            "いい夕方ですね"
+        else
+            "こんばんわ"
+        end
+
+        # return "おはようございます" if morning こういう書き方もいける
+
     end
 
 end

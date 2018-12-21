@@ -17,6 +17,12 @@ module ApplicationHelper
         Constants.options_for_public
     end
 
+    #constants.rbで公開・非公開を定数管理にした。
+    # ここでhtml.erb上「公開」「非公開」という言葉で表示できるようメソッドを定義。
+    # 現状、このメソッドを当てないとDBの値を返して０か１が表示されてしまうから。
+    # これをいろんなhtml.erbで使うといい。とりあえずwork/show.html.erbに使ってみた。
+    # これが引数をとる形式なのは、対象により表示が変わるから。
+    # 公開である１が返っている場合は公開、０なら非公開を出したい。この分岐が必要。
     def public_to_s(value)
         if value == Constants::PUBLIC
             Constants::PUBLIC_VALUE

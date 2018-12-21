@@ -10,12 +10,21 @@ class Constants
     PRIVATE = 0
     PUBLIC = 1
 
+    # 新たに2018/12/21追加↓表示ではなくコード上でいちいち公開・非公開と書くことはマジックナンバー使うのと同じ。
+    # またいろんなところで公開・非公開を使うので、変更が会った時に全部書き直す面倒が。
+    # よってここで公開・非公開を定数管理にした。
     PRIVATE_VALUE = "非公開"
     PUBLIC_VALUE = "公開"
 
     # 選択肢として表示する内容をメソッドとして作成。
     # 表示文字列（キー）が"公開"のものは、定数（値）：PUBLIC。定数：PUBLICは、カラム内では１として管理される。
     # この後はapplication_herlperでお呼び出しする
+    # def self.options_for_public
+    #     [["公開", PUBLIC], ["非公開", PRIVATE]]
+    # end
+    # ↑で新たに公開・非公開を定数管理にしたので、メソッドも↓のように書き換え！
+    # これをヘルパーで使う。
+
     def self.options_for_public
         [[PUBLIC_VALUE, PUBLIC], [PRIVATE_VALUE, PRIVATE]]
     end

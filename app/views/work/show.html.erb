@@ -3,6 +3,7 @@
 <h1><%= "成果物タイトル：#{@work.title}" %></h1>
 <h3><%= "成果物登録日時：#{@work.created_at}" %></h3>
 <h3>成果物の画像やファイル</h3>
+<%# 画像がないなら余計な作業は無用なので↓で画像があるかどうか判断している%>
   <% if @work.images.attached? %>
     <% @work.images.each do |image| %>
       <%= image_tag image%>
@@ -10,11 +11,11 @@
   <% end %>
 
 <h3><%= "コメント：#{@work.comment}" %></h3>
+<%# application.html.erbで作ったメソッドを使って、０・１を公開・非公開で表示する。%>
 <h4>他ユーザーへの公開設定：<%= public_to_s(@work.public) %></h4>
 <h4>PICK UP MOKUへの公開設定：<%=public_to_s(@work.pick_up) %></h4>
 <%# モデルにメソッド書いて、@work.public_to_sにすることもできる。どっちでも。
-他の部分でも使うなら、モデルに定義するよりはこのやり方の方がいいだろう
-%>
+他の部分でも使うなら、モデルに定義するよりはこのやり方の方がいいだろう%>
 
 
 <h4> このが生まれたMOKU：<%=link_to(@moku.created_at, user_moku_path(@user, @moku)) %></h4>

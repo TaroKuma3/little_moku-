@@ -28,6 +28,9 @@ class WorkController < MokusController
     # @moku = Moku.find_by(id: params[:id])
     # @moku_type = MokuType.find_by(id: @moku.moku_type)
 
+    # ストロングパラメータを書いたからって手書きでデーター拾っちゃいけないわけじゃない。
+    # 今回どういうわけかどうしてもmoku_idとuser_idをひろってくれないので、
+    # ↓のようにwork.mokuとwork.userを手書きで指定して拾ってきた。
     work = Work.new(work_params)
     # title: params[:work][:title],
     # comment: params[:work][:comment],
@@ -35,6 +38,7 @@ class WorkController < MokusController
     # pick_up: params[:work][:pick_up],
     # moku_id: params[:moku_id],
     # user_id: params[:user_id],
+    # images: params[:work][:images],
     # )
     work.moku = Moku.find(params[:moku_id])
     work.user = current_user
@@ -59,10 +63,9 @@ class WorkController < MokusController
   private
   # workのストロングパラメータ
   def work_params
-    params.require(:work).permit(:comment, :title, :images, :user_id, :moku_id)
-    # ★公開設定の値を追加
+    params.require(:work).permit(:comment, :title, :images, :user_id, :moku_id, :public, :pick_up)
   end
-# permitに書くこと・・・create/updateに入れるべき属性名。意図しない項目が変に更新されないようにするためのもの
+# permitに書くこと・・・create/updateに入れるべき属性名。意図しない項目が変に更新されないようにするためのものだけど
 # paramsでとってくる項目で受け取りたいものをリストアプする。routesで設定しているURLに必要なIDとかは拾う必要がある
-# ので
+# ので、単に入力フォームのことだけを指定するんではなくて、user_idなんかも指定する。
 end

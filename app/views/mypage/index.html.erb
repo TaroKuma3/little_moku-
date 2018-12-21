@@ -34,18 +34,22 @@
 </ul>
 
 <% if @user.admin? %>
-<%# boolean 定義してないと何がないの？とRailsが確認、booleanカラムあるの？あるじゃんと。で作ってくれる
-?はあってもなくてもいいけれど、あった方がいいよね、と %>
+<%# booleanを定義している場合、？のメソッドで　tureか？と聞く。
+本来聞くメソッドが必ず必要で、今回user.rbに定義はしたんだけど、実は定義しないでもOK
+必ず必要だからこそ、もし定義してない場合NoMethodErrorがでて、その時に
+booleanのメソッドがないなら生やしてやるよ、とRailsが勝手に判定メソッドをその場で作ってくれるため。
+作ってくれるなら書かなくていいよね、という感じでuser.rbのメソッドはコメントアウトした状態。
+ちなみにここのif @user.admin?の?は実はあってもなくてもいいけれど、あった方がいいよね、と %>
 <h2>管理者メニュー</h2>
 <ul>
   <li>
-    <%= link_to("FAQの追加", faqs_new_path )%>
+    <%= link_to("FAQの追加", faqs_path )%>
   </li>
   <li>
-    <%= link_to("FAQの編集・削除", faqs_index_path )%>
+    <%= link_to("FAQの編集・削除", faqs_path )%>
   </li>
 </ul>
 <% end %>
 
 <p><%= link_to("設定", mypage_edit_path)%></p>
-<h3><%= link_to("よくある質問",faqs_index_path) %></h3>
+<h3><%= link_to("よくある質問",faqs_path) %></h3>

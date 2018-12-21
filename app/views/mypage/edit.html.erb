@@ -3,8 +3,7 @@
 
 <h4>ニックネーム<input></h4>
 <h4>プロフ画像<input type="file"></h4>
-<h4>メアド<input></h4>
-<h4>PW<input type="password"></h4>
+
 <h4>MOKUアイテム</h4>
 <textarea>例：PC：MacBook Pro, 使用ソフト：VS Cood, 言語：Ruby、Ruby on Rails、他：ドットインストール</textarea>
 <h4>自己紹介</h4>
@@ -12,7 +11,7 @@
 <h4>公開表/非公開</h4>
 <ul>
   <li>
-    <b>★直す→アカウント</b><%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %>
+    <b>アカウント</b><%= select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %>
     <h3>☁︎公開にすると</h3>
       <p>公開の説明</p>
     <h3>☁︎非公開にすると</h3>

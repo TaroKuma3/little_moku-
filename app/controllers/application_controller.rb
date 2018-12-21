@@ -8,13 +8,10 @@ class ApplicationController < ActionController::Base
   # ↓user.admin == 1が生きてない。管理者もusers_pathに飛ぶ
   # ↓ログイン後にuser_idだすやつ、なし。
 
-  def after_sign_in_path_for(resource)#→アクセスしてたページを覚えてて、セッションが切れた後もログインすることでそこに戻してくれる機能…かもしれない。勝手に変えるとその辺の挙動がおかしくなる。
-  #   user = User.find_by(id: current_user.id)
-  #   if user.admin == 1
-  #     administrator_index
-  #   else
-  "/mypage"  #＜＝文字列でOKusers_pathはヘルパーメソッドであって結局文字列が返ってる
-  #   end
+  # アクセスしてたページを覚えてて、セッションが切れた後もログインすることでそこに戻してくれる機能…かもしれない。
+  # 勝手に変えるとその辺の挙動がおかしくなる。
+  def after_sign_in_path_for(resource)
+  "/mypage"  #＜＝文字列でOK　users_pathはヘルパーメソッドであって結局文字列が返ってる
   end
 
 

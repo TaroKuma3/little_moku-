@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get 'mypage' => 'mypage#index'
 
   get 'administrator/index'
-# FAQのルーティングチェックしてもらう
-  get 'faqs'          => 'faqs#index'  #直したので他の部分修正する
+
+  get 'faqs'          => 'faqs#index'
   get 'faqs/new'      => 'faqs#new'
   get 'faqs/:id'      => 'faqs#show'
   get 'faqs/:id/edit' => 'faqs#edit'

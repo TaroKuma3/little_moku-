@@ -27,7 +27,6 @@ class MokusController < ApplicationController
     redirect_to(mypage_path)
   end
 
-
   def edit
     @user = User.find_by(id: params[:user_id])
     @moku = Moku.find_by(id: params[:id])

@@ -25,6 +25,9 @@ class Constants
     # ↑で新たに公開・非公開を定数管理にしたので、メソッドも↓のように書き換え！
     # これをヘルパーで使う。
 
+    # ↓2018/12/22新たに追加。moku_type#editでとりまが編集できないよう制御するための定数
+    DEFAULT_MOKU_TYPE_NAME = "とりあえずMOKUる"
+
     def self.options_for_public
         [[PUBLIC_VALUE, PUBLIC], [PRIVATE_VALUE, PRIVATE]]
     end

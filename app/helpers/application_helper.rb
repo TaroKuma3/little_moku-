@@ -45,19 +45,25 @@ module ApplicationHelper
         # lunchtime = 12 <= now && now < 15
         # evening = 15 <= now && now < 19
         # night = 19 <= now || now < 5 elseだからいらない
-
-        morning = (5..11).include?(now) #(nowの（）はあってもなくてもいい)
+        eary_morning = (4..7),include?(now)
+        morning = (8..11).include?(now) #(nowの（）はあってもなくてもいい)
         lunchtime = (12..14).include?(now)
         evening = (15..18).include?(now)
+        night = (19..24).include?(now)
 
-        if morning #tureかfalseが入っているので == tureはいらない
+        if eary_morning
+            "早起きですね"
+        elsif
+            morning #tureかfalseが入っているので == tureはいらない
             "おはようございます"
         elsif lunchtime
             "こんにちは"
         elsif evening
             "いい夕方ですね"
-        else
+        elsif night
             "こんばんわ"
+        else
+            "遅くまでお疲れ様です"
         end
 
         # return "おはようございます" if morning こういう書き方もいける

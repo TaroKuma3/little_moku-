@@ -1,8 +1,26 @@
 <h1>Moku_type#edit</h1>
+<h1>MOKUタグの編集</h1>
 
-<h1><%= "【MOKUタグ:#{@moku_type.name}】の内容を編集する" %></h1>
-<h4>MOKUタグのなまえ：<input value="<%= "#{@moku_type.name}"%>" ></h4>
+<%= form_with(model: @MokuType,
+url: {controller: :moku_type, action: :update, user_id: @user, id: @moku_type},
+method: :patch,
+local: true) do |f| %>
 
-<p>紐付けについてはちょっと考えてから</p>
+<h2><%= "MOKUタグ【#{@moku_type.name}】の新しい名前を教えてください" %><h2>
+<p><%= f.text_field :name %></p>
+<%= f.submit "変更する" %>
+<% end %>
 
+
+<h3>今あるMOKUタグはこちら</h3>
+<% @moku_types.each do |moku_type| %>
+<ul>
+  <li>
+    <%= moku_type.name %>
+  </li>
+</ul>
+<% end %>
+
+
+<p><%= link_to("MOKUタグ一覧へ戻る", user_moku_type_index_path(@user))%></p>
 <p><%= link_to("マイページへ戻る", "/mypage")%></p>

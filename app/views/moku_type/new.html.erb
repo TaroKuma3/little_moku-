@@ -1,0 +1,25 @@
+<h1>Moku_type#new</h1>
+<h1>あたらしいMOKUタグを追加</h1>
+
+
+<%= form_with(model: @MokuType,
+url: {controller: :moku_type, action: :create, user_id: @user.id},
+method: :post,
+local: true) do |f| %>
+
+<%= f.label "新しいMOKUタグの名前を教えてください" %>
+<p><%= f.text_field :name%></p>
+<%= f.submit "追加する" %>
+<% end %>
+
+<h3>今あるMOKUタグはこちら</h3>
+<% @moku_types.each do |moku_type| %>
+<ul>
+  <li>
+    <%= moku_type.name %>
+  </li>
+</ul>
+<% end %>
+
+<p><%= link_to("MOKUタグ一覧へ戻る", user_moku_type_index_path(@user))%></p>
+<p><%= link_to("マイページへ戻る", "/mypage")%></p>

@@ -28,6 +28,9 @@ class Constants
     # ↓2018/12/22新たに追加。moku_type#editでとりまが編集できないよう制御するための定数
     DEFAULT_MOKU_TYPE_NAME = "とりあえずMOKUる"
 
+    # ↓2018/12/23新たに追加。faqのカテゴリのためのもの
+    GENERAL = "全般"
+
     def self.options_for_public
         [[PUBLIC_VALUE, PUBLIC], [PRIVATE_VALUE, PRIVATE]]
     end

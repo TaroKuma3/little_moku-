@@ -45,7 +45,7 @@ module ApplicationHelper
         # lunchtime = 12 <= now && now < 15
         # evening = 15 <= now && now < 19
         # night = 19 <= now || now < 5 elseだからいらない
-        eary_morning = (4..7),include?(now)
+        eary_morning = (4..7).include?(now)
         morning = (8..11).include?(now) #(nowの（）はあってもなくてもいい)
         lunchtime = (12..14).include?(now)
         evening = (15..18).include?(now)

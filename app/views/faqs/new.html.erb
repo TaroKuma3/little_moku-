@@ -5,9 +5,18 @@
               method: :post,
               local: true) do |form| %>
 
+<%= form.label :Q %>
 <p><%= form.text_area :questions %></p>
+
+<%= form.label :A %>
 <p><%= form.text_area :answer %></p>
+
+<%= form.label :"今あるカテゴリーから選ぶ" %>
+<p><%= form.collection_select :category, Faq.group(:category), :id, :category %></p>
+
+<%= form.label :"カテゴリーを新たに作る" %>
 <p><%= form.text_field :category %></p>
+
 <p><%= form.submit "登録する" %></p>
 <%= link_to("よくある質問一覧に戻る", faqs_path)%>
 <% end %>

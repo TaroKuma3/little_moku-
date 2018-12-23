@@ -4,34 +4,35 @@
 
 <h3><%= "#{@user.name}さん、#{@moku.created_at}に【#{@moku_type.name}】でMOKUった時の成果物を登録してください。" %></h3>
 
-<%= form_with(model: @work,
-url: {controller: :work, action: :create, user_id: @user.id, moku_id: @moku.id},
-method: :post,
-local: true) do |form| %>
+  <%= form_with(model: @work,
+  url: {controller: :work, action: :create, user_id: @user.id, moku_id: @moku.id},
+  method: :post,
+  local: true) do |form| %>
 
 
-<h3>制作物タイトル：<%= form.text_field :title %></h3>
-<h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>
-<h3>コメント：<%= form.text_area :comment %></h3>
+  <h3>制作物タイトル：<%= form.text_field :title %></h3>
+  <h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>
+  <h3>コメント：<%= form.text_area :comment %></h3>
+  　
+  <h4>
+  <%# 【１】moku_typeの選択肢と違って、カラムの中身を使うのではなくyesかnoだけだから、f.collection_selectは向いてなかった %>
+  <%# そこでf.selectで書くことにした。%>
+  <%# 他のビューでも使いそうだから、部品化することにした。%>
+  <%# パーシャルにするほどではないので、部品用フォルダをapp直下に作って、新しいRubyファイルを作った（app/lib/constants.rb）%>
 
-<h4>
-<%# 【１】moku_typeの選択肢と違って、カラムの中身を使うのではなくyesかnoだけだから、f.collection_selectは向いてなかった %>
-<%# そこでf.selectで書くことにした。%>
-<%# 他のビューでも使いそうだから、部品化することにした。%>
-<%# パーシャルにするほどではないので、部品用フォルダをapp直下に作って、新しいRubyファイルを作った（app/lib/constants.rb）%>
+  <%# 【４】f.selectの書き方(下の例に倣うと)%>
+  <%# f.select :対象のカラム名, 選択肢が入ってるデーター名,オプション %>
+    他ユーザーへの公開設定：
+    <%# form.collection_select :public, @work.public, %>
+    <%= form.select :public, options_for_public, selected: @work.public %>
+  </h4>
+  <h4>PICK UP MOKUへの公開設定：
+  <%= form.select :pick_up, options_for_public, selected: @work.pick_up %>
+  <%# select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %>
+  </h4>
 
-<%# 【４】f.selectの書き方(下の例に倣うと)%>
-<%# f.select :対象のカラム名, 選択肢が入ってるデーター名,オプション %>
-  他ユーザーへの公開設定：
-  <%# form.collection_select :public, @work.public, %>
-  <%= form.select :public, options_for_public, selected: @work.public %>
-</h4>
-<h4>PICK UP MOKUへの公開設定：
-<%= form.select :pick_up, options_for_public, selected: @work.pick_up %>
-<%# select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %>
-</h4>
+  <%= form.submit '登録する' %>
+  <% end %>
 
-<%= form.submit '登録する' %>
-<% end %>
+  <%= hello 'まきの' %>
 
-<%= hello 'まきの' %>

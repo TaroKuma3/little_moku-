@@ -9,6 +9,11 @@ class FaqsController < ApplicationController
 
   def new
     @faq = Faq.new
+    # @faqs = Faq.all
+    @user = User.find_by(id: current_user.id)
+
+    # ↓これアクティブにすると、カテゴリ新規追加に反映されてselecteddに反映しなくなっちゃう
+    # @faq.category = Constants::GENERAL
   end
 
   def create
@@ -22,7 +27,7 @@ class FaqsController < ApplicationController
     )
 
     faq.save!
-    redirect_to(faqs_index_path)
+    redirect_to(faqs_path)
   end
 
   def edit
@@ -38,13 +43,13 @@ class FaqsController < ApplicationController
     user_id = current_user.id
 
     faq.save!
-    redirect_to(faqs_index_path)
+    redirect_to(faqs_path)
   end
 
 
   def destroy
     @faq = Faq.find_by(id: params[:id])
     @faq.destroy
-    redirect_to(faqs_index_path)
+    redirect_to(faqs_path)
   end
 end

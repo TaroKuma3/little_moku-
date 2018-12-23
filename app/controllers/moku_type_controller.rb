@@ -12,6 +12,7 @@ class MokuTypeController < ApplicationController
   def new
     @user = User.find_by(id: current_user.id)
     @moku_types = MokuType.where(user_id: @user.id)
+
   end
 
   def create

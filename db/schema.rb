@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_113118) do
+ActiveRecord::Schema.define(version: 2018_12_24_093612) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,15 @@ ActiveRecord::Schema.define(version: 2018_12_18_113118) do
     t.string "content"
     t.integer "moku_type_id"
     t.boolean "mjn_public", default: true, null: false
+  end
+
+  create_table "mypage_configs", force: :cascade do |t|
+    t.text "items"
+    t.text "introduce"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "public", default: false, null: false
+    t.integer "user_id"
   end
 
   create_table "stamps", force: :cascade do |t|

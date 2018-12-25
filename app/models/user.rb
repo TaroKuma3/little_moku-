@@ -10,8 +10,9 @@ class User < ApplicationRecord
   has_many :book_marks
   has_many :stamps
   has_many :faqs
+  has_one :mypage_config
 
-  after_create :insert_default_moku_type
+  after_create :insert_default_moku_type, :insert_mypage_edit
 
 # 管理者かどうか判断
 # booleanは？のメソッドが必要なので、むしろ書かずともどこかに生えている。（Railsに限る）
@@ -29,4 +30,17 @@ class User < ApplicationRecord
     )
     moku_type.save!
   end
+
+  def insert_mypage_edit
+    mypage_config = MypageConfig.new(
+      items: "主に使う道具・教材・機材・材料など。
+      例：MacBook Air、ジャノメミシンJN508DX、ドットインストール、メディバンペイント、CanonEOS80D",
+      introduce: "自己紹介をどうぞ！",
+      public: false,
+      user_id: self.id
+    )
+
+    mypage_config.save!
+  end
+  
 end

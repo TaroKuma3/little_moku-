@@ -9,11 +9,12 @@ class MypageController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @works_random = Work.all.order("RANDOM()").limit(3)
+    @user = User.find_by(id: current_user.id)
+    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
   end
 
   def edit
-
+    @mypage_config = MypageConfig.new
+    @user = User.find_by(id: current_user.id)
   end
 end

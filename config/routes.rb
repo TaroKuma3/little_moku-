@@ -2,9 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get 'mypage/show'
-  get 'mypage/edit'
   get 'mypage' => 'mypage#index'
+  get 'mypage/:user_id' => 'mypage#show'
+  get 'mypage/:user_id/edit' => 'mypage#edit'
+  patch 'mypage/:user_id' => 'mypage#update'
 
   get 'administrator/index'
 

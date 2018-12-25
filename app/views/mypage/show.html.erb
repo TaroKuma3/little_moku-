@@ -1,2 +1,21 @@
 <h1>Mypage#show</h1>
-<p>Find me in app/views/mypage/show.html.erb</p>
+
+
+<h4>MOKUアイテム</h4>
+<%= @mypage_config.items %>
+<h4>自己紹介</h4>
+<%= @mypage_config.introduce %>
+<h4>公開表/非公開</h4>
+<ul>
+  <li>
+    <b>アカウント</b>
+    <h3>☁︎公開にすると</h3>
+      <p>公開の説明</p>
+    <h3>☁︎非公開にすると</h3>
+      <p>非公開の説明</p>
+  </li>
+</ul>
+
+
+<h3><%= link_to("設定を編集する", "/mypage/#{current_user.id}/edit" )%></h3>
+<h3><%= link_to("マイページへ戻る", "/mypage")%></h3>

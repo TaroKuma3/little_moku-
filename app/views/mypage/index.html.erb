@@ -51,5 +51,5 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 </ul>
 <% end %>
 
-<p><%= link_to("設定", mypage_edit_path)%></p>
+<p><%= link_to("設定", "/mypage/#{current_user.id}")%></p>
 <h3><%= link_to("よくある質問",faqs_path) %></h3>

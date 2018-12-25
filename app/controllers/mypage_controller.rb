@@ -14,7 +14,22 @@ class MypageController < ApplicationController
   end
 
   def edit
-    @mypage_config = MypageConfig.new
+    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
     @user = User.find_by(id: current_user.id)
+
+  end
+
+  def update
+    @user = User.find_by(id: current_user.id)
+    mypage_config = MypageConfig.find_by(user_id: current_user.id)
+    mypage_config.update(mypage_config_params)
+
+    mypage_config.save!
+    redirect_to ("/mypage/#{@user.id}")
+  end
+
+  private
+  def mypage_config_params
+    params.require(:mypage_config).permit(:items, :introduce, :public, :user_id)
   end
 end

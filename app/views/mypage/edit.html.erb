@@ -10,19 +10,21 @@ method: :patch,
 local: true) do |f| %>
 
 <h4>MOKUアイテム</h4>
-<%= f.text_area ":例：PC：MacBook Pro, 使用ソフト：VS Cood, 言語：Ruby、Ruby on Rails、他：ドットインストール" %>
+<%= f.text_area :items %>
 <h4>自己紹介</h4>
-<textarea></textarea>
-<h4>公開表/非公開</h4>
+<%= f.text_area :introduce %>
+<h4>アカウントの公開表/非公開</h4>
+<%= f.select :public, options_for_public, selected: @mypage_config.public %>
 <ul>
   <li>
-    <b>アカウント</b>
     <h3>☁︎公開にすると</h3>
       <p>公開の説明</p>
     <h3>☁︎非公開にすると</h3>
       <p>非公開の説明</p>
   </li>
 </ul>
+
+<%= f.submit "登録する" %>
 <% end %>
 
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>

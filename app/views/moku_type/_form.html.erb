@@ -1,18 +1,22 @@
-<%
-=begin
-  <%= form_with(model: @MokuType,
-  method: :patch,
-  local: true) do |f| %>
 
-    <% if request_path_info = edit_user_moku_type_path(@user, @moku_type) %>
+  <%= form_with(model: @MokuType, local: true) do |f| %>
+
+    <%# if request_path_info = edit_user_moku_type_path(@user, @moku_type) %>
       <h3><%= "新しいMOKUタグの名前を教えてください" %><h3>
       <p><%= f.text_field :name %></p>
       <%= f.submit "登録する" %>
-    <% else %>
-      <h2><%= "MOKUタグ【#{@moku_type.name}】の新しい名前を教えてください" %><h2>
-      <p><%= f.text_field :name %></p>
-      <%= f.submit "変更する" %>
-    <% end %>
-
+    <%# else %>
+      <h2><%#= "MOKUタグ【#{@moku_type.name}】の新しい名前を教えてください" %><h2>
+      <p><%#= f.text_field :name %></p>
+      <%#= f.submit "変更する" %>
+    <%# end %>
   <% end %>
-=end %>
+
+<h3>今あるMOKUタグはこちら</h3>
+<% @moku_types.each do |moku_type| %>
+  <ul>
+    <li>
+      <%= moku_type.name %>
+    </li>
+  </ul>
+<% end %>

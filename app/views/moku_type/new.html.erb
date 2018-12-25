@@ -1,8 +1,9 @@
 <h1>Moku_type#new</h1>
 <h1>あたらしいMOKUタグを追加</h1>
 
-
-<%= form_with(model: @MokuType,
+<%= render "form" %>
+<%
+=begin form_with(model: @MokuType,
 url: {controller: :moku_type, action: :create, user_id: @user.id},
 method: :post,
 local: true) do |f| %>
@@ -19,7 +20,8 @@ local: true) do |f| %>
     <%= moku_type.name %>
   </li>
 </ul>
-<% end %>
+<% 
+=end %>
 
 
 <p><%= link_to("MOKUタグ一覧へ戻る", user_moku_type_index_path(@user))%></p>

@@ -42,5 +42,4 @@ class User < ApplicationRecord
 
     mypage_config.save!
   end
-  
 end

@@ -1,7 +1,5 @@
 
-<%= form_with(model: @work,
-method: :patch,
-local: true) do |form| %>
+<%= form_with(model: @work, local: true) do |form| %>
 
   <h3>制作物タイトル：<%= form.text_field :title %></h3>
   <h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>

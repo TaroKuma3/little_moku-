@@ -1,16 +1,20 @@
 <h1>Work#edit</h1>
 
+<%#= render  "form" %>
 <%= form_with(model: @work,
 url: {controller: :work, action: :update, user_id: @user.id, id: @work},
 method: :patch,
-local: true) do |form| %>
+local: true) do |f| %>
 
-  <h3>制作物タイトル：<%= form.text_field :title %></h3>
-  <h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>
-  <h3>コメント：<%= form.text_area :comment %></h3>
+  <h3>制作物タイトル：<%= f.text_field :title %></h3>
+    <%#一部何を示しているかわからないのがある @work.images.each do |image| %>
+      <%#= f.check_box :image_ids, {multipart: true}, image.id %>
+      <%#= image_tag image, :size => "100×100" %><br>
+      <%# end %>
+  <h3>コメント：<%= f.text_area :comment %></h3>
 
-  <h4>他ユーザーへの公開設定：<%= form.select :public, options_for_public, selected: @work.public %></h4>
-  <h4>Pick Up MOKUへの公開設定：<%= form.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
-  <p><%= form.submit "更新する"%>
+  <h4>他ユーザーへの公開設定：<%= f.select :public, options_for_public, selected: @work.public %></h4>
+  <h4>Pick Up MOKUへの公開設定：<%= f.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
+  <p><%= f.submit "更新する"%>
 
 <% end %>

@@ -56,6 +56,12 @@ class WorkController < MokusController
     @work = Work.find_by(id: params[:id])
     @work.update(work_params)
 
+    # image_idsとかちゃんと何を示してるかわからない
+    # params[:work][:image_ids].each do |image_id|
+    #   image = @work.images.find(image_id)
+    #   image.purge
+    # end
+
     @work.save!
     redirect_to(user_work_path(@user,@work))
   end

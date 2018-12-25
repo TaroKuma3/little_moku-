@@ -6,9 +6,12 @@ class Constants
     # Constantsは定数って意味。
     # なんでクラス作ってるかは忘れてもた。
     # メソッドで使える定数・変数は先に定義済みじゃなきゃいかんから、以下の流れはわかる。
+    # 2018/12/25追記
+    # ↓workをintegerで０・１管理にしたからこうなった。でも今やりたいのはbooleanだからtrue/false
+    # ということで、or を使ってみたけれどmypate#showで非公開が出ちゃってる。
+    PRIVATE = 0 || false
+    PUBLIC = 1 || true
 
-    PRIVATE = 0
-    PUBLIC = 1
 
     # 新たに2018/12/21追加↓表示ではなくコード上でいちいち公開・非公開と書くことはマジックナンバー使うのと同じ。
     # またいろんなところで公開・非公開を使うので、変更が会った時に全部書き直す面倒が。
@@ -22,14 +25,17 @@ class Constants
     # def self.options_for_public
     #     [["公開", PUBLIC], ["非公開", PRIVATE]]
     # end
-    # ↑で新たに公開・非公開を定数管理にしたので、メソッドも↓のように書き換え！
+    # ↑で新たに公開・非公開を定数管理にしたので、self.options_for_publicメソッドも書き換え！
     # これをヘルパーで使う。
+
 
     # ↓2018/12/22新たに追加。moku_type#editでとりまが編集できないよう制御するための定数
     DEFAULT_MOKU_TYPE_NAME = "とりあえずMOKUる"
 
     # ↓2018/12/23新たに追加。faqのカテゴリのためのもの
-    GENERAL = "全般"
+    # 「全般」は特定のプライマリキーを持たせているわけじゃないから公開非公開みたいにIDでは繋げられない
+    # QA登録は頻繁にやるものではないのでとりあえずスルーする
+    # GENERAL = "全般"
 
     def self.options_for_public
         [[PUBLIC_VALUE, PUBLIC], [PRIVATE_VALUE, PRIVATE]]

@@ -34,6 +34,7 @@ class MokuTypeController < ApplicationController
 
   def update
     @user = User.find_by(id: current_user.id)
+
     moku_type = MokuType.find_by(id: params[:id])
     moku_type.name = params[:name]
     moku_type.user_id = current_user.id

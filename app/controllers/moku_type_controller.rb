@@ -26,10 +26,11 @@ class MokuTypeController < ApplicationController
     redirect_to(user_moku_type_index_path(@user))
   end
 
+
   def edit
     @user = User.find_by(id: current_user.id)
-    @moku_types = MokuType.where(user_id: @user.id)
     @moku_type = MokuType.find_by(id: params[:id])
+    @moku_types = MokuType.where(user_id: @user.id)
   end
 
   def update

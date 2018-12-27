@@ -33,6 +33,13 @@
   </li>
 </ul>
 
+<h4><%= "#{@user.name}さんのMOKUアイテム" %></h4>
+<%= simple_format(@mypage_config.items) %>
+<h4>自己紹介</h4>
+<%= simple_format(@mypage_config.introduce) %>
+<h4>アカウントの公開表/非公開</h4>
+<%= public_to_s(@mypage_config.public) %>
+
 <% if @user.admin? %>
 <%# booleanを定義している場合、？のメソッドで　tureか？と聞く。
 本来聞くメソッドが必ず必要で、今回user.rbに定義はしたんだけど、実は定義しないでもOK
@@ -51,5 +58,5 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 </ul>
 <% end %>
 
-<p><%= link_to("設定", "/mypage/#{current_user.id}")%></p>
+<p><%= link_to("MOKUアイテム・自己紹介の編集", "/mypage/#{@user.id}/edit")%></p>
 <h3><%= link_to("よくある質問",faqs_path) %></h3>

@@ -4,13 +4,14 @@ class MypageController < ApplicationController
 
   def index
     @user = User.find_by(id: current_user.id)
-    @works_random = Work.all.order("RANDOM()").limit(3)
+    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
+    @works_random = Work.where(pick_up: true).order("RANDOM()").limit(3)
     # @faq = Faq.new
   end
 
   def show
-    @user = User.find_by(id: current_user.id)
-    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
+    @user = User.find_by(id: params[:user_id])
+    @mypage_config = MypageConfig.find_by(user_id: @user.id)
   end
 
   def edit
@@ -25,7 +26,7 @@ class MypageController < ApplicationController
     mypage_config.update(mypage_config_params)
 
     mypage_config.save!
-    redirect_to ("/mypage/#{@user.id}")
+    redirect_to ("/mypage")
   end
 
   private

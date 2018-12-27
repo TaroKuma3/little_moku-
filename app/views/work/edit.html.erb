@@ -7,13 +7,14 @@ method: :patch,
 local: true) do |f| %>
 
   <h3>制作物タイトル：<%= f.text_field :title %></h3>
-    <%#一部何を示しているかわからないのがある @work.images.each do |image| %>
-      <%#= f.check_box :image_ids, {multipart: true}, image.id %>
-      <%#= image_tag image, :size => "100×100" %><br>
-      <%# end %>
+  <p>削除したい画像はチェックしてください。</p>
+    <% @work.images.each do |image| %>
+      <%= f.check_box :image_ids, {multipart: true}, image.id, false %>
+      <%= image_tag image, :size => "100×100" %><br>
+      <% end %>
   <h3>コメント：<%= f.text_area :comment %></h3>
 
-  <h4>他ユーザーへの公開設定：<%= f.select :public, options_for_public, selected: @work.public %></h4>
+  <h4>制作物コメントの公開設定：<%= f.select :public, options_for_public, selected: @work.public %></h4>
   <h4>Pick Up MOKUへの公開設定：<%= f.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
   <p><%= f.submit "更新する"%>
 

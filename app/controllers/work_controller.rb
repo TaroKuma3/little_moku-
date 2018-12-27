@@ -6,7 +6,7 @@ class WorkController < MokusController
 
   def show
     @work = Work.find_by(id: params[:id])
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find_by(id: params[:user_id]) #ここでひろうuser_idはURLに含まれるuser_id
     @moku = Moku.find_by(id: @work.moku_id)
   end
 
@@ -56,11 +56,12 @@ class WorkController < MokusController
     @work = Work.find_by(id: params[:id])
     @work.update(work_params)
 
-    # image_idsとかちゃんと何を示してるかわからない
-    # params[:work][:image_ids].each do |image_id|
-    #   image = @work.images.find(image_id)
-    #   image.purge
-    # end
+    # image_ids→１つの記事に複数画像貼れるからids。
+    # [:work][:image_ids]に削除対象のidが全部入ってる。
+    params[:work][:image_ids].each do |image_id|
+      image = @work.images.find(image_id)
+      image.purge
+    end
 
     @work.save!
     redirect_to(user_work_path(@user,@work))

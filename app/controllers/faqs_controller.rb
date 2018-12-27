@@ -1,4 +1,7 @@
 class FaqsController < ApplicationController
+
+  # before_action :ensure_admin_user,[only: [:new, :create, :edit, :update, :destroy]]
+
   def index
     @faqs = Faq.all
   end
@@ -52,4 +55,16 @@ class FaqsController < ApplicationController
     @faq.destroy
     redirect_to(faqs_path)
   end
+
+  # private
+  # def ensure_admin_user
+  #   user = User.find_by(id: current_user.id)
+
+  #   if user.admin == false
+  #     flash[:notice] = "権限がありません"
+  #     redirect_to(mypage_path)
+  #   end
+
+  # end
+
 end

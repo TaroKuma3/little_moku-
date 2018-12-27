@@ -1,12 +1,13 @@
 <h1>Mypage#show</h1>
+自ユーザー以外が、PICK UP MOKUで成果物をみた時に、ここに作者さん情報を見にくる
 
+<h1><%= "成果物の製作者：#{@user.name}さん" %></h1>
 
-<h4>MOKUアイテム</h4>
+<h4><%= "#{@user.name}さんのMOKUアイテム" %></h4>
 <%= simple_format(@mypage_config.items) %>
-<h4>自己紹介</h4>
-<%= simple_format(@mypage_config.introduce) %>
-<h4>アカウントの公開表/非公開</h4>
-<%= public_to_s(@mypage_config.public) %>
 
-<h3><%= link_to("設定を編集する", "/mypage/#{current_user.id}/edit" )%></h3>
+<h4><%= "#{@user.name}さんの自己紹介" %></h4>
+<%= simple_format(@mypage_config.introduce) %>
+
+<p>TwitterとかインスタとかFBとかのリンクが出せたらいいな</p>
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>

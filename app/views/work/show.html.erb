@@ -2,6 +2,7 @@
 
 <h1><%= "成果物タイトル：#{@work.title}" %></h1>
 <h3><%= "成果物登録日時：#{@work.created_at}" %></h3>
+
 <h3>成果物の画像やファイル</h3>
 <%# 画像がないなら余計な作業は無用なので↓で画像があるかどうか判断している%>
   <% if @work.images.attached? %>
@@ -10,14 +11,25 @@
     <% end %>
   <% end %>
 
-<h3><%= "コメント：#{@work.comment}" %></h3>
-<%# application.html.erbで作ったメソッドを使って、０・１を公開・非公開で表示する。%>
-<h4>他ユーザーへの公開設定：<%= public_to_s(@work.public) %></h4>
-<h4>PICK UP MOKUへの公開設定：<%= public_to_s(@work.pick_up) %></h4>
-<%# モデルにメソッド書いて、@work.public_to_sにすることもできる。どっちでも。
-他の部分でも使うなら、モデルに定義するよりはこのやり方の方がいいだろう%>
+<% if @work.user_id == current_user.id %>
+  <h3><%= "制作物のコメント：#{@work.comment}" %></h3>
+  <h4>制作物コメントの公開設定：<%= public_to_s(@work.public) %></h4>
+  <h4>PICK UP MOKUへの公開設定：<%= public_to_s(@work.pick_up) %></h4>
+  <%# モデルにメソッド書いて、@work.public_to_sにすることもできる。どっちでも。
+  他の部分でも使うなら、モデルに定義するよりはこのやり方の方がいいだろう%>
+  <h4> この制作物が生まれたMOKU：<%=link_to(@moku.created_at, user_moku_path(@user, @moku)) %></h4>
+  <p><%= link_to("【編集】", edit_user_work_path(@user, @work) ) %><%= link_to("【削除(link未設定)】") %></p>
 
+<% else %>
+  <% if @work.public == true %>
+    <h3><%= "制作物のコメント：#{@work.comment}" %></h3>
+    <%# application.html.erbで作ったメソッドを使って、０・１を公開・非公開で表示する。%>
+  <% else %>
+    <h3>制作物のコメント：非公開です☁︎</h3>
+  <% end %>
 
-<h4> このが生まれたMOKU：<%=link_to(@moku.created_at, user_moku_path(@user, @moku)) %></h4>
-<p><%= link_to("【編集】", edit_user_work_path(@user, @work) ) %><%= link_to("【削除(link未設定)】") %></p>
+  <% work_owner_user = User.find_by(id: @work.user_id )%>
+  <h3>この成果物の作者さん：<%= link_to "#{work_owner_user.name}さん", "/mypage/#{@work.user_id}" %></h3>
+<% end %>
+
 <p><%= link_to("マイページへ戻る", "/mypage")%></p>

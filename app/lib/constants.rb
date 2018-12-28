@@ -9,8 +9,12 @@ class Constants
     # 2018/12/25追記
     # ↓workをintegerで０・１管理にしたからこうなった。でも今やりたいのはbooleanだからtrue/false
     # ということで、or を使ってみたけれどmypate#showで非公開が出ちゃってる。
-    PRIVATE = 0 || false
-    PUBLIC = 1 || true
+    # PRIVATE = 0 || false
+    # PUBLIC =  1 || true)←これだと都度計算になってしまっている。定数は計算済みのものを当てるようにする
+# 定数は一度決めたら変更しない。
+
+    PRIVATE = 0
+    PUBLIC =  1
 
 
     # 新たに2018/12/21追加↓表示ではなくコード上でいちいち公開・非公開と書くことはマジックナンバー使うのと同じ。
@@ -35,7 +39,7 @@ class Constants
     # ↓2018/12/23新たに追加。faqのカテゴリのためのもの
     # 「全般」は特定のプライマリキーを持たせているわけじゃないから公開非公開みたいにIDでは繋げられない
     # QA登録は頻繁にやるものではないのでとりあえずスルーする
-    # GENERAL = "全般"
+    GENERAL = "全般"
 
     def self.options_for_public
         [[PUBLIC_VALUE, PUBLIC], [PRIVATE_VALUE, PRIVATE]]

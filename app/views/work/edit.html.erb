@@ -1,21 +1,32 @@
 <h1>Work#edit</h1>
 
-<%#= render  "form" %>
+
 <%= form_with(model: @work,
 url: {controller: :work, action: :update, user_id: @user.id, id: @work},
 method: :patch,
 local: true) do |f| %>
 
-  <h3>制作物タイトル：<%= f.text_field :title %></h3>
-  <p>削除したい画像はチェックしてください。</p>
-    <% @work.images.each do |image| %>
-      <%= f.check_box :image_ids, {multipart: true}, image.id, false %>
-      <%= image_tag image, :size => "100×100" %><br>
-      <% end %>
-  <h3>コメント：<%= f.text_area :comment %></h3>
+<p>削除したい画像はチェックしてください。</p>
+      <% @work.images.each do |image| %>
+        <%#= f.check_box :image_ids, {multipart: true}, image.id, false %>
+        <%# multipartなしで大丈夫　imputタグには本来書かないもの%>
 
-  <h4>制作物コメントの公開設定：<%= f.select :public, options_for_public, selected: @work.public %></h4>
-  <h4>Pick Up MOKUへの公開設定：<%= f.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
-  <p><%= f.submit "更新する"%>
+      <%= link_to "削除", "/work/#{@work.id}/images/#{image.id}", method: :delete %>
 
+        <%= image_tag image, :size => "100×100" %><br>
+        <% end %>
+    <h3>コメント：<%= f.text_area :comment %></h3>
+
+
+<%= render  "form", form:f %>
+
+<% end %>
+<%# partialにローカル変数を渡してあげることができる newはあとでやってみる %>
+<% if false %>
+  begin <h3>制作物タイトル：<%= f.text_field :title %></h3>
+
+    <h4>制作物コメントの公開設定：<%= f.select :public, options_for_public, selected: @work.public %></h4>
+    <h4>Pick Up MOKUへの公開設定：<%= f.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
+    <p><%= f.submit "更新する"%>
+  　
 <% end %>

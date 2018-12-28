@@ -67,6 +67,15 @@ class WorkController < MokusController
     redirect_to(user_work_path(@user,@work))
   end
 
+  def delete_image #動詞を頭に持ってきた方がいいよ
+    work = Work.find(params[:id])
+    image = work.images.find params[:image_id]
+    image.purge
+
+    redirect_to("/users/#{current_user.id}/work/#{work.id}")
+
+  end
+
   private
   # workのストロングパラメータ
   def work_params

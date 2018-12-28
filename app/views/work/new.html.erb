@@ -4,8 +4,9 @@
 
 <h3><%= "#{@user.name}さん、#{@moku.created_at}に【#{@moku_type.name}】でMOKUった時の成果物を登録してください。" %></h3>
 
-<%#= render  "form" %>
-  <%= form_with(model: @work,
+<%= render  "form" %>
+  <%
+=begin form_with(model: @work,
   url: {controller: :work, action: :create, user_id: @user.id, moku_id: @moku.id},
   method: :post,
   local: true) do |form| %>
@@ -33,7 +34,8 @@
   </h4>
 
   <%= form.submit '登録する' %>
-  <% end %>
+  <% 
+=end %>
 
   <%= hello 'まきの' %>
 

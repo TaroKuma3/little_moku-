@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  delete 'work/:id/images/:image_id' => 'work#delete_image'
 
   get 'mypage' => 'mypage#index'
   get 'mypage/:user_id' => 'mypage#show'

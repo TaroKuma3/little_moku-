@@ -1,7 +1,4 @@
 
-<%
-=begin form_with(model: @work, local: true) do |form| %>
-
   <h3>制作物タイトル：<%= form.text_field :title %></h3>
   <h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>
   <h3>コメント：<%= form.text_area :comment %></h3>
@@ -10,5 +7,3 @@
   <h4>Pick Up MOKUへの公開設定：<%= form.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
   <p><%= form.submit "登録する"%>
 
-  <%
-=end %>

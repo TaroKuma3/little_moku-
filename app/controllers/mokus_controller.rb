@@ -2,9 +2,14 @@ class MokusController < ApplicationController
   def index
 
     # 絞り込み用を書く
-    @user = User.find_by(id: current_user.id)
-    @mokus = Moku.where(user_id: @user.id)
-
+    if params[:moku_type]
+      @user = User.find_by(id: current_user.id)
+      # @moku_type = MokuType.where(id: params[:id])
+      @mokus = Moku.where(user_id: current_user.id).where(moku_type_id: params[:moku_type])
+    else
+      @user = User.find_by(id: current_user.id)
+      @mokus = Moku.where(user_id: @user.id)
+    end
   end
 
   def show

@@ -4,14 +4,16 @@
 
 <h3><%= "#{@user.name}さん、#{@moku.created_at}に【#{@moku_type.name}】でMOKUった時の成果物を登録してください。" %></h3>
 
-<%= render  "form" %>
-  <%
-=begin form_with(model: @work,
+<%= form_with(model: @work,
   url: {controller: :work, action: :create, user_id: @user.id, moku_id: @moku.id},
   method: :post,
   local: true) do |form| %>
 
+  <% render 'form', form:form %>
+<% end %>
 
+<%
+=begin
   <h3>制作物タイトル：<%= form.text_field :title %></h3>
   <h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>
   <h3>制作物コメント：<%= form.text_area :comment %></h3>
@@ -34,8 +36,5 @@
   </h4>
 
   <%= form.submit '登録する' %>
-  <% 
+  <%
 =end %>
-
-  <%= hello 'まきの' %>
-

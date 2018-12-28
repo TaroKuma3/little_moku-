@@ -67,6 +67,8 @@ class WorkController < MokusController
     redirect_to(user_work_path(@user,@work))
   end
 
+  # findはactive storageのattachmentクラスが持ってるメソッド。
+  # active strageだから使えるメソッドってこと。
   def delete_image #動詞を頭に持ってきた方がいいよ
     work = Work.find(params[:id])
     image = work.images.find params[:image_id]

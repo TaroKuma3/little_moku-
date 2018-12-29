@@ -22,15 +22,19 @@ class FaqsController < ApplicationController
   def create
     user = User.find_by(id: current_user.id)
 
-    faq = Faq.new(
+    @faq = Faq.new(
       questions: params[:faq][:questions],
       answer: params[:faq][:answer],
       category: params[:faq][:category],
       user_id: user.id,
     )
 
-    faq.save!
-    redirect_to(faqs_path)
+    if @faq.save
+      flash[:notice] = "FAQを登録しました！"
+      redirect_to(faqs_path)
+    else
+      render(faqs_new_path)
+    end
   end
 
   def edit
@@ -39,14 +43,18 @@ class FaqsController < ApplicationController
   end
 
   def update
-    faq = Faq.find_by(id: params[:id])
-    faq.questions = params[:faq][:questions]
-    faq.answer = params[:faq][:answer]
-    faq.category = params[:faq][:category]
+    @faq = Faq.find_by(id: params[:id])
+    @faq.questions = params[:faq][:questions]
+    @faq.answer = params[:faq][:answer]
+    @faq.category = params[:faq][:category]
     user_id = current_user.id
 
-    faq.save!
-    redirect_to(faqs_path)
+    if @faq.save
+      flash[:notice] = "FAQを更新しました！"
+      redirect_to(faqs_path)
+    else
+      render action: :edit
+    end
   end
 
 

@@ -23,6 +23,7 @@ module ApplicationHelper
     # これをいろんなhtml.erbで使うといい。とりあえずwork/show.html.erbに使ってみた。
     # これが引数をとる形式なのは、対象により表示が変わるから。
     # 公開である１が返っている場合は公開、０なら非公開を出したい。この分岐が必要。
+
     def public_to_s(value) #もしbooleanとかもでてくるならここで引数を分岐させてあげる必要がある
         if value.is_a?(TrueClass) #←booleanかどうかきいてる
             return Constants::PUBLIC_VALUE
@@ -30,22 +31,24 @@ module ApplicationHelper
             return Constants::PRIVATE_VALUE
         end
 
-        if value == Constants::PUBLIC #
+        if value == Constants::PUBLIC
             return Constants::PUBLIC_VALUE
         end
 
-        return Constants::PRIVATE_VALUE #想定外の変なクラスが渡ってきたとき＝どの条件にも当てはまらない場合はこの値をかえせになる。デフォ値のようになる、ように読める
+        return Constants::PRIVATE_VALUE
+        #想定外の変なクラスが渡ってきたとき＝どの条件にも当てはまらない場合はこの値をかえせになる。デフォ値のようになる、ように読める
         # elseだと数字だけが入ってくるように見える場合がある。booleanが増えたので、数値以外が入るようになってきた。
-        # 定数管理する際に、最初は数値にしていたけれど途中でbooleanを使い始めたのでこうなった。どちらかに統一するといい。
+        # 定数管理する際に、最初は数値にしていたけれど途中でbooleanを使い始めたのでこうなった。
+        # どちらかに統一するといい。
     end
 
-    def hello(name)
-        "こんにちは #{name}さん"
-    end
+    # def hello(name)
+    #     "こんにちは #{name}さん"
+    # end
 
-    def goodbye(name)
-        "さようなら #{name}さん"
-    end
+    # def goodbye(name)
+    #     "さようなら #{name}さん"
+    # end
 
     def greeting
         now = Time.now.hour

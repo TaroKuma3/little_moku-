@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   "/mypage"  #＜＝文字列でOK　users_pathはヘルパーメソッドであって結局文字列が返ってる
   end
 
+
   private
   # redirect先はdevise/sessions#newが指定されてる。サインインしてないならログイン画面へ飛ばされる。
   def sign_in_required

@@ -9,15 +9,20 @@
               method: :patch,
               local: true) do |form| %>
   <!--  https://qiita.com/colorrabbit/items/b58888506e41d1370fd1-->
-  <h4>
-    MOKUタグ：
+  <% if @moku.errors.any? %>
+    <% @moku.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  <% end %>
+
+  <h4>MOKUタグ</h4>
     <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @moku.moku_type_id %>
   <%# form.collection_select :対象のカラム名,プルダウンに表示するデータの配列, :データー格納先カラム名, :データー格納先カラム名, selected: そのmokuのmoku_type_idを拾ってそれに該当するMOKUタグを表示しておく%>
-  </h4>
 
-  <h4>
-    やったことやめも：
-    <%= form.text_area :content %>
-  </h4>
+  <h4>やったことやめも</h4>
+  <%= form.text_area :content %>
+
+  <h4>MOKU JUST NOWへの公開設定</h4>
+<%= form.select :mjn_public, options_for_public, selected: @moku.mjn_public %></h4>
   <%= form.submit '保存' %>
 <% end %>

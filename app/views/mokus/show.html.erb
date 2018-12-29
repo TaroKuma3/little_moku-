@@ -1,10 +1,19 @@
 <h1>mokusコントローラの　showビュー</h1>
 
 <h1><%= "#{@user.name}さんが#{@moku.created_at}にMOKUった内容"%></h1>
-<h4><%= "MOKU 終了時刻：#{@moku.updated_at}" %></h4>
-<h4><%= "MOKU TIME :○○分MOKUりました！" %></h4>
-<h4><%= "MOKUタグ： #{@moku_type.name}" %></h4>
-<h4><%= "やったことやめも： #{@moku.content}" %></h4>
+
+<h4>MOKU 終了時刻</h4>
+<%= @moku.updated_at %>
+
+<h4>MOKU TIME</h4>
+<%= "○○分MOKUりました！" %>
+
+<h4>MOKUタグ</h4>
+<%= @moku_type.name%>
+
+<h4>やったことやめも</h4>
+<h4><%= simple_format(@moku.content) %></h4>
+
 <h4><%= "このMOKUの成果物一覧" %></h4>
 <% if @works %>
   <% @works.each do |work| %>
@@ -16,7 +25,8 @@
   <% end %>
 <% end %>
 
+<h3>MOKU JUST NOWへの公開設定</h3>
+<%= public_to_s(@moku.mjn_public)%>
 
-<%= link_to("【編集】", edit_user_moku_path(@user, @moku.id)) %>
-＊成果物は成果物のページから編集か…
+<p><%= link_to("【編集】", edit_user_moku_path(@user, @moku.id)) %></p>
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>

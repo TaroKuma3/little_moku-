@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   has_many :mokus, dependent: :destroy
   has_many :moku_types, dependent: :destroy
   has_many :works #ブクマに関わるので調べてから
@@ -13,6 +14,9 @@ class User < ApplicationRecord
   has_one :mypage_config , dependent: :destroy
 
   after_create :insert_default_moku_type, :insert_mypage_edit
+
+  validates :admin, inclusion: { in: [true, false] }
+
 
 # 管理者かどうか判断
 # booleanは？のメソッドが必ず必要なので、むしろ書かずともどこかに生えている。（Railsに限る）

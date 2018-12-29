@@ -5,6 +5,12 @@ url: {controller: :work, action: :update, user_id: @user.id, id: @work},
 method: :patch,
 local: true) do |f| %>
 
+<% if @work.errors.any? %>
+  <% @work.errors.full_messages.each do |message| %>
+    <%= message %><br>
+  <% end %>
+<% end %>
+
   <p>削除したい画像はチェックしてください。</p>
   <% @work.images.each do |image| %>
     <%#= f.check_box :image_ids, {multipart: true}, image.id, false %>
@@ -14,7 +20,6 @@ local: true) do |f| %>
     <%= image_tag image, :size => "100×100" %><br>
   <% end %>
 
-  <h3>コメント：<%= f.text_area :comment %></h3>
 
   <%= render  "form", form:f %>
 <% end %>

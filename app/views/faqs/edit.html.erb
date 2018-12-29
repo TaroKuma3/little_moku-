@@ -5,9 +5,15 @@
               method: :patch,
               local: true) do |form| %>
 
-<p><%= form.text_area :questions %></p>
-<p><%= form.text_area :answer %></p>
-<p><%= form.text_field :category %></p>
-<p><%= form.submit "更新する" %></p>
-<%= link_to("よくある質問一覧に戻る", faqs_path)%>
+  <% if @faq.errors.any? %>
+    <% @faq.errors.full_messages.each do |message| %>
+      <%= message %><br>
+    <% end %>
+  <% end %><br>
+
+  <p><%= form.text_area :questions %></p>
+  <p><%= form.text_area :answer %></p>
+  <p><%= form.text_field :category %></p>
+  <p><%= form.submit "更新する" %></p>
+  <%= link_to("よくある質問一覧に戻る", faqs_path)%>
 <% end %>

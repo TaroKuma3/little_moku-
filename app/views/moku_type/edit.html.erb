@@ -1,15 +1,24 @@
 <h1>Moku_type#edit</h1>
 <h1>MOKUタグの編集</h1>
 
-<%= render  "form" %>
-<%
-=begin form_with(model: @MokuType,
+<%= form_with(model: @MokuType,
 url: {controller: :moku_type, action: :update, user_id: @user, id: @moku_type},
 method: :patch,
 local: true) do |f| %>
 
-<h2><%= "MOKUタグ【#{@moku_type.name}】の新しい名前を教えてください" %><h2>
-<p><%= f.text_field :name %></p>
+<% if @moku_type.errors.any? %>
+  <% @moku_type.errors.full_messages.each do |message| %>
+    <%= message %><br>
+  <% end %>
+<% end %>
+
+<%= "MOKUタグ【#{@moku_type.name}】の新しい名前を教えてください" %>
+<%= render "form", f:f %>
+<% end %>
+
+
+<%
+=begin f.text_field :name %>
 <%= f.submit "変更する" %>
 <% end %>
 
@@ -21,7 +30,7 @@ local: true) do |f| %>
     <%= moku_type.name %>
   </li>
 </ul>
-<% 
+<%
 =end %>
 
 

@@ -10,20 +10,23 @@ class MokuTypeController < ApplicationController
   end
 
   def new
-    @user = User.find_by(id: current_user.id)
-    @moku_types = MokuType.where(user_id: @user.id)
-
+    @user = current_user
+    @moku_type = MokuType.new
   end
 
   def create
     @user = User.find_by(id: current_user.id)
 
-    moku_type = MokuType.new(
+    @moku_type = MokuType.new(
       name: params[:name],
       user_id: current_user.id,
     )
-    moku_type.save!
-    redirect_to(user_moku_type_index_path(@user))
+    if @moku_type.save
+      flash[:notice] = "新しいMOKUタグを登しました！"
+      redirect_to(user_moku_type_index_path(@user))
+    else
+      render action: :new
+    end
   end
 
 
@@ -36,12 +39,16 @@ class MokuTypeController < ApplicationController
   def update
     @user = User.find_by(id: current_user.id)
 
-    moku_type = MokuType.find_by(id: params[:id])
-    moku_type.name = params[:name]
-    moku_type.user_id = current_user.id
+    @moku_type = MokuType.find_by(id: params[:id])
+    @moku_type.name = params[:name]
+    @moku_type.user_id = current_user.id
 
-    moku_type.save!
-    redirect_to(user_moku_type_index_path(@user))
+    if @moku_type.save
+      flash[:notice] = "更新しました！"
+      redirect_to(user_moku_type_index_path(@user))
+    else
+      render action: :edit
+    end
 
 
   end

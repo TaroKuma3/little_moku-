@@ -20,19 +20,23 @@ class MokusController < ApplicationController
   end
 
   def new
-    @user = User.find_by(id: params[:user_id])
+    @user = current_user
     @moku = Moku.find_by(id: params[:id])
   end
-
+# ★mokuをnewするのに一体なんのidを拾ってる？これnewmにするとmoku_typeが拾えなくなってエラー出る
   def create
-    moku = Moku.new(
+    @moku = Moku.new(
       user_id: current_user.id,
       moku_type_id: params[:moku_type],
       mjn_public: params[:mjn_public],
     )
 
-    moku.save!
-    redirect_to(mypage_path)
+    if @moku.save
+      flash[:notice] = "MOKU開始！頑張って！"
+      redirect_to(mypage_path)
+    else
+      render action: :new
+    end
   end
 
   def edit
@@ -44,15 +48,19 @@ class MokusController < ApplicationController
 
   def update
     user = User.find_by(id: params[:user_id])
-    moku = Moku.find(params[:id])
-    moku.content = params[:moku][:content]
+    @moku = Moku.find(params[:id])
+    @moku.content = params[:moku][:content]
 
     moku_type = MokuType.find(params[:moku][:moku_type])
-    moku.moku_type = moku_type
+    @moku.moku_type = moku_type
 
-    moku.save!
+    if @moku.save!
+      flash[:notice] = "更新しました！"
+    else
+      render action: :edit
+    end
 
-    redirect_to action: :show, user_id: user.id, id: moku.id
+    redirect_to action: :show, user_id: user.id, id: @moku.id
   end
 
 

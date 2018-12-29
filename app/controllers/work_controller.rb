@@ -31,7 +31,7 @@ class WorkController < MokusController
     # ストロングパラメータを書いたからって手書きでデーター拾っちゃいけないわけじゃない。
     # 今回どういうわけかどうしてもmoku_idとuser_idをひろってくれないので、
     # ↓のようにwork.mokuとwork.userを手書きで指定して拾ってきた。
-    work = Work.new(work_params)
+    @work = Work.new(work_params)
     # title: params[:work][:title],
     # comment: params[:work][:comment],
     # public: params[:work][:public],
@@ -40,10 +40,15 @@ class WorkController < MokusController
     # user_id: params[:user_id],
     # images: params[:work][:images],
     # )
-    work.moku = Moku.find(params[:moku_id])
-    work.user = current_user
-    work.save!
-    redirect_to(user_work_index_path(@user))
+    @work.moku = Moku.find(params[:moku_id])
+    @work.user = current_user
+
+    if @work.save
+      flash[:notice] = "登録しました！"
+      redirect_to(user_work_index_path(@user))
+    else
+      render action: :new
+    end
   end
 
   def edit
@@ -63,8 +68,12 @@ class WorkController < MokusController
       image.purge
     end
 
-    @work.save!
-    redirect_to(user_work_path(@user,@work))
+    if @work.save
+      flash[:notice] = "更新しました！"
+      redirect_to(user_work_path(@user,@work))
+    else
+      render action: :edit
+    end
   end
 
   # findはactive storageのattachmentクラスが持ってるメソッド。

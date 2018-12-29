@@ -22,11 +22,15 @@ class MypageController < ApplicationController
 
   def update
     @user = User.find_by(id: current_user.id)
-    mypage_config = MypageConfig.find_by(user_id: current_user.id)
-    mypage_config.update(mypage_config_params)
+    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
+    @mypage_config.update(mypage_config_params)
 
-    mypage_config.save!
-    redirect_to ("/mypage")
+    if @mypage_config.save
+      flash[:notice] = "更新しました！"
+      redirect_to ("/mypage")
+    else
+      render action: :edit
+    end
   end
 
   private

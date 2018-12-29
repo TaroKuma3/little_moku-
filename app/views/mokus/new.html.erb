@@ -2,25 +2,31 @@
 
 <h1>MOKUる</h1>
 <%= form_with(model: @moku,
-              url: {controller: :mokus, action: :create, user_id: @user.id},
+              url: {controller: :mokus, action: :create, user_id: current_user.id},
               method: :post,
               local: true) do |form| %>
-<h3>なにをMOKUりますか？MOKUタグを教えてください</h3>
-<%# = form.label :"なにをMOKUりますか？MOKUタグを教えてください" %>
-<%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
-<%# form.collection_selectのメモ
-:moku_type...指定したモデル@mokuのどのカラムが対処？
-@user.moku_type...選択肢になるデーター。@user（そのユーザー）が持ってるmoku_type全部対象だかからmoku_types（っていうかmoku_typesテーブルだなこれ多分）
-:id...表示している選択肢のmoku_typeのid。多分前段でmoku_typesテーブル指定してて、だからidだけでmoku_type.idが拾えてる。これparamsで拾われる。
-:name...表示するmoku_typeのなまえ。これもmoku_typesテーブル参照されてて、moku_typeのなまえはnameにしたから取れるんだ。
-selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
-%>
-<h3>MOKU JUST NOWに載せてもいいですか？</h3>
-<%# = form.label :"MOKU JUST NOWに載せてもいいですか？" %>
-　<%= form.select :mjn_public, options_for_mjn %>
 
-<p>MOKU開始を押す前に２つの選択肢に答えてもらうことが必須になる。答えてないと押せないように制御が必要</p>
-<%= form.submit 'MOKU開始！'%>
+  <%# if @moku.errors.any? %>
+    <%# @moku.errors.full_messages.each do |message| %>
+      <%#= message %><br>
+    <%# end %>
+  <%# end %>
+
+  <h3>なにをMOKUりますか？MOKUタグを教えてください</h3>
+  <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
+    <%# form.collection_selectのメモ
+    :moku_type...指定したモデル@mokuのどのカラムが対処？
+    @user.moku_type...選択肢になるデーター。@user（そのユーザー）が持ってるmoku_type全部対象だかからmoku_types（っていうかmoku_typesテーブルだなこれ多分）
+    :id...表示している選択肢のmoku_typeのid。多分前段でmoku_typesテーブル指定してて、だからidだけでmoku_type.idが拾えてる。これparamsで拾われる。
+    :name...表示するmoku_typeのなまえ。これもmoku_typesテーブル参照されてて、moku_typeのなまえはnameにしたから取れるんだ。
+    selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
+    %>
+
+  <h3>MOKU JUST NOWに載せてもいいですか？</h3>
+  <%= form.select :mjn_public, options_for_mjn %>
+
+  <p>MOKU開始を押す前に２つの選択肢に答えてもらうことが必須になる。答えてないと押せないように制御が必要</p>
+  <%= form.submit 'MOKU開始！'%>
 <% end %>
 
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>

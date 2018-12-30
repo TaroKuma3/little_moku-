@@ -7,7 +7,7 @@ class FaqsController < ApplicationController
   end
 
   def show
-    @faq = Faq.find_by(id: params[:id])
+    @faq = Faq.find(params[:id])
   end
 
   def new
@@ -20,14 +20,13 @@ class FaqsController < ApplicationController
   end
 
   def create
-    user = User.find_by(id: current_user.id)
+    # user = User.find_by(id: current_user.id)
 
-    @faq = Faq.new(
-      questions: params[:faq][:questions],
-      answer: params[:faq][:answer],
-      category: params[:faq][:category],
-      user_id: user.id,
-    )
+    @faq = Faq.new(faq_params)
+      # questions: params[:faq][:questions],
+      # answer: params[:faq][:answer],
+      # category: params[:faq][:category],
+      @faq.user_id = current_user.id
 
     if @faq.save
       flash[:notice] = "FAQを登録しました！"
@@ -43,15 +42,16 @@ class FaqsController < ApplicationController
   end
 
   def update
-    @faq = Faq.find_by(id: params[:id])
-    @faq.questions = params[:faq][:questions]
-    @faq.answer = params[:faq][:answer]
-    @faq.category = params[:faq][:category]
-    user_id = current_user.id
+    @faq = Faq.find(params[:id])
+    @faq.update(faq_params)
+    # @faq.questions = params[:faq][:questions]
+    # @faq.answer = params[:faq][:answer]
+    # @faq.category = params[:faq][:category]
+    # user_id = current_user.id
 
     if @faq.save
       flash[:notice] = "FAQを更新しました！"
-      redirect_to(faqs_path)
+      redirect_to("/faqs/#{@faq.id}")
     else
       render action: :edit
     end
@@ -75,4 +75,7 @@ class FaqsController < ApplicationController
 
   end
 
+  def faq_params
+    params.require(:faq).permit(:id, :questions, :answer, :category_list) #, :user_id)
+  end
 end

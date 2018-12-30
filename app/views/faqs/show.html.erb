@@ -1,5 +1,8 @@
 <h1>Faqs#show</h1>
-<h3><%= "カテゴリー： #{@faq.category}"%></h3>
+
+<h3>カテゴリー</h3>
+<%= @faq.category_list %>
+
 <h1><%= @faq.questions %></h1>
 <h3><%= @faq.answer %></h3>
 

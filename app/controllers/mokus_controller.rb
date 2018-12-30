@@ -14,14 +14,14 @@ class MokusController < ApplicationController
 
   def show
     @user = User.find_by(id: current_user.id)
-    @moku = Moku.find_by(id: params[:id])
+    @moku = Moku.find(params[:id])
     @moku_type = MokuType.find_by(id: @moku.moku_type_id)
     @works = Work.where(moku_id: @moku.id)
   end
 
   def new
     @user = current_user
-    @moku = Moku.find_by(id: params[:id])
+    @moku = Moku.find(params[:id])
   end
 # ★mokuをnewするのに一体なんのidを拾ってる？これnewmにするとmoku_typeが拾えなくなってエラー出る
   def create
@@ -41,7 +41,7 @@ class MokusController < ApplicationController
 
   def edit
     @user = User.find_by(id: params[:user_id])
-    @moku = Moku.find_by(id: params[:id])
+    @moku = Moku.find(params[:id])
     # @moku_type = MokuType.find_by(id: @moku.moku_type_id)
     # @works = Work.where(moku_id: @moku.id)
   end

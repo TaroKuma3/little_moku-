@@ -7,7 +7,7 @@
     <% if @user.id == work.user_id %>
       【My】
       <li>
-        <%= work.title %>
+        <%= "#{work.title} 登録日：#{work.created_at}" %>
       </li>
     <% else %>
       【Some One】
@@ -19,5 +19,5 @@
     <% end %>
 </ul>
 <% end %>
-第三者により見える見えないは、current_userかどうかで絞ればいい。
+
 <p><%= link_to("マイページへ戻る", "/mypage")%></p>

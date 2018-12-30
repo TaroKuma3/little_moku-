@@ -36,7 +36,7 @@ class MokuTypeController < ApplicationController
     @moku_types = MokuType.where(user_id: @user.id)
   end
 
-  def update
+ def update
     @user = User.find_by(id: current_user.id)
 
     @moku_type = MokuType.find_by(id: params[:id])
@@ -49,8 +49,6 @@ class MokuTypeController < ApplicationController
     else
       render action: :edit
     end
-
-
   end
 
 end

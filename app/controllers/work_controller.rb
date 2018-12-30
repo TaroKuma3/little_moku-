@@ -8,6 +8,7 @@ class WorkController < MokusController
     @work = Work.find_by(id: params[:id])
     @user = User.find_by(id: params[:user_id]) #ここでひろうuser_idはURLに含まれるuser_id
     @moku = Moku.find_by(id: @work.moku_id)
+    @bm_count = BookMark.where(work_id: @work.id).count
   end
 
   def new
@@ -23,23 +24,24 @@ class WorkController < MokusController
 
   end
 
+  # バリデートしたらrender時に一部のパラメータ拾わなくなったので一旦ストロングパラメータは＃
   def create
     @user = User.find_by(id: current_user.id)
-    # @moku = Moku.find_by(id: params[:id])
+    @moku = Moku.find_by(id: params[:id])
     # @moku_type = MokuType.find_by(id: @moku.moku_type)
 
     # ストロングパラメータを書いたからって手書きでデーター拾っちゃいけないわけじゃない。
     # 今回どういうわけかどうしてもmoku_idとuser_idをひろってくれないので、
     # ↓のようにwork.mokuとwork.userを手書きで指定して拾ってきた。
-    @work = Work.new(work_params)
-    # title: params[:work][:title],
-    # comment: params[:work][:comment],
-    # public: params[:work][:public],
-    # pick_up: params[:work][:pick_up],
-    # moku_id: params[:moku_id],
-    # user_id: params[:user_id],
-    # images: params[:work][:images],
-    # )
+    @work = Work.new(#work_params)
+    title: params[:work][:title],
+    comment: params[:work][:comment],
+    public: params[:work][:public],
+    pick_up: params[:work][:pick_up],
+    moku_id: params[:moku_id],
+    user_id: params[:user_id],
+    images: params[:work][:images],
+    )
     @work.moku = Moku.find(params[:moku_id])
     @work.user = current_user
 
@@ -47,7 +49,7 @@ class WorkController < MokusController
       flash[:notice] = "登録しました！"
       redirect_to(user_work_index_path(@user))
     else
-      render action: :new
+      render "new"
     end
   end
 
@@ -89,9 +91,10 @@ class WorkController < MokusController
 
   private
   # workのストロングパラメータ
-  def work_params
-    params.require(:work).permit(:comment, :title, :images, :user_id, :moku_id, :public, :pick_up)
-  end
+  # バリデートしたらrender時に一部のパラメータ拾わなくなったので一旦＃で様子見る
+  # def work_params
+  #   params.require(:work).permit(:comment, :title, :images, :user_id, :moku_id, :public, :pick_up)
+  # end
 # permitに書くこと・・・create/updateに入れるべき属性名。意図しない項目が変に更新されないようにするためのものだけど
 # paramsでとってくる項目で受け取りたいものをリストアプする。routesで設定しているURLに必要なIDとかは拾う必要がある
 # ので、単に入力フォームのことだけを指定するんではなくて、user_idなんかも指定する。

@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   get '/users/:user_id/mokus/:id/work/new' => 'work#new'
   post '/users/:user_id/mokus/:moku_id/work/create' => 'work#create'
 
+  post '/users/:user_id/works/:work_id/book_marks' => 'book_marks#create'
+  delete '/users/:user_id/works/:work_id/book_marks' => 'book_marks#destroy'
+
   resources :users do
     resources :mokus, :moku_type, :work, :book_marks
   end

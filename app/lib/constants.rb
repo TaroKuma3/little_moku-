@@ -46,13 +46,13 @@ class Constants
     end
 
     # ↑をまねて、mokus#newでMJNの選択肢選ぶのを作ってみる
-    FALSE = 0
-    TRUE = 1
+    # もともと作ってあった定数へ置き換えることにしたのでコメントアウト
+    # FALSE = 0
+    # TRUE = 1
 
     # 別の箇所でも出てくるようなら↑と同じように定数にすることも考える
     def self.options_for_mjn
-        [['もちろん!', TRUE], ['遠慮します', FALSE]]
+        [['もちろん!', PUBLIC], ['遠慮します', PRIVATE]]
     end
-
 
 end

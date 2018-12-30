@@ -50,6 +50,7 @@ class MokusController < ApplicationController
     user = User.find_by(id: params[:user_id])
     @moku = Moku.find(params[:id])
     @moku.content = params[:moku][:content]
+    @moku.mjn_public = params[:moku][:mjn_public]
 
     moku_type = MokuType.find(params[:moku][:moku_type])
     @moku.moku_type = moku_type

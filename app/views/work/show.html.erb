@@ -1,6 +1,18 @@
 <h1>Work#show</h1>
 
 <h1><%= "成果物タイトル：#{@work.title}" %></h1>
+
+<% if bookmark = BookMark.find_by(user_id: current_user.id, work_id: @work.id )%>
+  <%= link_to("/users/#{current_user.id}/works/#{@work.id}/book_marks", {method: :delete}) do %>
+    <span class="fa fa-bookmark fa-2x un-bm-btn" aria-hidden="true"></span>
+  <% end %>
+<% else %>
+  <%= link_to("/users/#{current_user.id}/works/#{@work.id}/book_marks", {method: :post}) do %>
+    <span class="fa fa-bookmark fa-2x bm-btn" aria-hidden="true"></span>
+  <% end %>
+<% end %>
+<%= @bm_count %>
+
 <h3><%= "成果物登録日時：#{@work.created_at}" %></h3>
 
 <h3>成果物の画像やファイル</h3>
@@ -10,6 +22,8 @@
       <%= image_tag image%>
     <% end %>
   <% end %>
+
+
 
 <% if @work.user_id == current_user.id %>
   <h3><%= "制作物のコメント：#{@work.comment}" %></h3>

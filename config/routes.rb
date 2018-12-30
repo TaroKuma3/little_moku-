@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'accounts/:user_id' => 'accounts#edit'
+  patch 'accounts/:user_id' => 'accounts#update'
+
   devise_for :users
   delete 'work/:id/images/:image_id' => 'work#delete_image'
 

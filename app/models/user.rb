@@ -16,6 +16,10 @@ class User < ApplicationRecord
   after_create :insert_default_moku_type, :insert_mypage_edit
 
   validates :admin, inclusion: { in: [true, false] }
+  validates :name, presence: true
+  validates :items, presence: true
+  validates :introduce, presence: true
+  validates :public, inclusion: { in: [true, false] }
 
 
 # 管理者かどうか判断

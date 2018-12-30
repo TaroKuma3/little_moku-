@@ -34,11 +34,11 @@
 </ul>
  
 <h4><%= "#{@user.name}さんのMOKUアイテム" %></h4>
-<%= simple_format(@mypage_config.items) %>
+<%= simple_format(@user.items) %>
 <h4>自己紹介</h4>
-<%= simple_format(@mypage_config.introduce) %>
+<%= simple_format(@user.introduce) %>
 <h4>アカウントの公開表/非公開</h4>
-<%= public_to_s(@mypage_config.public) %>
+<%= public_to_s(@user.public) %>
 
 <% if @user.admin? %>
 <%# booleanを定義している場合、？のメソッドで　tureか？と聞く。
@@ -58,5 +58,5 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 </ul>
 <% end %>
 
-<p><%= link_to("MOKUアイテム・自己紹介の編集", "/mypage/#{@user.id}/edit")%></p>
+<p><%= link_to("個人設定", "/accounts/#{current_user.id}")%></p>
 <h3><%= link_to("よくある質問",faqs_path) %></h3>

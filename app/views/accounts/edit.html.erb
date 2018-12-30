@@ -1,0 +1,40 @@
+<h1>Accounts#edit</h1>
+<h1>個人設定</h1>
+<%= form_with(model: @user,
+url: {controller: :accounts, action: :update, user_id: current_user.id},
+method: :patch,
+local: true) do |f| %>
+
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+<h4>ニックネーム</h4>
+<%= f.text_field :name %>
+
+<h4>MOKUアイテム</h4>
+<%= f.text_area :items %>
+
+<h4>自己紹介</h4>
+<%= f.text_area :introduce %>
+
+<h4>アカウントの公開表/非公開</h4>
+<%= f.select :public, options_for_public, selected: @user.public %>
+
+<ul>
+  <li>
+    <h3>☁︎公開にすると</h3>
+      <p>公開の説明</p>
+    <h3>☁︎非公開にすると</h3>
+      <p>非公開の説明</p>
+  </li>
+</ul>
+
+<%= f.submit "登録する" %>
+<% end %>
+
+<h3><%= link_to("マイページへ戻る", "/mypage")%></h3>
+
+

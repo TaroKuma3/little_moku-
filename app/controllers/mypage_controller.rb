@@ -14,27 +14,29 @@ class MypageController < ApplicationController
     @mypage_config = MypageConfig.find_by(user_id: @user.id)
   end
 
-  def edit
-    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
-    @user = User.find_by(id: current_user.id)
+  # edit/updateはaccounts_controllerでの仕事なのでコメント
 
-  end
+  # def edit
+  #   @mypage_config = MypageConfig.find_by(user_id: current_user.id)
+  #   @user = User.find_by(id: current_user.id)
 
-  def update
-    @user = User.find_by(id: current_user.id)
-    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
-    @mypage_config.update(mypage_config_params)
+  # end
 
-    if @mypage_config.save
-      flash[:notice] = "更新しました！"
-      redirect_to ("/mypage")
-    else
-      render action: :edit
-    end
-  end
+  # def update
+  #   @user = User.find_by(id: current_user.id)
+  #   @mypage_config = MypageConfig.find_by(user_id: current_user.id)
+  #   @mypage_config.update(mypage_config_params)
 
-  private
-  def mypage_config_params
-    params.require(:mypage_config).permit(:items, :introduce, :public, :user_id)
-  end
+  #   if @mypage_config.save
+  #     flash[:notice] = "更新しました！"
+  #     redirect_to ("/mypage")
+  #   else
+  #     render action: :edit
+  #   end
+  # end
+
+  # private
+  # def mypage_config_params
+  #   params.require(:mypage_config).permit(:items, :introduce, :public, :user_id)
+  # end
 end

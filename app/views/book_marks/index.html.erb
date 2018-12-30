@@ -7,7 +7,11 @@
     <% if @user.id == work.user_id %>
       【My】
       <li>
-        <%= "#{work.title} 登録日：#{work.created_at}" %>
+        <%= work.title %>
+        <%= "登録日：#{work.created_at}" %>
+        <%= link_to user_work_path(@user, work) do %>
+          <i class="fa fa-search" aria-hidden="true"></i>
+        <% end %>
       </li>
     <% else %>
       【Some One】
@@ -15,6 +19,9 @@
       <li>
         <%= work.title %>
         <%= "製作者：#{work_user.name}さん"%>
+        <%= link_to ("/users/#{work.user_id}/work/#{work.id}") do %>
+          <i class="fa fa-search" aria-hidden="true"></i>
+        <% end %>
       </li>
     <% end %>
 </ul>

@@ -1,4 +1,5 @@
 class MokusController < ApplicationController
+  before_action :authenticate_user!
   def index
 
     # 絞り込み用を書く
@@ -20,11 +21,11 @@ class MokusController < ApplicationController
   end
 
   def new
-    @user = current_user
-    @moku = Moku.find(params[:id])
+    @user = User.find(params[:user_id])
+    @moku_types = MokuType.where(user_id: @user.id)
   end
-# ★mokuをnewするのに一体なんのidを拾ってる？これnewmにするとmoku_typeが拾えなくなってエラー出る
-  def create
+
+def create
     @moku = Moku.new(
       user_id: current_user.id,
       moku_type_id: params[:moku_type],

@@ -1,7 +1,7 @@
 <h1>Faqs#show</h1>
 
 <h3>カテゴリー</h3>
-<%= @faq.category_list %>
+<%= raw @faq.category_list.map { |t| link_to t, tag_path(t)}.join(',') %>
 
 <h1><%= @faq.questions %></h1>
 <h3><%= @faq.answer %></h3>
@@ -15,3 +15,4 @@
 <% end %>
 
 <p><%= link_to("よくある質問一覧に戻る", faqs_path)%></p>
+

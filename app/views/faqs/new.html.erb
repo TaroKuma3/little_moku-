@@ -18,7 +18,7 @@
   <p><%= form.text_area :answer %></p>
 
   <%= form.label :category_list, "タグをカンマ区切りで入力" %>
-  <%= text_field_tag 'faq[category_list]', @faq.category_list.join(',') %>
+  <%= text_field_tag 'faq[category_list]', @faq.category_list.join(','), "data-role" => "tagsinput" %>
 
   <p><%= form.submit "登録する" %></p>
 <% end %>

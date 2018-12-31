@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get 'administrator/index'
 
+  get 'tags/:tag'=> 'faqs#index', as: :tag
   get 'faqs'          => 'faqs#index'
   get 'faqs/new'      => 'faqs#new'
   get 'faqs/:id'      => 'faqs#show'

@@ -3,7 +3,11 @@ class FaqsController < ApplicationController
   before_action :ensure_admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @faqs = Faq.all
+    if  params[:tag]
+      @faqs = Faq.tagged_with(params[:tag])
+    else
+      @faqs = Faq.all
+    end
   end
 
   def show

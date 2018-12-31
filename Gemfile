@@ -64,3 +64,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'

@@ -1,5 +1,6 @@
 class FaqsController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :ensure_admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index

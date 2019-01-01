@@ -17,13 +17,23 @@ class ApplicationController < ActionController::Base
 
   private
   # redirect先はdevise/sessions#newが指定されてる。サインインしてないならログイン画面へ飛ばされる。
-  def sign_in_required
-      redirect_to new_user_session_url unless user_signed_in?
-  end
+  # ↓devise入れた時にわざわざ追記したけど、authenticate_user!と同じだからコメント
+  # def sign_in_required
+  #     redirect_to new_user_session_url unless user_signed_in?
+  # end
 
   #↓新規ユーザー登録のときニックネームが追加できるようにするためのストロングパラメータ
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+
+  def ensure_current_user
+    @user = User.find(params[:user_id])
+
+    unless @user.id == current_user.id
+      flash[:notice] = "権限がありません！！"
+      redirect_to("/mypage")
+    end
   end
 
 end

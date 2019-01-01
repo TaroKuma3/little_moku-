@@ -4,11 +4,13 @@
 
 <% if bookmark = BookMark.find_by(user_id: current_user.id, work_id: @work.id )%>
   <%= link_to("/users/#{current_user.id}/works/#{@work.id}/book_marks", {method: :delete}) do %>
-    <span class="fa fa-bookmark fa-2x un-bm-btn" aria-hidden="true"></span>
+    <%#<span class="fa fa-bookmark fa-2x un-bm-btn" aria-hidden="true"></span> %>
+    <span class="fas fa-bookmark fa-2x bm-btn" aria-hidden="true"></span>
   <% end %>
 <% else %>
   <%= link_to("/users/#{current_user.id}/works/#{@work.id}/book_marks", {method: :post}) do %>
-    <span class="fa fa-bookmark fa-2x bm-btn" aria-hidden="true"></span>
+    <%# <span class="fa fa-bookmark fa-2x bm-btn" aria-hidden="true"></span> %>
+    <span class="far fa-bookmark fa-2x un-bm btn" aria-hidden="true"></span>
   <% end %>
 <% end %>
 <%= @bm_count %>
@@ -42,8 +44,8 @@
     <h3>制作物のコメント：非公開です☁︎</h3>
   <% end %>
 
-  <% work_owner_user = User.find_by(id: @work.user_id )%>
-  <h3>この成果物の作者さん：<%= link_to "#{work_owner_user.name}さん", "/mypage/#{@work.user_id}" %></h3>
+  <% work_owner_user = User.find(@work.user_id)%>
+  <h3>この成果物の作者さん：<%= link_to "#{work_owner_user.name}さん", "/mypage/#{work_owner_user.id}" %></h3>
 <% end %>
 
 <p><%= link_to("マイページへ戻る", "/mypage")%></p>

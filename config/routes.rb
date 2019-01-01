@@ -6,12 +6,11 @@ Rails.application.routes.draw do
   devise_for :users
   delete 'work/:id/images/:image_id' => 'work#delete_image'
 
-  get 'mypage' => 'mypage#index'
-  get 'mypage/:user_id' => 'mypage#show'
   get 'mypage/:user_id/edit' => 'mypage#edit'
+  get 'mypage/:user_id' => 'mypage#show'
+  get 'mypage' => 'mypage#index'
+  # ↑application_controllerのafter_sign_in_path_for(resource)メソッドでログイン後はここがデフォになってるからuser_idはなくても大丈夫
   patch 'mypage/:user_id' => 'mypage#update'
-
-  get 'administrator/index'
 
   get 'tags/:tag'=> 'faqs#index', as: :tag
   get 'faqs'          => 'faqs#index'
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
 
   get '/users/:user_id/mokus/:id/work/new' => 'work#new'
   post '/users/:user_id/mokus/:moku_id/work/create' => 'work#create'
+  # ↑createいらない。あとで削除
 
   post '/users/:user_id/works/:work_id/book_marks' => 'book_marks#create'
   delete '/users/:user_id/works/:work_id/book_marks' => 'book_marks#destroy'

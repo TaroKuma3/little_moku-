@@ -1,20 +1,23 @@
 class MypageController < ApplicationController
 
-  before_action :sign_in_required
+  before_action :authenticate_user!
+  # before_action :ensure_current_user, only:[:index]
 
   def index
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
     @mypage_config = MypageConfig.find_by(user_id: current_user.id)
     @works_random = Work.where(pick_up: true).order("RANDOM()").limit(3)
+    # ids = Work.pluck(:id).sample(3)
+    # @works_radom = Work.where(id: ids)
     # @faq = Faq.new
   end
 
+  #↓current_userにしてはいけない。pick upで成果物の作者を見にくる場合もアクセスされるから。
   def show
-    @user = User.find_by(id: params[:user_id])
-    @mypage_config = MypageConfig.find_by(user_id: @user.id)
+    @user = User.find(params[:user_id])
   end
 
-  # edit/updateはaccounts_controllerでの仕事なのでコメント
+  # edit/updateはaccounts_controllerでの仕事なので以下コメント
 
   # def edit
   #   @mypage_config = MypageConfig.find_by(user_id: current_user.id)

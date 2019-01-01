@@ -1,6 +1,9 @@
 class MokuTypeController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user
+
   def index
-    @user = User.find_by(id: params[:user_id])
+    @user = current_user
     @moku_types = MokuType.where(user_id: @user.id)
   end
 
@@ -15,7 +18,7 @@ class MokuTypeController < ApplicationController
   end
 
   def create
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
 
     @moku_type = MokuType.new(
       name: params[:name],
@@ -31,13 +34,13 @@ class MokuTypeController < ApplicationController
 
 
   def edit
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
     @moku_type = MokuType.find_by(id: params[:id])
     @moku_types = MokuType.where(user_id: @user.id)
   end
 
  def update
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
 
     @moku_type = MokuType.find_by(id: params[:id])
     @moku_type.name = params[:name]

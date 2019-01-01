@@ -4,10 +4,11 @@
 <h1><%= "成果物の製作者：#{@user.name}さん" %></h1>
 
 <h4><%= "#{@user.name}さんのMOKUアイテム" %></h4>
-<%= simple_format(@mypage_config.items) %>
+<%= simple_format(@user.items) %>
 
 <h4><%= "#{@user.name}さんの自己紹介" %></h4>
-<%= simple_format(@mypage_config.introduce) %>
+<%= simple_format(@user.introduce) %>
 
 <p>TwitterとかインスタとかFBとかのリンクが出せたらいいな</p>
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>
+

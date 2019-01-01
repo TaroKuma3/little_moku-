@@ -1,4 +1,7 @@
 class AccountsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user
+
   def edit
     @user = current_user
 

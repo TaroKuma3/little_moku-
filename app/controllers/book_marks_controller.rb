@@ -1,4 +1,7 @@
 class BookMarksController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_current_user
+
   def index
     @user = User.find_by(id: params[:user_id])
     @book_marks = BookMark.where(user_id: params[:user_id])

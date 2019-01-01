@@ -1,31 +1,32 @@
 class MokusController < ApplicationController
   before_action :authenticate_user!
-  def index
+  before_action :ensure_current_user
 
+  def index
     # 絞り込み用を書く
     if params[:moku_type]
-      @user = User.find_by(id: current_user.id)
+      @user = current_user
       # @moku_type = MokuType.where(id: params[:id])
       @mokus = Moku.where(user_id: current_user.id).where(moku_type_id: params[:moku_type])
     else
-      @user = User.find_by(id: current_user.id)
+      @user = current_user
       @mokus = Moku.where(user_id: @user.id)
     end
   end
 
   def show
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
     @moku = Moku.find(params[:id])
     @moku_type = MokuType.find_by(id: @moku.moku_type_id)
     @works = Work.where(moku_id: @moku.id)
   end
 
   def new
-    @user = User.find(params[:user_id])
+    @user = current_user
     @moku_types = MokuType.where(user_id: @user.id)
   end
 
-def create
+  def create
     @moku = Moku.new(
       user_id: current_user.id,
       moku_type_id: params[:moku_type],
@@ -41,7 +42,7 @@ def create
   end
 
   def edit
-    @user = User.find_by(id: params[:user_id])
+    @user = current_user
     @moku = Moku.find(params[:id])
     # @moku_type = MokuType.find_by(id: @moku.moku_type_id)
     # @works = Work.where(moku_id: @moku.id)
@@ -64,6 +65,5 @@ def create
 
     redirect_to action: :show, user_id: user.id, id: @moku.id
   end
-
 
 end

@@ -4,7 +4,6 @@ class AccountsController < ApplicationController
 
   def edit
     @user = current_user
-
   end
 
   def update

@@ -1,7 +1,7 @@
 class WorkController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :ensure_current_user, only:[:index, :edit, :update, :new, :create]
+  before_action :ensure_current_user, only:[:index, :show, :edit, :update, :new, :create]
 
   def index
     @user = User.find_by(id: params[:user_id])
@@ -9,9 +9,16 @@ class WorkController < ApplicationController
   end
 
   def show
-    @work = Work.find_by(id: params[:id])
-    @user = User.find_by(id: params[:user_id]) #ここでひろうuser_idはURLに含まれるuser_id
-    @moku = Moku.find_by(id: @work.moku_id)
+    @work = Work.find(params[:id])
+    @user = User.find(params[:user_id]) #ここでひろうuser_idはURLに含まれるuser_id
+    @moku = Moku.find(@work.moku_id)
+    @bm_count = BookMark.where(work_id: @work.id).count
+  end
+
+  def for_public
+    @work = Work.find(params[:work_id])
+    @user = User.find(params[:user_id]) #ここでひろうuser_idはURLに含まれるuser_id
+    @moku = Moku.find(@work.moku_id)
     @bm_count = BookMark.where(work_id: @work.id).count
   end
 
@@ -21,7 +28,7 @@ class WorkController < ApplicationController
     @moku_type = MokuType.find_by(id: @moku.moku_type)
     @work = Work.new
 
-    @work.public = Constants::PRIVATE
+    @work.comment_public = Constants::PRIVATE
     @work.pick_up = Constants::PRIVATE
     # @public_or_not = [['公開', Constants::PUBLIC], ['非公開', Constants::PRIVATE]]
     # @public_or_not = Constants.options_for_public
@@ -97,7 +104,7 @@ class WorkController < ApplicationController
   # workのストロングパラメータ
   # バリデートしたらrender時に一部のパラメータ拾わなくなったので一旦＃で様子見る
   def work_params
-    params.require(:work).permit(:comment, :title, :images, :user_id, :moku_id, :public, :pick_up)
+    params.require(:work).permit(:comment, :title, :images, :user_id, :moku_id, :comment_public, :pick_up)
   end
 # permitに書くこと・・・create/updateに入れるべき属性名。意図しない項目が変に更新されないようにするためのものだけど
 # paramsでとってくる項目で受け取りたいものをリストアプする。routesで設定しているURLに必要なIDとかは拾う必要がある

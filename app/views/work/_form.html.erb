@@ -1,9 +1,18 @@
 
-  <h3>制作物タイトル：<%= form.text_field :title %></h3>
-  <h3>画像やテキストファイル１<%= form.file_field :images, multipart: true %></h3>
-  <h3>コメント：<%= form.text_area :comment %></h3>
+  <h3>制作物タイトル</h3>
+  <%= form.text_field :title %>
 
-  <h4>他ユーザーへの公開設定：<%= form.select :public, options_for_public, selected: @work.public %></h4>
-  <h4>Pick Up MOKUへの公開設定：<%= form.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
+  <h3>画像やテキストファイル１</h3>
+  <%= form.file_field :images, multipart: true %>
+
+  <h3>コメント</h3>
+  <%= form.text_area :comment %>
+
+  <h3>コメントを公開しますか？</h3>
+  <%= form.select :comment_public, options_for_public, selected: @work.comment_public %>
+
+  <h3>Pick Up MOKUへの公開設定</h3>
+  <%= form.select :pick_up, options_for_public, selected: @work.pick_up %>
+
   <p><%= form.submit "登録する"%>
 

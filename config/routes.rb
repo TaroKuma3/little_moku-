@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   patch 'accounts/:user_id' => 'accounts#update'
 
   devise_for :users
+  get 'users/:user_id/works/:work_id/public' => 'work#for_public'
   delete 'work/:id/images/:image_id' => 'work#delete_image'
 
   get 'mypage/:user_id/edit' => 'mypage#edit'

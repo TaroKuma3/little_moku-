@@ -23,7 +23,12 @@
       <ul>
         <li>
         <% work = Work.find_by(id: work_random.id)%>
-          <%= link_to(work_random.title, user_work_path(@user,work)) %>
+          <%#= link_to(work_random.title, "users/#{@user.id}/works/#{work.id}/public") %>
+          <% if work.user_id == current_user.id%>
+            <%= link_to(work_random.title, user_work_path(@user, work)) %>
+          <% else %>
+            <%= link_to(work_random.title, "/users/#{work.user_id}/works/#{work.id}/public") %>
+          <% end %>
         </li>
       </ul>
     <% end %>
@@ -39,7 +44,6 @@
 <%= simple_format(@user.introduce) %>
 <h4>アカウントの公開表/非公開</h4>
 <%= public_to_s(@user.public) %>
-
 <% if @user.admin? %>
 <%# booleanを定義している場合、？のメソッドで　tureか？と聞く。
 本来聞くメソッドが必ず必要で、今回user.rbに定義はしたんだけど、実は定義しないでもOK

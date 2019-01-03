@@ -18,7 +18,7 @@ class FaqsController < ApplicationController
   def new
     @faq = Faq.new
     # @faqs = Faq.all
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
 
     # ↓これアクティブにすると、カテゴリ新規追加に反映されてselecteddに反映しなくなっちゃう
     # @faq.category = Constants::GENERAL
@@ -43,7 +43,7 @@ class FaqsController < ApplicationController
 
   def edit
     @faq = Faq.find_by(id: params[:id])
-    @user = User.find_by(id: current_user.id)
+    @user = current_user
   end
 
   def update
@@ -71,7 +71,7 @@ class FaqsController < ApplicationController
 
   private
   def ensure_admin_user
-    user = User.find_by(id: current_user.id)
+    user = current_user
 
     if user.admin == false
       flash[:notice] = "権限がありません"

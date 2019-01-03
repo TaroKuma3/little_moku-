@@ -4,28 +4,28 @@ class WorkController < ApplicationController
   before_action :ensure_current_user, only:[:index, :show, :edit, :update, :new, :create]
 
   def index
-    @user = User.find_by(id: params[:user_id])
+    @user = current_user
     @works = Work.where(user_id: params[:user_id])
   end
 
   def show
     @work = Work.find(params[:id])
-    @user = User.find(params[:user_id]) #ここでひろうuser_idはURLに含まれるuser_id
+    @user = current_user #ここでひろうuser_idは自ページ分なのでcurrent_userでおｋ
     @moku = Moku.find(@work.moku_id)
     @bm_count = BookMark.where(work_id: @work.id).count
   end
 
   def for_public
     @work = Work.find(params[:work_id])
-    @user = User.find(params[:user_id]) #ここでひろうuser_idはURLに含まれるuser_id
+    @user = User.find(params[:user_id]) #ここでひろうuser_idはpick upで見つけた他者のページにいくからURLに含まれるuser_id
     @moku = Moku.find(@work.moku_id)
     @bm_count = BookMark.where(work_id: @work.id).count
   end
 
   def new
-    @user = User.find_by(id: current_user.id)
-    @moku = Moku.find_by(id: params[:id])
-    @moku_type = MokuType.find_by(id: @moku.moku_type)
+    @user = current_user
+    @moku = Moku.find(params[:id])
+    @moku_type = MokuType.find(@moku.moku_type)
     @work = Work.new
 
     @work.comment_public = Constants::PRIVATE
@@ -37,22 +37,22 @@ class WorkController < ApplicationController
 
   # バリデートしたらrender時に一部のパラメータ拾わなくなったので一旦ストロングパラメータは＃
   def create
-    @user = User.find_by(id: current_user.id)
-    @moku = Moku.find_by(id: params[:id])
+    @user = current_user
+    @moku = Moku.find(params[:moku_id])
     # @moku_type = MokuType.find_by(id: @moku.moku_type)
 
     # ストロングパラメータを書いたからって手書きでデーター拾っちゃいけないわけじゃない。
     # 今回どういうわけかどうしてもmoku_idとuser_idをひろってくれないので、
     # ↓のようにwork.mokuとwork.userを手書きで指定して拾ってきた。
-    @work = Work.new(work_params)
-    # title: params[:work][:title],
-    # comment: params[:work][:comment],
-    # public: params[:work][:public],
-    # pick_up: params[:work][:pick_up],
-    # moku_id: params[:moku_id],
-    # user_id: params[:user_id],
-    # images: params[:work][:images],
-    # )
+    @work = Work.new(#work_params)
+    title: params[:work][:title],
+    comment: params[:work][:comment],
+    comment_public: params[:work][:comment_public],
+    pick_up: params[:work][:pick_up],
+    moku_id: params[:moku_id],
+    user_id: params[:user_id],
+    images: params[:work][:images],
+    )
     @work.moku = Moku.find(params[:moku_id])
     @work.user = current_user
 
@@ -65,13 +65,13 @@ class WorkController < ApplicationController
   end
 
   def edit
-    @work = Work.find_by(id: params[:id])
-    @user = User.find_by(id: current_user.id)
+    @work = Work.find(params[:id])
+    @user = current_user
   end
 
   def update
-    @user = User.find_by(id: current_user.id)
-    @work = Work.find_by(id: params[:id])
+    @user = current_user
+    @work = Work.find(params[:id])
     @work.update(work_params)
 
     # image_ids→１つの記事に複数画像貼れるからids。

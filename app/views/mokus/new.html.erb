@@ -13,7 +13,7 @@
   <%# end %>
 
   <h3>なにをMOKUりますか？MOKUタグを教えてください</h3>
-  <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
+ <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
     <%# form.collection_selectのメモ
     :moku_type...指定したモデル@mokuのどのカラムが対処？
     @user.moku_type...選択肢になるデーター。@user（そのユーザー）が持ってるmoku_type全部対象だかからmoku_types（っていうかmoku_typesテーブルだなこれ多分）
@@ -25,7 +25,6 @@
   <h3>MOKU JUST NOWに載せてもいいですか？</h3>
   <%= form.select :mjn_public, options_for_mjn %>
 
-  <p>MOKU開始を押す前に２つの選択肢に答えてもらうことが必須になる。答えてないと押せないように制御が必要</p>
   <%= form.submit 'MOKU開始！'%>
 <% end %>
 

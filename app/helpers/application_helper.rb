@@ -65,8 +65,7 @@ module ApplicationHelper
 
         if eary_morning
             "早起きですね"
-        elsif
-            morning #tureかfalseが入っているので == tureはいらない
+        elsif morning #tureかfalseが入っているので == tureはいらない
             "おはようございます"
         elsif lunchtime
             "こんにちは"

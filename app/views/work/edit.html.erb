@@ -27,7 +27,7 @@ local: true) do |f| %>
 <% if false %>
   begin <h3>制作物タイトル：<%= f.text_field :title %></h3>
 
-    <h4>制作物コメントの公開設定：<%= f.select :public, options_for_public, selected: @work.public %></h4>
+    <h4>制作物コメントの公開設定：<%= f.select :comment_public, options_for_public, selected: @work.comme_tpublic %></h4>
     <h4>Pick Up MOKUへの公開設定：<%= f.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
     <p><%= f.submit "更新する"%>
   　

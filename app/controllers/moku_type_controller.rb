@@ -8,7 +8,7 @@ class MokuTypeController < ApplicationController
   end
 
   def show
-    @moku_type = MokuType.find_by(id: params[:id])
+    @moku_type = MokuType.find(params[:id])
     @mokus = Moku.where(moku_type_id: @moku_type.id)
   end
 
@@ -35,14 +35,14 @@ class MokuTypeController < ApplicationController
 
   def edit
     @user = current_user
-    @moku_type = MokuType.find_by(id: params[:id])
+    @moku_type = MokuType.find(params[:id])
     @moku_types = MokuType.where(user_id: @user.id)
   end
 
  def update
     @user = current_user
 
-    @moku_type = MokuType.find_by(id: params[:id])
+    @moku_type = MokuType.find(params[:id])
     @moku_type.name = params[:name]
     @moku_type.user_id = current_user.id
 

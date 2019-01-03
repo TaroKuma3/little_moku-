@@ -1,18 +1,38 @@
 <h1>Mokus#index</h1>
-<h1><%= "#{@user.name}さんのMOKUった一覧"%></h1>
+<h1><%= "#{@user.name}さんのMOKUった一覧" %></h1>
 
+<% if false %>
+ <%= form_with(model: @moku,
+              url: {controller: :mokus, action: :index, user_id: current_user.id, moku_type: @user.moku_types.ids},
+              local: true) do |form| %>
+
+               <h4>絞り込み</h4>
+  <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
+  <%= form.submit "絞り込む" %>
+  <% end %>
+<% end %>
 
   <% @mokus.each do |moku| %>
     <ul>
       <li>
         <p><%= link_to("#{moku.created_at} の MOKU", user_moku_path(moku.user_id, moku.id)) %>
-        <% moku_type = MokuType.find_by(id: moku.moku_type_id) %>
+        <% moku_type = MokuType.find(moku.moku_type_id) %>
         <%= "MOKUタグ：#{moku_type.name}" %>
         <%= link_to("【成果物の登録】", "/users/#{moku.user_id}/mokus/#{moku.id}/work/new") %></p>
       </li>
     </ul>
   <% end %>
 
-<%= link_to(" Rubyでしぼりこみ", "/users/#{current_user.id}/mokus?moku_type=3")%>
-<%= link_to("マイページへ戻る", "/mypage")%>
+  <h5>----- 絞り込み　-----</h5>
+    <% moku_types = MokuType.where(user_id: current_user.id) %>
+    <% moku_types.each do |moku_type| %>
+    <p><%= link_to moku_type.name, "/users/#{current_user.id}/mokus?moku_type=#{moku_type.id}" %></p>
+  <% end %>
+
+
+<%#= link_to(" Rubyでしぼりこみ", "/users/#{current_user.id}/mokus?moku_type=3")%>
+<%# end %>
+<h5><%= link_to("全ての一覧", user_mokus_path(@user)) %></h5>
+<h5>------------------------</h5>
+<h4><%= link_to("マイページへ戻る", "/mypage") %></h4>
 

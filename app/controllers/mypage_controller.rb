@@ -5,7 +5,7 @@ class MypageController < ApplicationController
 
   def index
     @user = current_user
-    @mypage_config = MypageConfig.find_by(user_id: current_user.id)
+    # @mypage_config = MypageConfig.find_by(user_id: current_user.id)
     @works_random = Work.where(pick_up: true).order("RANDOM()").limit(3)
     # ids = Work.pluck(:id).sample(3)
     # @works_radom = Work.where(id: ids)

@@ -26,8 +26,7 @@ Rails.application.routes.draw do
   get "top/about" => "top#about"
 
   get '/users/:user_id/mokus/:id/work/new' => 'work#new'
-  post '/users/:user_id/mokus/:moku_id/work/create' => 'work#create'
-  # ↑createいらない。あとで削除
+  post '/users/:user_id/mokus/:moku_id/work' => 'work#create'
 
   post '/users/:user_id/works/:work_id/book_marks' => 'book_marks#create'
   delete '/users/:user_id/works/:work_id/book_marks' => 'book_marks#destroy'

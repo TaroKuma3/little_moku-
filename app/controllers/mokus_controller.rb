@@ -17,7 +17,7 @@ class MokusController < ApplicationController
   def show
     @user = current_user
     @moku = Moku.find(params[:id])
-    @moku_type = MokuType.find_by(id: @moku.moku_type_id)
+    @moku_type = MokuType.find(@moku.moku_type_id)
     @works = Work.where(moku_id: @moku.id)
   end
 
@@ -49,7 +49,7 @@ class MokusController < ApplicationController
   end
 
   def update
-    user = User.find_by(id: params[:user_id])
+    user = current_user
     @moku = Moku.find(params[:id])
     @moku.content = params[:moku][:content]
     @moku.mjn_public = params[:moku][:mjn_public]

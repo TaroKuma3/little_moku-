@@ -9,6 +9,6 @@ class Work < ApplicationRecord
   validates :moku_id, presence: true
   validates :user_id, presence: true
   validates :title, presence: true
-  validates :public, presence: true #booleanじゃなくてintegerだから
+  validates :comment_public, presence: true #booleanじゃなくてintegerだから
   validates :pick_up, presence: true #booleanじゃなくてintegerだから
 end

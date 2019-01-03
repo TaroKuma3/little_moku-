@@ -1,5 +1,4 @@
 <h1>Work#new</h1>
-
 <h1>成果物の登録</h1>
 <h3><%= "#{@user.name}さん、#{@moku.created_at}に【#{@moku_type.name}】でMOKUった時の成果物を登録してください。" %></h3>
 
@@ -17,6 +16,8 @@
   <% render 'form', form:form %>
 <% end %>
 
+<h4><%= link_to("成果物一覧へ戻る", user_work_index_path(@user)) %></h4>
+<h4><%= link_to("マイページへ戻る", "/mypage") %></h4>
 <%
 =begin
   <h3>制作物タイトル：<%= form.text_field :title %></h3>
@@ -34,11 +35,6 @@
     制作物コメントの公開設定：
     <%# form.collection_select :public, @work.public, %>
     <%= form.select :public, options_for_public, selected: @work.public %>
-  </h4>
-  <h4>PICK UP MOKUへの公開設定：
-  <%= form.select :pick_up, options_for_public, selected: @work.pick_up %>
-  <%# select_tag(:release_id, options_for_select([['公開', 1], ['非公開', 2]], 2)) %>
-  </h4>
 
   <%= form.submit '登録する' %>
   <%

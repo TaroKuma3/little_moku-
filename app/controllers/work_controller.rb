@@ -25,7 +25,7 @@ class WorkController < ApplicationController
   def new
     @user = current_user
     @moku = Moku.find(params[:id])
-    @moku_type = MokuType.find(@moku.moku_type)
+    @moku_type = MokuType.find(@moku.moku_type.id)
     @work = Work.new
 
     @work.comment_public = Constants::PRIVATE
@@ -35,27 +35,27 @@ class WorkController < ApplicationController
 
   end
 
-  # バリデートしたらrender時に一部のパラメータ拾わなくなったので一旦ストロングパラメータは＃
   def create
     @user = current_user
     @moku = Moku.find(params[:moku_id])
+    @moku_type = MokuType.find(@moku.moku_type.id)
     # @moku_type = MokuType.find_by(id: @moku.moku_type)
 
     # ストロングパラメータを書いたからって手書きでデーター拾っちゃいけないわけじゃない。
     # 今回どういうわけかどうしてもmoku_idとuser_idをひろってくれないので、
     # ↓のようにwork.mokuとwork.userを手書きで指定して拾ってきた。
-    @work = Work.new(#work_params)
-    title: params[:work][:title],
-    comment: params[:work][:comment],
-    comment_public: params[:work][:comment_public],
-    pick_up: params[:work][:pick_up],
-    moku_id: params[:moku_id],
-    user_id: params[:user_id],
-    images: params[:work][:images],
-    )
+    @work = Work.new(work_params)
+    # title: params[:work][:title],
+    # comment: params[:work][:comment],
+    # comment_public: params[:work][:comment_public],
+    # pick_up: params[:work][:pick_up],
+    # moku_id: params[:moku_id],
+    # user_id: params[:user_id],
+    # images: params[:work][:images],
+    # )
     @work.moku = Moku.find(params[:moku_id])
     @work.user = current_user
-
+ 
     if @work.save
       flash[:notice] = "登録しました！"
       redirect_to(user_work_index_path(@user))
@@ -76,16 +76,16 @@ class WorkController < ApplicationController
 
     # image_ids→１つの記事に複数画像貼れるからids。
     # [:work][:image_ids]に削除対象のidが全部入ってる。
-    params[:work][:image_ids].each do |image_id|
-      image = @work.images.find(image_id)
-      image.purge
-    end
+    # params[:work][:image_ids].each do |image_id|
+    #   image = @work.images.find(image_id)
+    #   image.purge
+    # end
 
     if @work.save
       flash[:notice] = "更新しました！"
       redirect_to(user_work_path(@user,@work))
     else
-      render action: :edit
+      render :edit
     end
   end
 

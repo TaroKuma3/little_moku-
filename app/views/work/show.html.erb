@@ -1,7 +1,5 @@
 <h1>Work#show</h1>
 
-<% if @work.pick_up == Constants::PUBLIC %>
-
   <h1><%= "成果物タイトル：#{@work.title}" %></h1>
 
   <% if bookmark = BookMark.find_by(user_id: current_user.id, work_id: @work.id )%>
@@ -35,7 +33,5 @@
   <h4> この制作物が生まれたMOKU：<%=link_to(@moku.created_at, user_moku_path(@user, @moku)) %></h4>
   <p><%= link_to("【編集】", edit_user_work_path(@user, @work) ) %><%= link_to("【削除(link未設定)】") %></p>
 
-<% else %>
-  <h1>非公開です</h1>
-<% end %>
-<p><%= link_to("マイページへ戻る", "/mypage")%></p>
+<h4><%= link_to("成果物一覧へ戻る", user_work_index_path(@user))%></h4>
+<h4><%= link_to("マイページへ戻る", "/mypage")%></h4>

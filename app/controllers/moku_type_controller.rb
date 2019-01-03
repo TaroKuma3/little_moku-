@@ -22,7 +22,7 @@ class MokuTypeController < ApplicationController
 
     @moku_type = MokuType.new(
       name: params[:name],
-      user_id: current_user.id,
+      user_id: params[:user_id],
     )
     if @moku_type.save
       flash[:notice] = "新しいMOKUタグを登しました！"
@@ -32,25 +32,22 @@ class MokuTypeController < ApplicationController
     end
   end
 
-
   def edit
-    @user = current_user
     @moku_type = MokuType.find(params[:id])
-    @moku_types = MokuType.where(user_id: @user.id)
+    @moku_types = MokuType.where(user_id: current_user.id)
   end
 
  def update
-    @user = current_user
-
+    @moku_types = MokuType.where(user_id: current_user.id) #これがないとrender時にeachがnilだと言われる
     @moku_type = MokuType.find(params[:id])
-    @moku_type.name = params[:name]
+    @moku_type.name = params[:moku_type][:name]
     @moku_type.user_id = current_user.id
 
     if @moku_type.save
       flash[:notice] = "更新しました！"
       redirect_to(user_moku_type_index_path(@user))
     else
-      render action: :edit
+      render :edit
     end
   end
 

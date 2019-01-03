@@ -24,11 +24,15 @@ local: true) do |f| %>
   <%= render  "form", form:f %>
 <% end %>
 
-<% if false %>
-  begin <h3>制作物タイトル：<%= f.text_field :title %></h3>
+<h4><%= link_to("成果物一覧へ戻る", user_work_index_path(@user))%></h4>
+<h4><%= link_to("マイページへ戻る", "/mypage")%></h4>
+
+ <%
+=begin%>
+ <h3>制作物タイトル：<%= f.text_field :title %></h3>
 
     <h4>制作物コメントの公開設定：<%= f.select :comment_public, options_for_public, selected: @work.comme_tpublic %></h4>
     <h4>Pick Up MOKUへの公開設定：<%= f.select :pick_up, options_for_public, selected: @work.pick_up %></h4>
-    <p><%= f.submit "更新する"%>
-  　
-<% end %>
+    <p><%= f.submit "更新する"%> 
+<%
+=end%>

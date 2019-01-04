@@ -62,5 +62,21 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 </ul>
 <% end %>
 
+<h1>カレンダー</h1>
+
+<%= month_calendar do |date| %>
+  <%= date %>
+  <%
+=begin%>
+ <% mokus.each do |moku| %>
+    <% moku_type = MokuType.find(:moku.moku_type_id)%>
+    <div>
+      <%= moku_type.name %>
+    </div>
+  <% end %> 
+<%
+=end%>
+<% end %>
+
 <p><%= link_to("個人設定", "/accounts/#{current_user.id}")%></p>
 <h3><%= link_to("よくある質問",faqs_path) %></h3>

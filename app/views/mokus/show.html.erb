@@ -29,4 +29,5 @@
 <%= public_to_s(@moku.mjn_public) %>
 
 <p><%= link_to("【編集】", edit_user_moku_path(@user, @moku.id)) %></p>
+<%= link_to("MOKUった一覧へ戻る", user_mokus_path(@user))%>
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>

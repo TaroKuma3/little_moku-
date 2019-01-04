@@ -26,3 +26,6 @@
 <%= form.select :mjn_public, options_for_public, selected: @moku.mjn_public %></h4>
   <%= form.submit '保存' %>
 <% end %>
+
+<%= link_to("MOKUった一覧へ戻る", user_mokus_path(@user))%>
+<%= link_to("マイページへ戻る", "/mypage")%>

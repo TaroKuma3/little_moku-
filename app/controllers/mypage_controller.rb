@@ -10,6 +10,7 @@ class MypageController < ApplicationController
     # ids = Work.pluck(:id).sample(3)
     # @works_radom = Work.where(id: ids)
     # @faq = Faq.new
+    @mokus = Moku.all #カレンダーのために取得
   end
 
   #↓current_userにしてはいけない。pick upで成果物の作者を見にくる場合もアクセスされるから。

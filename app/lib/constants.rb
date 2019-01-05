@@ -16,6 +16,8 @@ class Constants
     PRIVATE = 0
     PUBLIC =  1
 
+    PRIVATE_FOR_BOOL = false
+    PUBLIC_FOR_BOOL = true
 
     # 新たに2018/12/21追加↓表示ではなくコード上でいちいち公開・非公開と書くことはマジックナンバー使うのと同じ。
     # またいろんなところで公開・非公開を使うので、変更が会った時に全部書き直す面倒が。
@@ -31,7 +33,6 @@ class Constants
     # end
     # ↑で新たに公開・非公開を定数管理にしたので、self.options_for_publicメソッドも書き換え！
     # これをヘルパーで使う。
-
 
     # ↓2018/12/22新たに追加。moku_type#editでとりまが編集できないよう制御するための定数
     DEFAULT_MOKU_TYPE_NAME = "とりあえずMOKUる"

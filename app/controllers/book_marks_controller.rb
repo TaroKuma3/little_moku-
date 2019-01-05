@@ -14,7 +14,12 @@ class BookMarksController < ApplicationController
       )
 
       @book_mark.save!
-      redirect_to user_work_path(current_user.id, params[:work_id])
+      work = Work.find(@book_mark.work_id)
+      if work.user_id == current_user.id
+        redirect_to user_work_path(current_user.id, params[:work_id])
+      else
+        redirect_to ("/users/#{work.user_id}/works/#{work.id}/public")
+      end
   end
 
   def destroy
@@ -24,6 +29,11 @@ class BookMarksController < ApplicationController
       )
 
     @book_mark.destroy
-    redirect_to user_work_path(current_user.id, params[:work_id])
+    work = Work.find(@book_mark.work_id)
+    if work.user_id == current_user.id
+      redirect_to user_work_path(current_user.id, params[:work_id])
+    else
+      redirect_to ("/users/#{work.user_id}/works/#{work.id}/public")
+    end
   end
 end

@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
       flash[:notice] = "更新しました！"
       redirect_to ("/mypage")
     else
-      render action: :edit
+      render :edit
     end
   end
 

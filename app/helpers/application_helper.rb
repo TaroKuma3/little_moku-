@@ -23,7 +23,7 @@ module ApplicationHelper
     # これをいろんなhtml.erbで使うといい。とりあえずwork/show.html.erbに使ってみた。
     # これが引数をとる形式なのは、対象により表示が変わるから。
     # 公開である１が返っている場合は公開、０なら非公開を出したい。この分岐が必要。
-
+ 
     def public_to_s(value) #もしbooleanとかもでてくるならここで引数を分岐させてあげる必要がある
         if value.is_a?(TrueClass) #←booleanかどうかきいてる
             return Constants::PUBLIC_VALUE

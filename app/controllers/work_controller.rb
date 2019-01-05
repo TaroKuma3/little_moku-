@@ -32,7 +32,6 @@ class WorkController < ApplicationController
     @work.pick_up = Constants::PRIVATE
     # @public_or_not = [['公開', Constants::PUBLIC], ['非公開', Constants::PRIVATE]]
     # @public_or_not = Constants.options_for_public
-
   end
 
   def create

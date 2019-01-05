@@ -33,8 +33,8 @@ class MokuTypeController < ApplicationController
   end
 
   def edit
-    @moku_type = MokuType.find(params[:id])
     @moku_types = MokuType.where(user_id: current_user.id)
+    @moku_type = MokuType.find(params[:id])
   end
 
  def update

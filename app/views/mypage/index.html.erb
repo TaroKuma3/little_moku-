@@ -64,18 +64,12 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 
 <h1>カレンダー</h1>
 
-<%= month_calendar do |date| %>
-  <%= date %>
-  <%
-=begin%>
- <% mokus.each do |moku| %>
-    <% moku_type = MokuType.find(:moku.moku_type_id)%>
-    <div>
-      <%= moku_type.name %>
-    </div>
-  <% end %> 
-<%
-=end%>
+<%= month_calendar(attribute: :created_at, events: @mokus) do |date, mokus| %>
+  <%= date %><br>
+  <% mokus.each do |moku| %>
+      <% moku_type = MokuType.find(moku.moku_type_id)%>
+        <%= link_to(moku_type.name, user_moku_path(moku.user_id, moku.id)) %><br>
+    <% end %>
 <% end %>
 
 <p><%= link_to("個人設定", "/accounts/#{current_user.id}")%></p>

@@ -46,6 +46,10 @@ class Constants
         [[PUBLIC_VALUE, PUBLIC], [PRIVATE_VALUE, PRIVATE]]
     end
 
+    def self.options_for_public_for_bool
+        [[PUBLIC_VALUE, PUBLIC_FOR_BOOL], [PRIVATE_VALUE, PRIVATE_FOR_BOOL]]
+    end
+ 
     # ↑をまねて、mokus#newでMJNの選択肢選ぶのを作ってみる
     # もともと作ってあった定数へ置き換えることにしたのでコメントアウト
     # FALSE = 0

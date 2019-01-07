@@ -48,6 +48,8 @@ class MokuTypeController < ApplicationController
       redirect_to(user_moku_type_index_path(@user))
     else
       render :edit
+      # redirect_to(edit_user_moku_type_path(current_user.id, @moku_type))
+      # render plain:"OK"
     end
   end
 

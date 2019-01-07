@@ -17,6 +17,9 @@ module ApplicationHelper
         Constants.options_for_public
     end
 
+    def options_for_public_for_bool
+        Constants.options_for_public_for_bool
+    end
     #constants.rbで公開・非公開を定数管理にした。
     # ここでhtml.erb上「公開」「非公開」という言葉で表示できるようメソッドを定義。
     # 現状、このメソッドを当てないとDBの値を返して０か１が表示されてしまうから。

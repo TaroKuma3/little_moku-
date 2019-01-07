@@ -23,7 +23,7 @@
   <%= form.text_area :content %>
 
   <h4>MOKU JUST NOWへの公開設定</h4>
-<%= form.select :mjn_public, options_for_public, selected: @moku.mjn_public %></h4>
+<%= form.select :mjn_public, options_for_public_for_bool, selected: @moku.mjn_public %></h4>
   <%= form.submit '保存' %>
 <% end %>
 　

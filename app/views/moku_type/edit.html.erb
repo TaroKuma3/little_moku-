@@ -12,7 +12,8 @@ local: true) do |f| %>
     <% end %>
   <% end %>
 
-  <%= "MOKUタグ【#{@moku_type.name}】の新しい名前を教えてください" %>
+<%# ifで分岐させて表示内容を変更する %>
+  <%= "MOKUタグの新しい名前を教えてください" %>
   <%= render "form", f:f %>
 <% end %>
 

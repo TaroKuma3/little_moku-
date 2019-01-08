@@ -1,6 +1,6 @@
 class MokusController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_current_user
+  before_action :ensure_current_user, only:[:index, :show, :new, :create, :edit, :update]
 
   def index
     # 絞り込み用を書く
@@ -66,4 +66,8 @@ class MokusController < ApplicationController
     redirect_to action: :show, user_id: user.id, id: @moku.id
   end
 
+  def justnow
+    mokus = Moku.where(mjn_public: true).order(created_at: 'desc').limit(5) # 最新を先に表示するから、desc
+    render json: mokus #これでmokusがjson(≒JSのハッシュ)になる
+  end
 end

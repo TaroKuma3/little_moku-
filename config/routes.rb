@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/ajax/justnow' => 'mokus#justnow'
   get 'accounts/:user_id' => 'accounts#edit'
   patch 'accounts/:user_id' => 'accounts#update'
 

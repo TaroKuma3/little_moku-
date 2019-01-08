@@ -1,0 +1,19 @@
+current directory: /Users/taro-kuma/Desktop/Git/little_moku-/vendor/bundle/gems/byebug-10.0.2/ext/byebug
+/Users/taro-kuma/.rbenv/versions/2.5.1/bin/ruby -r ./siteconf20190108-68035-h585n9.rb extconf.rb
+creating Makefile
+
+current directory: /Users/taro-kuma/Desktop/Git/little_moku-/vendor/bundle/gems/byebug-10.0.2/ext/byebug
+make "DESTDIR=" clean
+
+current directory: /Users/taro-kuma/Desktop/Git/little_moku-/vendor/bundle/gems/byebug-10.0.2/ext/byebug
+make "DESTDIR="
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.bundle
+
+current directory: /Users/taro-kuma/Desktop/Git/little_moku-/vendor/bundle/gems/byebug-10.0.2/ext/byebug
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 byebug.bundle ./.gem.20190108-68035-1p6sutq/byebug

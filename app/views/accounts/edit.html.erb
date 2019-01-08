@@ -21,7 +21,7 @@ local: true) do |f| %>
 <%= f.text_area :introduce %>
 
 <h4>アカウントの公開表/非公開</h4>
-<%= f.select :public, options_for_public, selected: @user.public %>
+<%= f.select :public, options_for_public_for_bool, selected: @user.public %>
 
 <ul>
   <li>

@@ -6,8 +6,8 @@ class MypageController < ApplicationController
   def index
     @user = current_user
     # @mypage_config = MypageConfig.find_by(user_id: current_user.id)
-    @works_random = Work.where(pick_up: true).order("RANDOM()").limit(3)
-    # order付近がやばい
+    # @works_random = Work.where(pick_up: true).order("RANDOM()").limit(3)
+    @works_random = Work.where(pick_up: true).limit(3) #このままだと上から３つ固定なのでちょと考える
     # ids = Work.pluck(:id).sample(3)
     # @works_radom = Work.where(id: ids)
     # @faq = Faq.new

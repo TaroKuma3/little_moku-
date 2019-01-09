@@ -3,14 +3,23 @@
   <h1><%= "成果物の製作者：#{@user.name}さん" %></h1>
 
   <h4><%= "#{@user.name}さんのMOKUアイテム" %></h4>
-  <%= simple_format(@user.items) %>
+    <% if @user.items.empty? %>
+      <p><%= "#{@user.name}さんは、MOKUアイテムを登録されていませんでした。"%></p>
+    <% else %>
+      <%= simple_format(@user.items) %>
+    <% end %>
 
   <h4><%= "#{@user.name}さんの自己紹介" %></h4>
-  <%= simple_format(@user.introduce) %>
+    <% if @user.introduce.empty? %>
+      <%= "#{@user.name}さんは、自己紹介を登録されていませんでした。"%>
+    <% else %>
+      <%= simple_format(@user.introduce) %>
+    <% end %>
 
   <p>TwitterとかインスタとかFBとかのリンクが出せたらいいかも</p>
 <% else %>
   <h3><%= "#{@user.name}さんは非公開ユーザーさんです" %></h3>
 <% end %>
+
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>
 

@@ -5,8 +5,8 @@ belongs_to :user
 # 理由は、ユーザーを追加するときに、だからuser.rbに書くべき内容だったから。
 # after_create :insert_mypage_edit
 
-validates :items, presence: true
-validates :introduce, presence: true
-validates :public, inclusion: { in: [true, false] }
-validates :user_id, presence: true
-end
+# validates :items, presence: true
+# validates :introduce, presence: true
+# validates :public, inclusion: { in: [true, false] }
+# validates :user_id, presence: true
+# end

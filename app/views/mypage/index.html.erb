@@ -57,7 +57,8 @@
           for (let i = 0; i < mokus.length; i++) { //変数iを定義　mokusの要素の数より小さいうちはインクリメント
               const moku = mokus[i] //定数mokuを定義　mokusに入っている要素のi番目を取得
               console.log(moku.id, moku.moku_type_id)
-              const liElement = "<li>" + moku.id + "</li>" //定数liElementを定義　moku.idをリスト形式で出力
+              // let created_time = moment(moku.created_at).fromNow()
+              const liElement = "<li>" + moku.created_at + "   " + moku.user.name + "さんが" + moku.moku_type.name + "でMOKUを開始しました！" + "</li>" //定数liElementを定義　moku.idをリスト形式で出力
               $('#justNowUl').append(liElement) //justNowUlに対してliElementを追加　
           }
       })
@@ -73,9 +74,19 @@
 </script>
 
 <h4><%= "#{@user.name}さんのMOKUアイテム" %></h4>
-<%= simple_format(@user.items) %>
+<% if @user.items.empty? %>
+  <h5>☁︎画面下部の「個人設定」から、使用する道具を登録しよう！</h5>
+<% else %>
+  <%= simple_format(@user.items) %>
+<% end %>
+
 <h4>自己紹介</h4>
-<%= simple_format(@user.introduce) %>
+<% if @user.introduce.empty? %>
+　<h5>︎︎︎︎☁︎画面下部の「個人設定」から、自己紹介を登録しよう！</h5>
+<% else %>
+  <%= simple_format(@user.introduce) %>
+<% end %>
+
 <h4>アカウントの公開表/非公開</h4>
 <%= public_to_s(@user.public) %>
 <% if @user.admin? %>
@@ -106,5 +117,5 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
     <% end %>
 <% end %>
 
-<p><%= link_to("個人設定", "/accounts/#{current_user.id}")%></p>
+<h3><%= link_to("個人設定", "/accounts/#{current_user.id}")%></h3>
 <h3><%= link_to("よくある質問",faqs_path) %></h3>

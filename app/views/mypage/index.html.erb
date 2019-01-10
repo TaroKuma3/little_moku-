@@ -41,8 +41,8 @@
 
 <ul id="justNowUl"></ul>
 
+<%# ファイル分けたいけど読み込みがわからずとりあえずそのまま↓%>
 <script>
-
   function getJustNowDatas() {
       $.ajax({
           type: 'get',
@@ -64,12 +64,27 @@
       })
   }
 
-  $(document).ready(function () {
-      setInterval(getJustNowDatas, 5000)
+  $(document).ready(function () { //HTMLが全部読み込めたらfunction以下の処理をしてね
+      setInterval(getJustNowDatas, 5000) //getJustNowDates関数を実行/5000ms
       // $('#justNowButton').on('click', function () {
       // })
 
   })
+
+// 画面をリロードした時に「いいの？」アラートが出て欲しかった。出なかった。scriptのすぐ下に書いてもだめだった。
+// $(window).on('beforeunload', function(event) {
+// 	console.log('beforeunload');
+// 	return 'jquery beforeunload';
+// });
+
+// var onBeforeunloadHandler = function(e) {
+//     e.returnValue = 'ちょっと待ってくださいよ。まだダメですよ。';
+// };
+// window.addEventListener('beforeunload', onBeforeunloadHandler, false);
+
+// $(window).on('beforeunload', function(e) {
+//     return 'ちょっと待ってくださいよ。まだダメですよ。';
+// });
 
 </script>
 

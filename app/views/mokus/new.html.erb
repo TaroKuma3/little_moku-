@@ -7,25 +7,82 @@
               local: true) do |form| %>
 
   <%# if @moku.errors.any? %>
-    <%# @moku.errors.full_messages.each do |message| %>
-      <%#= message %><br>
-    <%# end %>
+  <%# @moku.errors.full_messages.each do |message| %>
+  <%#= message %><br>
+  <%# end %>
   <%# end %>
 
   <h3>なにをMOKUりますか？MOKUタグを教えてください</h3>
- <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
-    <%# form.collection_selectのメモ
+  <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
+  <%# form.collection_selectのメモ
     :moku_type...指定したモデル@mokuのどのカラムが対処？
     @user.moku_type...選択肢になるデーター。@user（そのユーザー）が持ってるmoku_type全部対象だかからmoku_types（っていうかmoku_typesテーブルだなこれ多分）
     :id...表示している選択肢のmoku_typeのid。多分前段でmoku_typesテーブル指定してて、だからidだけでmoku_type.idが拾えてる。これparamsで拾われる。
     :name...表示するmoku_typeのなまえ。これもmoku_typesテーブル参照されてて、moku_typeのなまえはnameにしたから取れるんだ。
     selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
-    %>
+  %>
 
   <h3>MOKU JUST NOWに載せてもいいですか？</h3>
   <%= form.select :mjn_public, options_for_mjn %>
 
-  <p><%= form.submit 'MOKU開始！'%></p>
+  <p><%= form.submit 'MOKU開始！' %></p>
 <% end %>
 
-<h3><%= link_to("マイページへ戻る", "/mypage")%></h3>
+<div id="clock" style="display:none;">
+  時計
+</div>
+
+<hr/>
+
+開始されたMokuのID:
+<input type="text" id="startedMokuId"/>
+
+<button type="button" id="startButton">開始</button>
+
+
+<%= form_with(url: 'dummy', method: :patch, local: true, id: 'finishForm') do |form| %>
+  <input type="hidden" name="moku_time" id="mokuTime" value=""/>
+  <input type="submit" id="stopButton" value="終了"/>
+<% end %>
+
+
+<script>
+
+    let nowStarted = false
+
+    $(document).ready(function () {
+        $(window).on('beforeunload', function () {
+            if (nowStarted) {
+                return "ちょっとまって"
+            }
+        })
+
+
+        $('#startButton').on('click', function () {
+            nowStarted = true
+            $.ajax({
+                url: '/ajax/mokus/create',
+                method: 'post',
+                data: {
+                    user_id: <%= current_user.id %>,
+                    moku_type_id: $('#moku_type').val(),
+                    mjn_public: $('#mjn_public').val()
+                }
+            }).done(function (json) {
+                const moku = json
+                const mokuId = moku.id
+                $('#startedMokuId').val(mokuId)
+                const url = '/mokus/' + mokuId + '/finish'
+                $('#finishForm').attr('action', url)
+
+                $('#clock').show(3000)
+
+            })
+
+        })
+    })
+</script>
+
+
+
+<h3><%= link_to("マイページへ戻る", "/mypage") %></h3>

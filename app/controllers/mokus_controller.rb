@@ -2,6 +2,9 @@ class MokusController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_current_user, only:[:index, :show, :new, :create, :edit, :update]
 
+  # CSRF対策を一時OFFに。次回レクチャー。
+  skip_before_action :verify_authenticity_token
+
   def index
     # 絞り込み用を書く
     if params[:moku_type]
@@ -28,9 +31,9 @@ class MokusController < ApplicationController
 
   def create
     @moku = Moku.new(
-      user_id: current_user.id,
-      moku_type_id: params[:moku_type],
-      mjn_public: params[:mjn_public],
+        user_id: current_user.id,
+        moku_type_id: params[:moku_type],
+        mjn_public: params[:mjn_public],
     )
 
     if @moku.save
@@ -68,6 +71,26 @@ class MokusController < ApplicationController
 
   def justnow
     mokus = Moku.where(mjn_public: true).order(created_at: 'desc').limit(5) # 最新を先に表示するから、desc
-    render json: mokus #これでmokusがjson(≒JSのハッシュ)になる
+    render json: mokus, include: [:user, :moku_type], methods: [:sakuseibi] #これでmokusがjson(≒JSのハッシュ)になる
+  end
+
+
+  # /ajax/mokus/create
+  def ajax_create
+    moku = Moku.new
+    moku.user_id = params[:user_id]
+    moku.moku_type_id = params[:moku_type_id]
+    moku.mjn_public = params[:mjn_public]
+    moku.started_at = DateTime.now.to_s
+    moku.save!
+    render json: moku
+  end
+
+
+  def finish
+    moku = Moku.find params[:id]
+    moku.finished_at = DateTime.now.to_s
+    moku.save!
+    redirect_to '/mypage'
   end
 end

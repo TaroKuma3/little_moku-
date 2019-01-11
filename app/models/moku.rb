@@ -11,4 +11,11 @@ class Moku < ApplicationRecord
   validates :moku_type_id, presence: true
   validates :mjn_public, inclusion: { in: [true, false] }
 
+
+
+
+  def sakuseibi
+    self.created_at.strftime('%Y/%m/%d')
+  end
+
 end

@@ -16,8 +16,8 @@ module LittleMoku
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.time_zone = 'Tokyo'
-    config.active_record.default_timezone = :utc
+    config.time_zone = 'Tokyo' #表示は日本時間
+    config.active_record.default_timezone = :utc #DBではUTC時間
 
   end
 end

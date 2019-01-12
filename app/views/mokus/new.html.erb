@@ -47,7 +47,7 @@
 <h1>MOKUる</h1>
 <%= form_with(model: @moku,
               url: {controller: :mokus, action: :create, user_id: current_user.id},
-              method: :post,
+              method: :post, #getでもいけるけれど設計的に美しくないのでやはりpostがいい
               local: true) do |form| %>
 
   <%# if @moku.errors.any? %>
@@ -68,6 +68,7 @@
 
   <h3>MOKU JUST NOWに載せてもいいですか？</h3>
   <%= form.select :mjn_public, options_for_mjn %>
+  <%# ↑for_boolを当てる！%>
 
   <p><%= form.submit 'MOKU開始！'%></p>
 

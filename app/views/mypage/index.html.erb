@@ -21,7 +21,7 @@
 <ul>
   <li>
     PICK UP MOKU
-    <% @works_random.each do |work_random| %>
+    <% @work_randoms.each do |work_random| %>
       <ul>
         <li>
         <% work = Work.find_by(id: work_random.id)%>
@@ -41,41 +41,14 @@
 
 <ul id="justNowUl"></ul>
 
-<%# ファイル分けたいけど読み込みがわからずとりあえずそのまま↓%>
+<%= javascript_include_tag "mypage" %>
 <script>
-  function getJustNowDatas() {
-      $.ajax({
-          type: 'get',
-          url: '/ajax/justnow.json'
-      }).done(function (response, status) {
-
-          $('#justNowUl').empty() //justNowUlの中身を空っぽに
-
-          const mokus = response //responseは↑の第一引数。ブラウザから返ってきたデーター
-          console.log(mokus)
-
-          for (let i = 0; i < mokus.length; i++) { //変数iを定義　mokusの要素の数より小さいうちはインクリメント
-              const moku = mokus[i] //定数mokuを定義　mokusに入っている要素のi番目を取得
-              console.log(moku.id, moku.moku_type_id)
-              // let created_time = moment(moku.created_at).fromNow()
-              const liElement = "<li>" + moku.created_at + "   " + moku.user.name + "さんが" + moku.moku_type.name + "でMOKUを開始しました！" + "</li>" //定数liElementを定義　moku.idをリスト形式で出力
-              $('#justNowUl').append(liElement) //justNowUlに対してliElementを追加　
-          }
-      })
-  }
-
-  $(document).ready(function () { //HTMLが全部読み込めたらfunction以下の処理をしてね
-      setInterval(getJustNowDatas, 5000) //getJustNowDates関数を実行/5000ms
-      // $('#justNowButton').on('click', function () {
-      // })
-
-  })
 
 // 画面をリロードした時に「いいの？」アラートが出て欲しかった。出なかった。scriptのすぐ下に書いてもだめだった。
 // $(window).on('beforeunload', function(event) {
 // 	console.log('beforeunload');
-// 	return 'jquery beforeunload';
-// });
+// 	return 'jquery beforeunload'; unloadは閉じるか遷移する時のどちらも対応される
+// }); moku開始前は戻れないとまずい。
 
 // var onBeforeunloadHandler = function(e) {
 //     e.returnValue = 'ちょっと待ってくださいよ。まだダメですよ。';
@@ -127,8 +100,7 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 <%= month_calendar(attribute: :created_at, events: @mokus) do |date, mokus| %>
   <%= date %><br>
   <% mokus.each do |moku| %>
-      <% moku_type = MokuType.find(moku.moku_type_id)%>
-        <%= link_to(moku_type.name, user_moku_path(moku.user_id, moku.id)) %><br>
+        <%= link_to(moku.moku_type.name, user_moku_path(moku.user_id, moku.id)) %><br>
     <% end %>
 <% end %>
 

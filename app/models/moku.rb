@@ -11,4 +11,7 @@ class Moku < ApplicationRecord
   validates :moku_type_id, presence: true
   validates :mjn_public, inclusion: { in: [true, false] }
 
+  def format_created_at
+    self.created_at.strftime('%y/%m/%d  %H:%M')
+  end
 end

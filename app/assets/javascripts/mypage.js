@@ -24,6 +24,5 @@ $(document).ready(function () { //HTMLとか全部滞りなく読み取れたら
   setInterval(getJustNowDatas, 5000) //setIntervalさん、5000ms === 5秒ごとに、getJustNowDatasを実行してね
   // $('#justNowButton').on('click', function () {
   // })
-
 })
 

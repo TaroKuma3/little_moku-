@@ -26,19 +26,43 @@ class MokusController < ApplicationController
     @moku_types = MokuType.where(user_id: @user.id)
   end
 
-  def create
-    @moku = Moku.new(
-      user_id: current_user.id,
-      moku_type_id: params[:moku_type],
-      mjn_public: params[:mjn_public],
-    )
+  # def create
+  #   @moku = Moku.new(
+  #     user_id: current_user.id,
+  #     moku_type_id: params[:moku_type],
+  #     mjn_public: params[:mjn_public],
+  #   )
 
-    if @moku.save
+  #   if @moku.save
+  #     flash[:notice] = "MOKU開始！頑張って！"
+  #     redirect_to(mypage_path)
+  #   else
+  #     render action: :new
+  #   end
+  # end
+
+  def ajax_create
+    moku = Moku.new
+    moku.user_id = params[:user_id]
+    moku.moku_type_id = params[:moku_type_id]
+    moku.mjn_public = params[:mjn_public]
+    moku.started_at = DateTime.now.to_s
+
+    if moku.save!
       flash[:notice] = "MOKU開始！頑張って！"
-      redirect_to(mypage_path)
+      render json: moku
     else
-      render action: :new
+      render :new
     end
+  end
+
+  def finish
+    moku = Moku.find params[:id]
+    moku.finished_at = DateTime.now
+
+    moku.save!
+    flash[:notice] = "おつかれさまでした！"
+    redirect_to '/mypage'
   end
 
   def edit
@@ -52,7 +76,7 @@ class MokusController < ApplicationController
     user = current_user
     @moku = Moku.find(params[:id])
     @moku.content = params[:moku][:content]
-    @moku.mjn_public = params[:moku][:mjn_public]
+    # @moku.mjn_public = params[:moku][:mjn_public] →開始時にしか拾わないからupdateでは必要ない
 
     moku_type = MokuType.find(params[:moku][:moku_type])
     @moku.moku_type = moku_type

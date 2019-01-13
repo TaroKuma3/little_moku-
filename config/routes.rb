@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get '/ajax/justnow' => 'mokus#justnow'
-  post 'ajax/mokus/create' => 'mokus#ajax_create'
+  post '/ajax/mokus/create' => 'mokus#ajax_create'
   patch '/mokus/:id/finish' => 'mokus#finish'
 
   get 'accounts/:user_id' => 'accounts#edit'

@@ -1,6 +1,8 @@
 class MokusController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_current_user, only:[:index, :show, :new, :create, :edit, :update]
+  #↓次回やる。CSRF対策を一時的にOFFにしているとのこと。
+  skip_before_action :verify_authenticity_token
 
   def index
     # 絞り込み用を書く
@@ -62,7 +64,7 @@ class MokusController < ApplicationController
 
     moku.save!
     flash[:notice] = "おつかれさまでした！"
-    redirect_to '/mypage'
+    redirect_to("/mypage")
   end
 
   def edit

@@ -38,41 +38,22 @@
 </ul>
 
 <h4>MOKU JUST NOW</h4>
-
-<ul id="justNowUl"></ul>
-
-<%= javascript_include_tag "mypage" %>
-<script>
-
-// 画面をリロードした時に「いいの？」アラートが出て欲しかった。出なかった。scriptのすぐ下に書いてもだめだった。
-// $(window).on('beforeunload', function(event) {
-// 	console.log('beforeunload');
-// 	return 'jquery beforeunload'; unloadは閉じるか遷移する時のどちらも対応される
-// }); moku開始前は戻れないとまずい。
-
-// var onBeforeunloadHandler = function(e) {
-//     e.returnValue = 'ちょっと待ってくださいよ。まだダメですよ。';
-// };
-// window.addEventListener('beforeunload', onBeforeunloadHandler, false);
-
-// $(window).on('beforeunload', function(e) {
-//     return 'ちょっと待ってくださいよ。まだダメですよ。';
-// });
-
-</script>
+  <ul id="justNowUl"></ul>
+  <%= javascript_include_tag "mypage" %>
+  <script></script>
 
 <h4><%= "#{@user.name}さんのMOKUアイテム" %></h4>
-<% if @user.items.empty? %>
-  <h5>☁︎画面下部の「個人設定」から、使用する道具を登録しよう！</h5>
-<% else %>
-  <%= simple_format(@user.items) %>
+  <% if @user.items.empty? %>
+    <h5>☁︎画面下部の「個人設定」から、使用する道具を登録しよう！</h5>
+  <% else %>
+    <%= simple_format(@user.items) %>
 <% end %>
 
 <h4>自己紹介</h4>
-<% if @user.introduce.empty? %>
-　<h5>︎︎︎︎☁︎画面下部の「個人設定」から、自己紹介を登録しよう！</h5>
-<% else %>
-  <%= simple_format(@user.introduce) %>
+  <% if @user.introduce.empty? %>
+  　<h5>︎︎︎︎☁︎画面下部の「個人設定」から、自己紹介を登録しよう！</h5>
+  <% else %>
+    <%= simple_format(@user.introduce) %>
 <% end %>
 
 <h4>アカウントの公開表/非公開</h4>
@@ -85,14 +66,14 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 作ってくれるなら書かなくていいよね、という感じでuser.rbのメソッドはコメントアウトした状態。
 ちなみにここのif @user.admin?の?は実はあってもなくてもいいけれど、あった方がいいよね、と %>
 <h2>管理者メニュー</h2>
-<ul>
-  <li>
-    <%= link_to("FAQの追加", faqs_new_path )%>
-  </li>
-  <li>
-    <%= link_to("FAQの編集・削除", faqs_path )%>
-  </li>
-</ul>
+  <ul>
+    <li>
+      <%= link_to("FAQの追加", faqs_new_path )%>
+    </li>
+    <li>
+      <%= link_to("FAQの編集・削除", faqs_path )%>
+    </li>
+  </ul>
 <% end %>
 
 <h1>カレンダー</h1>

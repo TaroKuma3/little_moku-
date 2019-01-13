@@ -2,7 +2,7 @@
 <html>
 <head>
   <style>
-    #base {
+    #clockImage {
         width: 300px;
         height: 300px;
         position: relative;
@@ -17,34 +17,17 @@
   </style>
 </head>
 <body>
-
-  <div id="base">
+<h1>MOKUる</h1>
+  <div id="clockImage" style="display:none;">
       <img src="/assets/dial.png" class="clock"><!--文字盤-->
       <img src="/assets/hour.png" id="hour" class="clock"><!--短針-->
       <img src="/assets/minute.png" id="minute" class="clock"><!--長針-->
       <img src="/assets/second.png" id="second" class="clock"><!--秒針-->
   </div>
-    <script>
-      var time;
-      var hour = document.getElementById("hour");
-      var minute = document.getElementById("minute");
-      var second = document.getElementById("second");
 
-      function main() {
-        time = new Date();
+<%= javascript_include_tag "clock" %>
+  <script> </script>
 
-        hour.style.transform = "rotate("+(time.getHours()*30+time.getMinutes()*0.5)+"deg)";
-        minute.style.transform = "rotate("+(time.getMinutes()*6)+"deg)";
-        second.style.transform = "rotate("+(time.getSeconds()*6)+"deg)";
-
-        setTimeout(main, 1000-time.getMilliseconds());
-      }
-
-      main();
-    </script>
-
-
-<h1>MOKUる</h1>
 <%= form_with(model: @moku,
               url: {controller: :mokus, action: :create, user_id: current_user.id},
               method: :post, #getでもいけるけれど設計的に美しくないのでやはりpostがいい
@@ -66,14 +49,56 @@
     selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
     %>
 
-  <h3>MOKU JUST NOWに載せてもいいですか？</h3>
-  <%= form.select :mjn_public, options_for_mjn %>
-  <%# ↑for_boolを当てる！%>
+  <h3>MOKU JUST NOWに公開していいですか？</h3>
+  <%= form.select :mjn_public, options_for_public_for_bool %>
 
-  <p><%= form.submit 'MOKU開始！'%></p>
+  <p><%#= form.submit 'MOKU開始！'%></p>
 
 <% end %>
 
+<hr/>
+<input type="hidden" id="startedMokuId"/>
+<button type="button" id="startButton">MOKU開始！</button>
+
+
+<%= form_with(url: 'dummy', method: :patch, local: true, id: 'finishForm') do |form| %>
+  <input type="hidden" name="moku_time" id="mokuTime" value=""/>
+  <input type="submit" id="stopButton" style="display:none;" value="MOKU終了！"/>
+<% end %>
+
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>
+
+<script>
+    let nowStarted = false
+    $(document).ready(function () {
+        // $(window).on('beforeunload', function () {
+        //     if (nowStarted) {
+        //         return "ちょっとまって"
+        //     }
+        // })
+        $('#startButton').on('click', function () {
+            nowStarted = true
+            $.ajax({
+                url: '/ajax/mokus/create',
+                method: 'post',
+                data: {
+                    user_id: <%= current_user.id %>,
+                    moku_type_id: $('#moku_type').val(),
+                    mjn_public: $('#mjn_public').val()
+                }
+            }).done(function (json) {
+                const moku = json
+                const mokuId = moku.id
+                $('#startedMokuId').val(mokuId)
+                const url = '/mokus/' + mokuId + '/finish'
+                $('#finishForm').attr('action', url)
+                $('#clockImage').fadeIn(2000)
+                $('#stopButton').show()
+                $('#startButton, #moku_type, #mjn_public').hide()
+            })
+        })
+    })
+</script>
+
 </body>
 </html>

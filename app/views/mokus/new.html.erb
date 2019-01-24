@@ -17,30 +17,32 @@
   </style>
 </head>
 <body>
-<h1>MOKUる</h1>
-  <div id="clockImage" style="display:none;">
-      <img src="/assets/dial.png" class="clock"><!--文字盤-->
-      <img src="/assets/hour.png" id="hour" class="clock"><!--短針-->
-      <img src="/assets/minute.png" id="minute" class="clock"><!--長針-->
-      <img src="/assets/second.png" id="second" class="clock"><!--秒針-->
-  </div>
+  <span id="defaultTitle"><h1>MOKUる</h1></span>
+    <span id="afterStartTitle" style="display:none;"><h1>ただいまMOKUっています！</h1></span>
+    <span id="afterStartTitle" style="display:none;"><h4>終了するときは【MOKU終了！】をクリック！</h4></span>
+    <div id="clockImage" style="display:none;">
+        <img src="/assets/dial.png" class="clock"><!--文字盤-->
+        <img src="/assets/hour.png" id="hour" class="clock"><!--短針-->
+        <img src="/assets/minute.png" id="minute" class="clock"><!--長針-->
+        <img src="/assets/second.png" id="second" class="clock"><!--秒針-->
+    </div>
 
-<%= javascript_include_tag "clock" %>
-  <script> </script>
+  <%= javascript_include_tag "clock" %> <%# このclock.jsの中でver timeが宣言されているので注意！%>
+    <script></script>
 
-<%= form_with(model: @moku,
-              url: {controller: :mokus, action: :create, user_id: current_user.id},
-              method: :post, #getでもいけるけれど設計的に美しくないのでやはりpostがいい
-              local: true) do |form| %>
+  <%= form_with(model: @moku,
+                url: {controller: :mokus, action: :create, user_id: current_user.id},
+                method: :post, #getでもいけるけれど設計的に美しくないのでやはりpostがいい
+                local: true) do |form| %>
 
-  <%# if @moku.errors.any? %>
-    <%# @moku.errors.full_messages.each do |message| %>
-      <%#= message %><br>
+    <%# if @moku.errors.any? %>
+      <%# @moku.errors.full_messages.each do |message| %>
+        <%#= message %><br>
+      <%# end %>
     <%# end %>
-  <%# end %>
 
-  <h3>なにをMOKUりますか？MOKUタグを教えてください</h3>
- <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
+  <span id="selectMokuType"><h3>なにをMOKUりますか？MOKUタグを教えてください</h3></span>
+  <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
     <%# form.collection_selectのメモ
     :moku_type...指定したモデル@mokuのどのカラムが対処？
     @user.moku_type...選択肢になるデーター。@user（そのユーザー）が持ってるmoku_type全部対象だかからmoku_types（っていうかmoku_typesテーブルだなこれ多分）
@@ -49,27 +51,42 @@
     selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
     %>
 
-  <h3>MOKU JUST NOWに公開していいですか？</h3>
+  <span id="selectMJN"><h3>MOKU JUST NOWに公開していいですか？</h3></span>
   <%= form.select :mjn_public, options_for_public_for_bool %>
-
-  <p><%#= form.submit 'MOKU開始！'%></p>
 
 <% end %>
 
 <hr/>
-<input type="hidden" id="startedMokuId"/>
+<input type="hidden" id="startedMokuId"/> <%#= create後に発行されたmoku.idの保存 %>
+<span id="timer"><%# displayTimerでインクリメントにより何秒経過したのか計算された結果を表示している %>
 <button type="button" id="startButton">MOKU開始！</button>
+<input type="submit" id="pauseButton" style="display:none;" value="一時停止！"/>
 
-
-<%= form_with(url: 'dummy', method: :patch, local: true, id: 'finishForm') do |form| %>
-  <input type="hidden" name="moku_time" id="mokuTime" value=""/>
+<%= form_with(url: 'dummy', method: :patch, local: true, id: 'finishForm') do |form| %> <%# id: はid=と同じ　この中に書いたものをfinish時に一緒に送ってあげる%>
+  <input type="text" name="moku_time" id="mokuTime" value=""/> <%# MOKUった時間の総合計を保存 %>
   <input type="submit" id="stopButton" style="display:none;" value="MOKU終了！"/>
 <% end %>
 
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>
 
+
 <script>
-    let nowStarted = false
+'use strict';
+    //ブラウザバックや再読み込みする時に確認メッセージを出すためのフラグ
+    //MOKU開始前は戻れないと困るから。
+    let nowStarted = false;
+
+    // ストップウォッチ関係の変数　とりあえずお手本のまま。あとで調整
+    let timeCounter = 0; //数値がインクリメントされるため０で初期化
+    let timer = null; //setIntervalの処理結果を代入するから初期化
+    let startTime = null; //Dateからのデーターが入るので0ではなくnullで初期化
+    let endTime = null;
+
+    function displayTimer() { //displayTimerという関数宣言
+        timeCounter = ++timeCounter // 変数timeCounterが＋１　++が前にあると出力してから加算、後にあれば加算してから出力
+        $("#timer").text(timeCounter) // #timer === id="timer" に変数timeCounterを表示させる。text=マッチした要素内のテキストを取得する。つまりtimeCounterの値を#timerに表示しているという。
+    }
+
     $(document).ready(function () {
         // $(window).on('beforeunload', function () {
         //     if (nowStarted) {
@@ -77,26 +94,50 @@
         //     }
         // })
         $('#startButton').on('click', function () {
-            nowStarted = true
+            nowStarted = true　//MOKU中はブラウザバック・再読み込み時にalertを出すためそのフラグ変更
             $.ajax({
-                url: '/ajax/mokus/create',
-                method: 'post',
+                url: '/ajax/mokus/create', //ajyaxでデーター送る時のURL(routes参照)
+                method: 'post', //リクエストメソッド
                 data: {
-                    user_id: <%= current_user.id %>,
+                    user_id: <%= current_user.id %>, //create時に欲しいデーターの皆さん
                     moku_type_id: $('#moku_type').val(),
                     mjn_public: $('#mjn_public').val()
                 }
-            }).done(function (json) {
-                const moku = json
-                const mokuId = moku.id
-                $('#startedMokuId').val(mokuId)
-                const url = '/mokus/' + mokuId + '/finish'
-                $('#finishForm').attr('action', url)
-                $('#clockImage').fadeIn(2000)
-                $('#stopButton').show()
-                $('#startButton, #moku_type, #mjn_public').hide()
-            })
-        })
+            }).done(function (json) { //↑までうまくいったら json === mokus_controllerでrender json: moku　したもの。ajax_createしたMOKUのデータが入ってくる
+                const moku = json //ajax_createしたmokuのデーターをJSの定数mokuへ代入
+                const mokuId = moku.id //定数mokuIdの定義
+                $('#startedMokuId').val(mokuId) //id='startedMokuIdの値に定数mokuIdの値を代入してJSでもmoku.idが使えるよう保持'
+
+                const url = '/mokus/' + mokuId + '/finish' //定数urlを定義　これを使って、終了時のデーター飛び先URLを組み立てる
+                $('#finishForm').attr('action', url) //form_withのid: 'finishForm'の内容をurlに書き換える？？？？
+                $('#clockImage').fadeIn(2000) //時計をフェードイン
+                $('#afterStartTitle, #stopButton, #pauseButton').show() //開始後のタイトルとストップボタンを表示
+                $('#defaultTitle, #startButton, #moku_type, #mjn_public, #selectMokuType, #selectMJN').hide() //開始後のデフォタイトルやタートボタンなどを非表示
+
+                // ここから開始時のタイマーの作業
+                timer = setInterval(displayTimer, 1000) //タイマーの開始はもっと上の方がいいのかな
+                  if (startTime == null) { //変数startTimeがnullのときだけその時の日時を入れる。
+                  startTime = new Date() //スタートを再クリックすると開始時刻が更新されてしまうのを防ぐため。DBには保存しないが制御上多分必要。
+                  $('#startTimeInput').val(startTime) //DBへは必要ないけどカウント的に必要なきがする
+                }
+               })
+               })
+
+                // ここから終了時のタイマーの作業
+                $('#stopButton').on('click', function () { //【処理２】stopButton要素がクリックされたら、このfunction以下を処理するよ
+                  endTime = new Date() //変数endTimeに今の日時を代入
+                  $('#endTimeInput').val(endTime) //DBには保存しないが制御上多分必要。
+                  $('#mokuTime').val(timeCounter) //全部で何分MOKUったか。
+
+                  clearInterval(displayTimer) //setIntervalでセットしたタイマーをクリア
+                  timeCounter = 0 //timeCounterを０に戻して経過秒数を０にする
+                })
+
+            //ここから一時停止のタイマーの作業
+                $('#pauseButton').on('click', function () {
+                  clearInterval(displayTimer) //setInterbalでセットしたタイマーをクリア。
+                  $('#mokuTime').val(timer)
+                 })
     })
 </script>
 

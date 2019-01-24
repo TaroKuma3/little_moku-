@@ -12,29 +12,9 @@ local: true) do |f| %>
     <% end %>
   <% end %>
 
-<%# ifで分岐させて表示内容を変更する %>
   <%= "MOKUタグの新しい名前を教えてください" %>
   <%= render "form", f:f %>
 <% end %>
-
-  　
-  <%
-=begin%>
- <p><%= f.text_field :name %></p>
-  <%= f.submit "変更する" %>
-<% end %>
-
-<h3>今あるMOKUタグはこちら</h3>
-<% @moku_types.each do |moku_type| %>
-<ul>
-  <li>
-    <%= moku_type.name %>
-  </li>
-</ul>
-<%end %> 
-<%
-=end%>
-
 
 <p><%= link_to("MOKUタグ一覧へ戻る", user_moku_type_index_path(@user))%></p>
 <p><%= link_to("マイページへ戻る", "/mypage")%></p>

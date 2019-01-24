@@ -18,7 +18,7 @@ module ApplicationHelper
     end
 
     def options_for_public_for_bool
-        Constants.options_for_public_for_bool
+        Constants.options_for_public_for_bool #名前がアホすぎる。がbooleanに統一してあげられれば供養できそう。
     end
     #constants.rbで公開・非公開を定数管理にした。
     # ここでhtml.erb上「公開」「非公開」という言葉で表示できるようメソッドを定義。

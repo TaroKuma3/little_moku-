@@ -1,3 +1,5 @@
+'use strict';
+
 var time;
       var hour = document.getElementById("hour");
       var minute = document.getElementById("minute");

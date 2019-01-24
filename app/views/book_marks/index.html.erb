@@ -19,7 +19,7 @@
       <li>
         <%= work.title %>
         <%= "製作者：#{work_user.name}さん"%>
-        <%= link_to ("/users/#{work.user_id}/work/#{work.id}") do %>
+        <%= link_to ("/users/#{work.user_id}/works/#{work.id}/public") do %>
           <i class="fa fa-search" aria-hidden="true"></i>
         <% end %>
       </li>

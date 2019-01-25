@@ -9,4 +9,4 @@ belongs_to :user
 # validates :introduce, presence: true
 # validates :public, inclusion: { in: [true, false] }
 # validates :user_id, presence: true
-# end
+end

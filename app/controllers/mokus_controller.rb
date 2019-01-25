@@ -2,7 +2,7 @@ class MokusController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_current_user, only:[:index, :show, :new, :create, :edit, :update]
   #↓次回やる。CSRF対策を一時的にOFFにしているとのこと。
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only:[:ajax_create]
 
   def index
     # 絞り込み用を書く
@@ -48,7 +48,7 @@ class MokusController < ApplicationController
     moku.user_id = params[:user_id]
     moku.moku_type_id = params[:moku_type_id]
     moku.mjn_public = params[:mjn_public]
-    moku.started_at = DateTime.now.to_s
+    moku.started_at = DateTime.now
 
     if moku.save!
       flash[:notice] = "MOKU開始！頑張って！"
@@ -61,6 +61,7 @@ class MokusController < ApplicationController
   def finish
     moku = Moku.find params[:id]
     moku.finished_at = DateTime.now
+    moku.moku_time = params[:moku_time]
 
     moku.save!
     flash[:notice] = "おつかれさまでした！"

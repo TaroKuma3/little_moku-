@@ -5,7 +5,7 @@
     #clockImage {
         width: 300px;
         height: 300px;
-        position: relative;
+              position: relative;
       }
       .clock {
         width: 300px;
@@ -58,7 +58,11 @@
 
 <hr/>
 <input type="hidden" id="startedMokuId"/> <%#= create後に発行されたmoku.idの保存 %>
-<span id="timer"><%# displayTimerでインクリメントにより何秒経過したのか計算された結果を表示している %>
+<span id="timer"></span>
+
+
+
+<%# displayTimerでインクリメントにより何秒経過したのか計算された結果を表示している %>
 <button type="button" id="startButton">MOKU開始！</button>
 <input type="submit" id="pauseButton" style="display:none;" value="一時停止！"/>
 
@@ -85,6 +89,7 @@
     function displayTimer() { //displayTimerという関数宣言
         timeCounter = ++timeCounter // 変数timeCounterが＋１　++が前にあると出力してから加算、後にあれば加算してから出力
         $("#timer").text(timeCounter) // #timer === id="timer" に変数timeCounterを表示させる。text=マッチした要素内のテキストを取得する。つまりtimeCounterの値を#timerに表示しているという。
+        $('#mokuTime').val(timeCounter)
     }
 
     $(document).ready(function () {
@@ -101,7 +106,8 @@
                 data: {
                     user_id: <%= current_user.id %>, //create時に欲しいデーターの皆さん
                     moku_type_id: $('#moku_type').val(),
-                    mjn_public: $('#mjn_public').val()
+                    mjn_public: $('#mjn_public').val(),
+                    // authenticity_token: $('meta[name="csrf-token"]').attr('content')
                 }
             }).done(function (json) { //↑までうまくいったら json === mokus_controllerでrender json: moku　したもの。ajax_createしたMOKUのデータが入ってくる
                 const moku = json //ajax_createしたmokuのデーターをJSの定数mokuへ代入
@@ -127,7 +133,7 @@
                 $('#stopButton').on('click', function () { //【処理２】stopButton要素がクリックされたら、このfunction以下を処理するよ
                   endTime = new Date() //変数endTimeに今の日時を代入
                   $('#endTimeInput').val(endTime) //DBには保存しないが制御上多分必要。
-                  $('#mokuTime').val(timeCounter) //全部で何分MOKUったか。
+                  // $('#mokuTime').val(timeCounter) //全部で何分MOKUったか。
 
                   clearInterval(displayTimer) //setIntervalでセットしたタイマーをクリア
                   timeCounter = 0 //timeCounterを０に戻して経過秒数を０にする
@@ -135,11 +141,17 @@
 
             //ここから一時停止のタイマーの作業
                 $('#pauseButton').on('click', function () {
-                  clearInterval(displayTimer) //setInterbalでセットしたタイマーをクリア。
-                  $('#mokuTime').val(timer)
+                  if (nowStarted) {
+                    clearInterval(timer); //setInterbalでセットしたタイマーをクリア。
+                    $('#pauseButton').val('再開！');
+                    nowStarted = false;
+                  } else {
+                    $('#pauseButton').val('一時停止！');
+                    nowStarted = true;
+                    timer = setInterval(displayTimer, 1000);
+                  };
                  })
     })
 </script>
-
 </body>
 </html>

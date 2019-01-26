@@ -141,7 +141,7 @@
             //ここから一時停止のタイマーの作業
                 $('#pauseButton').on('click', function () {
                   if (nowStarted) {
-                    clearInterval(timer); //setInterbalでセットしたタイマーをクリア。
+                    clearInterval(timer); //setInterbalでセットしたタイマーをクリア。displayTimerではなく値が代入されているtimerを指定する。
                     $('#pauseButton').val('再開！');
                     nowStarted = false;
                   } else {

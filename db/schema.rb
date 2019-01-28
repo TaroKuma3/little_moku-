@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_023241) do
+ActiveRecord::Schema.define(version: 2019_01_27_031939) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,9 +63,9 @@ ActiveRecord::Schema.define(version: 2019_01_02_023241) do
   end
 
   create_table "mokus", force: :cascade do |t|
-    t.string "started_at"
-    t.string "finished_at"
-    t.integer "stopped_second"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.integer "moku_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"

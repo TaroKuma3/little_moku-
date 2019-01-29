@@ -27,8 +27,6 @@
         <img src="/assets/second.png" id="second" class="clock"><!--秒針-->
     </div>
 
-  <%= javascript_include_tag "clock" %> <%# このclock.jsの中でver timeが宣言されているので注意！%>
-    <script></script>
 
   <%= form_with(model: @moku,
                 url: {controller: :mokus, action: :create, user_id: current_user.id},
@@ -73,84 +71,7 @@
 
 <h3><%= link_to("マイページへ戻る", "/mypage")%></h3>
 
+<%= render 'moku_js' %>
 
-<script>
-    //ブラウザバックや再読み込みする時に確認メッセージを出すためのフラグ
-    //MOKU開始前は戻れないと困るから。
-    let nowStarted = false;
-
-    // ストップウォッチ関係の変数　とりあえずお手本のまま。あとで調整
-    let timeCounter = 0; //数値がインクリメントされるため０で初期化
-    let timer = null; //setIntervalの処理結果を代入するから初期化
-    let startTime = null; //Dateからのデーターが入るので0ではなくnullで初期化
-    let endTime = null;
-
-    function displayTimer() { //displayTimerという関数宣言
-        timeCounter = ++timeCounter // 変数timeCounterが＋１　++が前にあると出力してから加算、後にあれば加算してから出力
-        $("#timer").text(timeCounter) // #timer === id="timer" に変数timeCounterを表示させる。text=マッチした要素内のテキストを取得する。つまりtimeCounterの値を#timerに表示しているという。
-        $('#mokuTime').val(timeCounter)
-    }
-
-    $(document).ready(function () {
-        // $(window).on('beforeunload', function () {
-        //     if (nowStarted) {
-        //         return "ちょっとまって"
-        //     }
-        // })
-        $('#startButton').on('click', function () {
-            nowStarted = true　//MOKU中はブラウザバック・再読み込み時にalertを出すためそのフラグ変更
-            $.ajax({
-                url: '/ajax/mokus/create', //ajyaxでデーター送る時のURL(routes参照)
-                method: 'post', //リクエストメソッド
-                data: {
-                    user_id: <%= current_user.id %>, //create時に欲しいデーターの皆さん
-                    moku_type_id: $('#moku_type').val(),
-                    mjn_public: $('#mjn_public').val(),
-                    // authenticity_token: $('meta[name="csrf-token"]').attr('content')
-                }
-            }).done(function (json) { //↑までうまくいったら json === mokus_controllerでrender json: moku　したもの。ajax_createしたMOKUのデータが入ってくる
-                const moku = json //ajax_createしたmokuのデーターをJSの定数mokuへ代入
-                const mokuId = moku.id //定数mokuIdの定義
-                $('#startedMokuId').val(mokuId) //id='startedMokuIdの値に定数mokuIdの値を代入してJSでもmoku.idが使えるよう保持'
-
-                const url = '/mokus/' + mokuId + '/finish' //定数urlを定義　これを使って、終了時のデーター飛び先URLを組み立てる
-                $('#finishForm').attr('action', url) //form_withのid: 'finishForm'の内容をurlに書き換える？？？？
-                $('#clockImage').fadeIn(2000) //時計をフェードイン
-                $('#afterStartTitle, #stopButton, #pauseButton').show() //開始後のタイトルとストップボタンを表示
-                $('#defaultTitle, #startButton, #moku_type, #mjn_public, #selectMokuType, #selectMJN').hide() //開始後のデフォタイトルやタートボタンなどを非表示
-
-                // ここから開始時のタイマーの作業
-                timer = setInterval(displayTimer, 1000) //タイマーの開始はもっと上の方がいいのかな
-                  if (startTime == null) { //変数startTimeがnullのときだけその時の日時を入れる。
-                  startTime = new Date() //スタートを再クリックすると開始時刻が更新されてしまうのを防ぐため。DBには保存しないが制御上多分必要。
-                  $('#startTimeInput').val(startTime) //DBへは必要ないけどカウント的に必要なきがする
-                }
-               })
-               })
-
-                // ここから終了時のタイマーの作業
-                $('#stopButton').on('click', function () { //【処理２】stopButton要素がクリックされたら、このfunction以下を処理するよ
-                  endTime = new Date() //変数endTimeに今の日時を代入
-                  $('#endTimeInput').val(endTime) //DBには保存しないが制御上多分必要。
-                  // $('#mokuTime').val(timeCounter) //全部で何分MOKUったか。
-
-                  clearInterval(timer) //setIntervalでセットしたタイマーをクリア
-                  timeCounter = 0 //timeCounterを０に戻して経過秒数を０にする
-                })
-
-            //ここから一時停止のタイマーの作業
-                $('#pauseButton').on('click', function () {
-                  if (nowStarted) {
-                    clearInterval(timer); //setInterbalでセットしたタイマーをクリア。displayTimerではなく値が代入されているtimerを指定する。
-                    $('#pauseButton').val('再開！');
-                    nowStarted = false;
-                  } else {
-                    $('#pauseButton').val('一時停止！');
-                    nowStarted = true;
-                    timer = setInterval(displayTimer, 1000);
-                  };
-                 })
-    })
-</script>
 </body>
 </html>

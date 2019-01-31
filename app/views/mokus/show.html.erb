@@ -6,13 +6,14 @@
 <%= @moku.updated_at %>
 
 <h4>MOKU TIME</h4>
-<%= "○○分MOKUりました！" %>
+<%= "#{@moku.moku_time}分MOKUりました！" %>
 
 <h4>MOKUタグ</h4>
 <%= @moku_type.name%>
 
 <h4>やったことやめも</h4>
 <h4><%= simple_format(@moku.content) %></h4>
+<%# ifで分ける？秒・分・時間で計算が必要　%>
 
 <h4><%= "このMOKUの成果物一覧" %></h4>
 <% if @works %>

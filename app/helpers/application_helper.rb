@@ -54,7 +54,7 @@ module ApplicationHelper
     # end
 
     def greeting
-        now = Time.now.hour
+        now = Time.current.hour
         # morning = 5 <= now && now < 12 #真偽値がかえる
         # lunchtime = 12 <= now && now < 15
         # evening = 15 <= now && now < 19

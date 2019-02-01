@@ -17,7 +17,7 @@ local: true) do |f| %>
     <%# multipartなしで大丈夫　imputタグには本来書かないもの。check_boxは不要になったので全体コメントアウト%>
 
     <%= link_to "削除", "/work/#{@work.id}/images/#{image.id}", method: :delete, data: {confirm: "削除してよろしいですか？"} %>
-    <%= image_tag image, :size => "100×100" %><br>
+    <%= image_tag image.variant(resize: '100x') %>
   <% end %>
 
 

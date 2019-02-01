@@ -13,7 +13,8 @@ class User < ApplicationRecord
   has_many :faqs #管理者が関わるのでこのまま
   has_one :mypage_config , dependent: :destroy
 
-  after_create :insert_default_moku_type #, :insert_mypage_edit
+  # before_create :insert_mypage_edit
+  after_create :insert_default_moku_type
 
   validates :admin, inclusion: { in: [true, false] }
   validates :name, presence: true
@@ -40,13 +41,8 @@ class User < ApplicationRecord
   end
 
   # def insert_mypage_edit
-  #   user = User.new(
-  #     items: "主に使う道具・教材・機材・材料などをどうぞ。画面下方から編集できます！",
-  #     introduce: "自己紹介をどうぞ。画面下方から編集できます！",
-  #     public: false,
-  #     user_id: self.id
-  #   )
-
-  #   user.save!
+  #     self.items = "主に使う道具・教材・機材・材料などをどうぞ。画面下方から編集できます！"
+  #     self.introduce = "自己紹介をどうぞ。画面下方から編集できます！"
+  #     puts "テスト！"
   # end
 end

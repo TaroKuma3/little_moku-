@@ -19,6 +19,6 @@
   <%# 画像がないなら余計な作業は無用なので↓で画像があるかどうか判断している%>
   <% if @work.images.attached? %>
     <% @work.images.each do |image| %>
-      <%= image_tag image%>
+      <%= image_tag image.variant(resize: '100x') %>
     <% end %>
   <% end %>

@@ -73,3 +73,5 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem "simple_calendar", "~> 2.0"
 gem "aws-sdk-s3"
+
+gem 'mini_magick'

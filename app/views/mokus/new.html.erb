@@ -56,8 +56,8 @@
 
 <hr/>
 <input type="hidden" id="startedMokuId"/> <%#= create後に発行されたmoku.idの保存 %>
-<span id="timer"></span>
-
+<input type="text" id="timer" />
+<%# ↑本番含め開発中はtextにしてるけど、運用開始時はhiddenで隠す。もしくは６０で割って算数＋分表示に%>
 
 
 <%# displayTimerでインクリメントにより何秒経過したのか計算された結果を表示している %>
@@ -65,7 +65,7 @@
 <input type="submit" id="pauseButton" style="display:none;" value="一時停止！"/>
 
 <%= form_with(url: 'dummy', method: :patch, local: true, id: 'finishForm') do |form| %> <%# id: はid=と同じ　この中に書いたものをfinish時に一緒に送ってあげる%>
-  <input type="text" name="moku_time" id="mokuTime" value=""/> <%# MOKUった時間の総合計を保存 %>
+  <input type="hidden" name="moku_time" id="mokuTime" value=""/> <%# MOKUった時間の総合計を保存 %>
   <input type="submit" id="stopButton" style="display:none;" value="MOKU終了！"/>
 <% end %>
 

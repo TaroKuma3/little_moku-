@@ -8,10 +8,10 @@ class MokusController < ApplicationController
     if params[:moku_type]
       @user = current_user
       # @moku_type = MokuType.where(id: params[:id])
-      @mokus = Moku.where(user_id: current_user.id).where(moku_type_id: params[:moku_type])
+      @mokus = Moku.where(user_id: current_user.id).where(moku_type_id: params[:moku_type]).order(created_at: 'desc')
     else
       @user = current_user
-      @mokus = Moku.where(user_id: @user.id)
+      @mokus = Moku.where(user_id: @user.id).order(created_at: 'desc')
     end
   end
 

@@ -15,8 +15,8 @@
       <nav>
         <% if user_signed_in? %>
           <%= "#{greeting}、#{current_user.name}さん！" %>
-          <%= link_to("アカウント情報", edit_user_registration_path) %>
-          <%= link_to("ログアウト", destroy_user_session_path, method: :delete) %>
+          <span id="linkToAaacount"><%= link_to("アカウント情報", edit_user_registration_path) %></span>
+          <span id="linkToLogout"><%= link_to("ログアウト", destroy_user_session_path, method: :delete) %></span>
         <% else %>
           <%= link_to 'ユーザー登録', new_user_registration_path %>
           <%= link_to 'ログイン', new_user_session_path %>

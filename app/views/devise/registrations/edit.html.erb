@@ -38,7 +38,7 @@
 
 <h3>アカウントを削除する場合</h3>
 
-<p><%= link_to("こちらをご確認ください", "/accounts/#{current_user.id}/check") %></p>
+<p><%= link_to("こちら", "/accounts/#{current_user.id}/check") %></p>
 <%#= button_to "削除する", registration_path(resource_name), data: { confirm: "いちど削除すると復元できません。本当に削除していいですか？" }, method: :delete %>
 
 <%= link_to "戻る", :back %>

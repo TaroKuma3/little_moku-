@@ -56,8 +56,8 @@
 
 <hr/>
 <input type="hidden" id="startedMokuId"/> <%#= create後に発行されたmoku.idの保存 %>
-<input type="text" id="timer" />
-<%# ↑本番含め開発中はtextにしてるけど、運用開始時はhiddenで隠す。もしくは６０で割って算数＋分表示に%>
+<span id="timer"></span>
+<%# ↑本番含め開発中はtextにしてるけど、運用開始時はimputにしてhiddenで隠す。もしくは６０で割って算数＋分表示に%>
 
 
 <%# displayTimerでインクリメントにより何秒経過したのか計算された結果を表示している %>

@@ -21,4 +21,14 @@ class AccountsController < ApplicationController
     end
   end
 
+  def check_delete
+    @user = current_user
+  end
+  # def delte
+  #   user = User.find(id)
+  #   user.deleted = true
+
+  #   user.save!
+  # end
+
 end

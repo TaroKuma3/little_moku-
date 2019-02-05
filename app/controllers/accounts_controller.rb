@@ -54,7 +54,8 @@ class AccountsController < ApplicationController
       book_mark.save!
     end
 
-    
+    # ログアウト処理
+    # redirect_to()
 
 
 

@@ -11,7 +11,13 @@
   <h3>コメントを公開しますか？</h3>
   <%= form.select :comment_public, options_for_public, selected: @work.comment_public %>
 
-  <h3>Pick Up MOKUへの公開設定</h3>
-  <%= form.select :pick_up, options_for_public, selected: @work.pick_up %>
+  <h3>Pick Upへの公開設定</h3>
+  公開にすると、Pick Upに載る事があります。<br>
+  非公開にすると、Pick Upには載りません。<br>
+  制作物が他の方にブックマークされていた場合、非公開にするとその方のブックマークにも表示されなくなります。<br>
+  ブックマークが解除されるわけでは無いため、ブックマーク数は変動せず、<br>
+  再度公開にすると、相手のブックマークに表示されるようになります。
+
+  <p><%= form.select :pick_up, options_for_public, selected: @work.pick_up %></p>
 
   <p><%= form.submit "登録する"%>

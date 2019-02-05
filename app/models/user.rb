@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :likes #なくす予定
   has_many :book_marks, dependent: :destroy
   has_many :stamps　#なくす予定だけどやっぱりやりたいかな
-  has_many :faqs #管理者が関わるのでこのまま
+  has_many :faqs #管理者しか関係ない。管理者は退会してはいけないのでこのまま。
   has_one :mypage_config , dependent: :destroy
 
   # before_create :insert_mypage_edit

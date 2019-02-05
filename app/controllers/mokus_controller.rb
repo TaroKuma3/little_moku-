@@ -3,6 +3,8 @@ class MokusController < ApplicationController
   before_action :ensure_current_user, only:[:index, :show, :new, :create, :edit, :update]
   skip_before_action :verify_authenticity_token, only:[:ajax_create]
 
+  # reqire 'ruby-duration' なんか間違ってる。
+
   def index
     # 絞り込み用を書く
     if params[:moku_type]
@@ -20,6 +22,9 @@ class MokusController < ApplicationController
     @moku = Moku.find(params[:id])
     @moku_type = MokuType.find(@moku.moku_type_id)
     @works = Work.where(moku_id: @moku.id)
+    # @time = Time.at(@moku.moku_time) 意図した結果通り出ないから×
+    # time = Duration.new(@moku.moku_time) エラー出たのであとで確認
+    # @moku_time = time.format(%H:&M:%S)
   end
 
   def new

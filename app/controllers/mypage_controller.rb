@@ -6,7 +6,7 @@ class MypageController < ApplicationController
   def index
     @user = current_user
     # @works_random = Work.where(pick_up: true).order("RANDOM()").limit(3)
-    @work_randoms = Work.where(pick_up: true).limit(3) #このままだと上から３つ固定なのでちょと考える
+    @work_randoms = Work.where(pick_up: true).order(created_at: 'desc').limit(3) #このままだと上から３つ固定なのでちょと考える
     @mokus = Moku.where(user_id: current_user.id) #カレンダーのために取得
   end
 

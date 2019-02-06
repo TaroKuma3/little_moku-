@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'accounts/:user_id/check' => 'accounts#check_delete'
   patch 'accounts/:user_id/delete' => 'accounts#delete'
 
+  get 'users/:user_id/mokus/:moku_id/check' => 'mokus#check_delete'
+  patch 'users/:user_id/mokus/:moku_id/delete' => 'mokus#delete'
+
   devise_for :users
   get 'users/:user_id/works/:work_id/public' => 'work#for_public'
   delete 'work/:id/images/:image_id' => 'work#delete_image'

@@ -5,7 +5,7 @@ class WorkController < ApplicationController
 
   def index
     @user = current_user
-    @works = Work.where(user_id: params[:user_id])
+    @works = Work.where(user_id: params[:user_id]).where(deleted: false)
   end
 
   def show

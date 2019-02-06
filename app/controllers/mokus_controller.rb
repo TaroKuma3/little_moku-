@@ -10,10 +10,10 @@ class MokusController < ApplicationController
     if params[:moku_type]
       @user = current_user
       # @moku_type = MokuType.where(id: params[:id])
-      @mokus = Moku.where(user_id: current_user.id).where(moku_type_id: params[:moku_type]).order(created_at: 'desc')
+      @mokus = Moku.where(user_id: current_user.id).where(moku_type_id: params[:moku_type]).where(deleted: false).order(created_at: 'desc')
     else
       @user = current_user
-      @mokus = Moku.where(user_id: @user.id).order(created_at: 'desc')
+      @mokus = Moku.where(user_id: @user.id).where(deleted: false).order(created_at: 'desc')
     end
   end
 
@@ -95,6 +95,27 @@ class MokusController < ApplicationController
     end
 
     redirect_to action: :show, user_id: user.id, id: @moku.id
+  end
+
+  def check_delete
+    @moku = Moku.find(params[:moku_id])
+    @works = Work.where(moku_id: @moku.id)
+
+  end
+
+  def delete
+    moku = Moku.find(params[:moku_id])
+    moku.deleted = true
+    moku.save!
+
+    works = Work.where(moku_id: moku.id)
+    works.each do |work|
+      work.deleted = true
+      work.save!
+    end
+
+    flash[:notice] = "MOKUを削除しました☁︎"
+    redirect_to(user_mokus_path)
   end
 
   def justnow

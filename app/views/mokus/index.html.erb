@@ -7,9 +7,9 @@
               method: :get, #明示的にgetの追記が必要だった
               local: true) do |form| %>
 
-               <h4>絞り込み</h4>
-  <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
-  <%= form.submit "絞り込む" %>
+    <h4>絞り込み</h4>
+    <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
+    <%= form.submit "絞り込む" %>
   <% end %>
 <% end %>
 
@@ -19,6 +19,7 @@
         <p><%= link_to("#{moku.created_at} の MOKU", user_moku_path(moku.user_id, moku.id)) %>
         <% moku_type = MokuType.find(moku.moku_type_id) %>
         <%= "MOKUタグ：#{moku_type.name}" %>
+        <%= link_to("【MOKUを削除する】","/users/#{moku.user_id}/mokus/#{moku.id}/check")%>
         <%= link_to("【成果物の登録】", "/users/#{moku.user_id}/mokus/#{moku.id}/work/new") %></p>
       </li>
     </ul>

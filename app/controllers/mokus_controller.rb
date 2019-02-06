@@ -125,7 +125,7 @@ class MokusController < ApplicationController
   end
 
   def justnow
-    mokus = Moku.where(mjn_public: true).order(created_at: 'desc').limit(5) # 最新を先に表示するから、desc
+    mokus = Moku.where(mjn_public: true).where(deleted: false).order(created_at: 'desc').limit(5) # 最新を先に表示するから、desc
     render json: mokus, include:[:user, :moku_type], methods: [:format_created_at]#これでmokusがjson(≒JSのハッシュ)になる。さらになぜかuserモデルとmoku_typeモデルが拾える。
   end
 end

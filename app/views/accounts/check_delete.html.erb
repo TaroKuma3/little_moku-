@@ -10,6 +10,13 @@
 
 問題無いようでしたら削除ボタンをクリックしてください☁︎
 
-<p><button>アカウントを削除する</button></p>
+<%= form_with(model: @user,
+url: {controller: :accounts, action: :delete, user_id: current_user.id},
+method: :patch,
+local: true) do |f| %>
+
+<%= f.submit "アカウントを削除する" %>
+
+<% end %>
 
 <p><%= link_to("マイページへ戻る", "/mypage")%></p>

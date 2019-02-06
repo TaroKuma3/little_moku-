@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'accounts/:user_id' => 'accounts#edit'
   patch 'accounts/:user_id' => 'accounts#update'
   get 'accounts/:user_id/check' => 'accounts#check_delete'
+  patch 'accounts/:user_id/delete' => 'accounts#delete'
 
   devise_for :users
   get 'users/:user_id/works/:work_id/public' => 'work#for_public'

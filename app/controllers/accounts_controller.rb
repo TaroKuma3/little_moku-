@@ -25,12 +25,12 @@ class AccountsController < ApplicationController
     @user = current_user
   end
 
-  def delete
-    user = current_user
-    user.deleted = true
-    user.save!
+  # def delete
+  #   user = current_user
+  #   user.deleted = true
+  #   user.save!
 
-    redirect_to ("/mypage")
+  #   redirect_to ("/mypage")
 
     # mokus = Moku.where(user_id: user.id)
     # mokus.each do |moku|
@@ -55,12 +55,7 @@ class AccountsController < ApplicationController
     #   book_mark.deleted = true
     #   book_mark.save!
 
-      
-
-    end
-
-    # ログアウト処理
-    # redirect_to()
+    # end
 
 
 

@@ -112,6 +112,12 @@ class MokusController < ApplicationController
     works.each do |work|
       work.deleted = true
       work.save!
+
+      book_marks = BookMark.where(work_id: work.id)
+      book_marks.each do |book_mark|
+        book_mark.deleted = true
+        book_mark.save!
+      end
     end
 
     flash[:notice] = "MOKUを削除しました☁︎"

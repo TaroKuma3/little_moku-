@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get 'users/:user_id/mokus/:moku_id/check' => 'mokus#check_delete'
   patch 'users/:user_id/mokus/:moku_id/delete' => 'mokus#delete'
 
+  get 'users/:user_id/moku_type/:moku_type_id/check' => 'moku_type#check_delete'
+  patch 'users/:user_id/moku_type/:moku_type_id/delete' => 'moku_type#delete'
+
   devise_for :users
   get 'users/:user_id/works/:work_id/public' => 'work#for_public'
   delete 'work/:id/images/:image_id' => 'work#delete_image'

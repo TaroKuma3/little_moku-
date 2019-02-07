@@ -1,6 +1,6 @@
 <h1>mokus#check_delete</h1>
 
-<h2>MOKUを削除するときはご注意ください</h2>
+<h1>MOKUを削除するときはご注意ください</h1>
 <ul>
   <li>MOKUを削除すると、このMOKUの【成果物】も全て消えてしまいます。</li>
   <li>Book Markされていた成果物の場合、Book Markからも消えてしまいます。</li>
@@ -13,7 +13,7 @@
     <p>成果物のタイトル：<%= link_to("#{work.title}", "/users/#{work.user_id}/work/#{work.id}") %></p>
   <% end %>
 <% else %>
-  <h3>このMOKUには成果物の登録がありませんでした。</h3>
+  <h2>このMOKUには成果物の登録がありませんでした。</h2>
 <% end %>
 
 <h3>本当にこのMOKUを削除してよろしいければ、削除ボタンをクリックしてください。</h3>

@@ -26,7 +26,7 @@
   <% end %>
 
   <h5>----- 絞り込み　-----</h5>
-    <% moku_types = MokuType.where(user_id: current_user.id) %>
+    <% moku_types = MokuType.where(user_id: current_user.id).where(deleted: false) %>
     <% moku_types.each do |moku_type| %>
     <p><%= link_to moku_type.name, "/users/#{current_user.id}/mokus?moku_type=#{moku_type.id}" %></p>
   <% end %>

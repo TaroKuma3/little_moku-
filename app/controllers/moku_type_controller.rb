@@ -60,7 +60,9 @@ class MokuTypeController < ApplicationController
 
   def delete
     moku_type = MokuType.find(params[:moku_type_id])
-    default_moku_type = MokuType.find_by(name: Constants::DEFAULT_MOKU_TYPE_NAME)
+    default_moku_type = MokuType.find_by(
+      user_id: moku_type.user_id,
+      name: Constants::DEFAULT_MOKU_TYPE_NAME)
     moku_type.deleted = true
     moku_type.save!
 

@@ -45,4 +45,24 @@ class User < ApplicationRecord
   #     self.introduce = "自己紹介をどうぞ。画面下方から編集できます！"
   #     puts "テスト！"
   # end
+
+  # def active_for_authentication?
+  #   # super && ! self.deleted
+  #   puts "てすと" #出なかった
+  #   if self.deleted
+  #     false
+  #   else
+  #     super
+  #   end
+  # end
+
+  # def inactive_message #非アクティブのユーザーが
+  #   # self.deleted? ? super : :delete
+
+  #   if self.deleted
+  #     :moku_deleted　 #deleted == trueならこのメッセージを出すようにする。デフォルトのメッセージだとログインできない理由が正当ではなくなる
+  #   else
+  #     super　#:inactiveを返すようだ
+  #   end
+  # end
 end

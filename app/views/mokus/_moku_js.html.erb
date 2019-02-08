@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.js"></script>
 <script>
     //ブラウザバックや再読み込みする時に確認メッセージを出すためのフラグ
     //MOKU開始前は戻れないと困るから。
@@ -26,16 +28,23 @@
 
     function displayTimer() { //displayTimerという関数宣言
         timeCounter = ++timeCounter // 変数timeCounterが＋１　++が前にあると出力してから加算、後にあれば加算してから出力
-        $("#timer").text(timeCounter) // #timer === id="timer" に変数timeCounterを表示させる。text=マッチした要素内のテキストを取得する。つまりtimeCounterの値を#timerに表示しているという。
-        $('#mokuTime').val(timeCounter)
+        // $("#timer").text(timeCounter) // #timer === id="timer" に変数timeCounterを表示させる。text=マッチした要素内のテキストを取得する。つまりtimeCounterの値を#timerに表示しているという。
+        let duration = moment.duration(timeCounter, 'seconds')
+            formatDuration = moment.utc(duration.as('milliseconds')).format('HH:mm:ss')
+            $("#timer").text(formatDuration)
+            $('#mokuTime').val(timeCounter)
+            // console.log(Time.at(timeCounter).utc.strftime('%X'))
+            // console.log(moment.duration(timeCounter).format('hh:mm:ss'))
+            // console.log(formatDuration)
+            // moment.utc(duration.as('milliseconds')).format('HH:mm:ss')
     }
 
     $(document).ready(function () {
-        // $(window).on('beforeunload', function () {
-        //     if (nowStarted) {
-        //         return "ちょっとまって"
-        //     }
-        // })
+        $(window).on('beforeunload', function () {
+            if (nowStarted) {
+                return "ちょっとまって"
+            }
+        })
         startClock();
 
         $('#startButton').on('click', function () {
@@ -74,7 +83,7 @@
                   endTime = new Date() //変数endTimeに今の日時を代入
                   $('#endTimeInput').val(endTime) //DBには保存しないが制御上多分必要。
                   // $('#mokuTime').val(timeCounter) //全部で何分MOKUったか。
-
+                    nowStarted = false;
                   clearInterval(timer) //setIntervalでセットしたタイマーをクリア
                   timeCounter = 0 //timeCounterを０に戻して経過秒数を０にする
                 })

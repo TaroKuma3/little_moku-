@@ -99,6 +99,25 @@ class WorkController < ApplicationController
 
   end
 
+  def check_delete
+    @work = Work.find(params[:work_id])
+  end
+  def delete
+    work = Work.find(params[:work_id])
+    work.deleted = true
+    work.save!
+
+    book_marks = BookMark.where(work_id: work.id)
+    book_marks.each do |book_mark|
+      book_mark.deleted = true
+      book_mark.save!
+    end
+
+    flash[:notice] = "成果物を削除しました☁︎"
+    redirect_to(user_work_index_path(current_user.id))
+  end
+
+
   private
   # workのストロングパラメータ
   # バリデートしたらrender時に一部のパラメータ拾わなくなったので一旦＃で様子見る

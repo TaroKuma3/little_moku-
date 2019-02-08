@@ -27,7 +27,7 @@
     <% @work.images.each do |image| %>
       <%= image_tag image%>
     <% end %>
-  <% end %> 
+  <% end %>
 <%
 =end%>
 
@@ -37,7 +37,12 @@
   <%# モデルにメソッド書いて、@work.public_to_sにすることもできる。どっちでも。
   他の部分でも使うなら、モデルに定義するよりはこのやり方の方がいいだろう%>
   <h4> この制作物が生まれたMOKU：<%=link_to(@moku.created_at, user_moku_path(@user, @moku)) %></h4>
-  <p><%= link_to("【編集】", edit_user_work_path(@user, @work) ) %><%= link_to("【削除(link未設定)】") %></p>
-
+  <p><%= link_to("【編集】", edit_user_work_path(@user, @work) ) %><%= link_to("【削除】", "/users/#{@user.id}/works/#{@work.id}/check") %></p>
+<%#= button_to "削除する",
+ "users/#{current_user.id}/works/#{@work.id}/delete",
+ data: { confirm: "・成果物がブックマークされている場合、ブックマークからも消えてしまいます。
+ ・一度削除すると復活させることはできません。
+ ・本当に削除してよろしいですか？" },
+ method: :patch %>
 <h4><%= link_to("成果物一覧へ戻る", user_work_index_path(@user))%></h4>
 <h4><%= link_to("マイページへ戻る", "/mypage")%></h4>

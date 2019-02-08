@@ -1,0 +1,16 @@
+<h1>work#check_delete</h1>
+
+<h1>成果物の削除の際はご注意ください</h1>
+成果物がブックマークされている場合、ブックマークからも消えてしまいます。<br>
+一度削除すると復活させることはできません。<br>
+
+<h3>本当にこの成果物を削除してよろしいければ、削除ボタンをクリックしてください。</h3>
+
+<%= form_with(model: @work,
+              url: {controller: :work, action: :delete, user_id: current_user.id, work_id: @work.id},
+              method: :patch,
+              local: true) do |f| %>
+
+<%= f.submit "MOKUを削除する" %>
+
+<% end %>

@@ -22,6 +22,25 @@ class User < ApplicationRecord
   # validates :introduce, presence: true
   validates :public, inclusion: { in: [true, false] }
 
+  def active_for_authentication?
+    # super && ! self.deleted
+    if self.deleted
+      false
+    else
+      super
+    end
+  end
+
+  def inactive_message #非アクティブのユーザーが
+    # self.deleted? ? super : :delete
+
+    if self.deleted
+      :moku_deleted #deleted == trueならこのメッセージを出すようにする。デフォルトのメッセージだとログインできない理由が正当ではなくなる
+    else
+      super　#:inactiveを返すようだ
+    end
+  end
+
 
 # 管理者かどうか判断
 # booleanは？のメソッドが必ず必要なので、むしろ書かずともどこかに生えている。（Railsに限る）
@@ -46,23 +65,7 @@ class User < ApplicationRecord
   #     puts "テスト！"
   # end
 
-  # def active_for_authentication?
-  #   # super && ! self.deleted
-  #   puts "てすと" #出なかった
-  #   if self.deleted
-  #     false
-  #   else
-  #     super
-  #   end
-  # end
 
-  # def inactive_message #非アクティブのユーザーが
-  #   # self.deleted? ? super : :delete
 
-  #   if self.deleted
-  #     :moku_deleted　 #deleted == trueならこのメッセージを出すようにする。デフォルトのメッセージだとログインできない理由が正当ではなくなる
-  #   else
-  #     super　#:inactiveを返すようだ
-  #   end
-  # end
+  
 end

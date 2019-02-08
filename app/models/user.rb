@@ -22,24 +22,24 @@ class User < ApplicationRecord
   # validates :introduce, presence: true
   validates :public, inclusion: { in: [true, false] }
 
-  def active_for_authentication?
-    # super && ! self.deleted
-    if self.deleted
-      false
-    else
-      super
-    end
-  end
+  # def active_for_authentication?
+  #   # super && ! self.deleted
+  #   if self.deleted
+  #     false
+  #   else
+  #     super
+  #   end
+  # end
 
-  def inactive_message #非アクティブのユーザーが
-    # self.deleted? ? super : :delete
+  # def inactive_message #非アクティブのユーザーが
+  #   # self.deleted? ? super : :delete
 
-    if self.deleted
-      :moku_deleted #deleted == trueならこのメッセージを出すようにする。デフォルトのメッセージだとログインできない理由が正当ではなくなる
-    else
-      super　#:inactiveを返すようだ
-    end
-  end
+  #   if self.deleted
+  #     :moku_deleted #deleted == trueならこのメッセージを出すようにする。デフォルトのメッセージだとログインできない理由が正当ではなくなる
+  #   else
+  #     super　#:inactiveを返すようだ
+  #   end
+  # end
 
 
 # 管理者かどうか判断

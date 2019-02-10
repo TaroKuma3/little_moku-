@@ -5,9 +5,6 @@
     <%= link_to("MOKUる", new_user_moku_path(@user))%>
   </li>
   <li>
-    <%= link_to("これまでのMOKU一覧へ(カレンダーのメガネから)", user_mokus_path(@user))%>
-  </li>
-  <li>
     <%= link_to("MOKUタグ一覧へ", user_moku_type_index_path(@user))%>
   </li>
   <li>
@@ -77,7 +74,7 @@ booleanのメソッドがないなら生やしてやるよ、とRailsが勝手�
 <% end %>
 
 <h1>カレンダー</h1>
-
+<h5><%= link_to("【これまでの全てのMOKU一覧】", user_mokus_path(@user))%></h5>
 <%= month_calendar(attribute: :created_at, events: @mokus) do |date, mokus| %>
   <%= date %><br>
   <% mokus.each do |moku| %>

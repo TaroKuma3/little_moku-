@@ -55,7 +55,6 @@ class MokusController < ApplicationController
     moku.started_at = DateTime.now
 
     if moku.save!
-      flash[:notice] = "MOKU開始！頑張って！"
       render json: moku
     else
       render :new

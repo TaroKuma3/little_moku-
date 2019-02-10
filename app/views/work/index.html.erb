@@ -5,6 +5,8 @@
     <ul>
       <li>
         <%= link_to(work.title, user_work_path(work.user_id, work.id)) %>
+        <%= link_to("【編集】", edit_user_work_path(work.user_id, work.id))%>
+        <%= link_to("【削除】", "/users/#{work.user_id}/works/#{work.id}/check")%>
       </li>
     </ul>
   <% end %>

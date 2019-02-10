@@ -4,14 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :mokus, dependent: :destroy
-  has_many :moku_types, dependent: :destroy
-  has_many :works #ブクマに関わるので調べてから
-  has_many :likes #なくす予定
-  has_many :book_marks, dependent: :destroy
-  has_many :stamps　#なくす予定だけどやっぱりやりたいかな
-  has_many :faqs #管理者しか関係ない。管理者は退会してはいけないのでこのまま。
-  has_one :mypage_config , dependent: :destroy
+  has_many :mokus#, dependent: :destroy
+  has_many :moku_types#dependentは, v: :destroy
+  has_many :works #dependentはブクマに関わるので調べてから
+  has_many :likes #なし
+  has_many :book_marks#, dependent: :destroy
+  has_many :stamps　#なし
+  has_many :faqs #管理者しか関係ない。管理者は退会してはいけないのでdependentせずこのまま。
+  has_one :mypage_config# , dependent: :destroy #なし
 
   # before_create :insert_mypage_edit
   after_create :insert_default_moku_type

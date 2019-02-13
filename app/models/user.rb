@@ -18,28 +18,26 @@ class User < ApplicationRecord
 
   validates :admin, inclusion: { in: [true, false] }
   validates :name, presence: true
-  # validates :items, presence: true
-  # validates :introduce, presence: true
   validates :public, inclusion: { in: [true, false] }
 
-  # def active_for_authentication?
-  #   # super && ! self.deleted
-  #   if self.deleted
-  #     false
-  #   else
-  #     super
-  #   end
-  # end
+  def active_for_authentication?
+    # super && ! self.deleted これは三項演算子による記述。砕けて書くと↓になる。
+    if self.deleted
+      false
+    else
+      super
+    end
+  end
 
-  # def inactive_message #非アクティブのユーザーが
-  #   # self.deleted? ? super : :delete
+  def inactive_message #非アクティブのユーザーが
+    # self.deleted? ? super : :delete
 
-  #   if self.deleted
-  #     :moku_deleted #deleted == trueならこのメッセージを出すようにする。デフォルトのメッセージだとログインできない理由が正当ではなくなる
-  #   else
-  #     super　#:inactiveを返すようだ
-  #   end
-  # end
+    if self.deleted
+      :moku_deleted #deleted == trueならこのメッセージを出すようにする。デフォルトのメッセージだとログインできない理由が正当ではなくなる
+    else            #:moku_deletedのメッセージはconfig/locales/devise.en.ymlに作った。
+      super　#:inactiveを返すようだ
+    end
+  end
 
 
 # 管理者かどうか判断
@@ -59,13 +57,4 @@ class User < ApplicationRecord
     moku_type.save!
   end
 
-  # def insert_mypage_edit
-  #     self.items = "主に使う道具・教材・機材・材料などをどうぞ。画面下方から編集できます！"
-  #     self.introduce = "自己紹介をどうぞ。画面下方から編集できます！"
-  #     puts "テスト！"
-  # end
-
-
-
-  
 end

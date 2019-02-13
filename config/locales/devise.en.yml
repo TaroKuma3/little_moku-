@@ -8,8 +8,8 @@ en:
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
       already_authenticated: "You are already signed in."
-      inactive: "Your account is not activated yet."
-      moku_deleted: "this account has already been withdrawn" #自作のメッセージ。退会済みだからログインできませんよ
+      inactive: "Your account is not activated yet." #これがもともと設定されていたもの。
+      moku_deleted: "Your account is not active." #自作のメッセージ。(退会済みだから)非アクティブなんでログインできませんよ
       invalid: "Invalid %{authentication_keys} or password."
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."

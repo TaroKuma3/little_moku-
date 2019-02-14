@@ -14,7 +14,6 @@
     <header>
       <nav>
         <% if user_signed_in? %>
-          <span id="greet"><%= "#{greeting}、#{current_user.name}さん！" %></span>
           <span id="linkToAaacount"><%= link_to("アカウント情報", edit_user_registration_path) %></span>
           <span id="linkToSetting"><%= link_to("個人設定", "/accounts/#{current_user.id}")%></span>
           <span id="linkToLogout"><%= link_to("ログアウト", destroy_user_session_path, method: :delete) %></span>
@@ -24,6 +23,10 @@
         <% end %>
         <span id="linkToTaq"><%= link_to("よくある質問",faqs_path) %></span>
       </nav>
+
+      <% if user_signed_in? %>
+          <span id="greet"><%= "#{greeting}、#{current_user.name}さん！" %></span>
+      <% end %>
     </header>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>

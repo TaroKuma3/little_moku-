@@ -8,7 +8,7 @@
               local: true) do |form| %>
 
     <h4>絞り込み</h4>
-    <%= form.collection_select :moku_type, @user.moku_types.where(deleted: false), :id, :name, selected: @user.moku_types %>
+    <%= form.collection_select :moku_type, @user.active_moku_types, :id, :name, selected: @user.moku_types %>
     <%= form.submit "絞り込む" %>
   <% end %>
 <% end %>

@@ -39,6 +39,10 @@ class User < ApplicationRecord
     end
   end
 
+  def active_moku_types
+    moku_types = MokuType.where(deleted: false).where(user_id: self.id) #find_by,findだと１件しか拾わない
+  end
+
 
 # 管理者かどうか判断
 # booleanは？のメソッドが必ず必要なので、むしろ書かずともどこかに生えている。（Railsに限る）

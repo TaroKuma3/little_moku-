@@ -6,7 +6,7 @@
 <%= @moku.updated_at %>
 
 <h4>MOKU TIME</h4>
-<%= "#{@moku.moku_time / 60}MOKUりました！" %>
+<%= "#{distance_of_time_in_words(@moku.moku_time)}MOKUりました！" %>
 <%# ヘルパーでメソッド作る%>
 
 

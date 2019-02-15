@@ -68,6 +68,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+gem 'devise-i18n'
+
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
@@ -75,3 +77,4 @@ gem "simple_calendar", "~> 2.0"
 gem "aws-sdk-s3"
 
 gem 'mini_magick'
+gem 'rails-i18n', '~> 5.1'

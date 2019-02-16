@@ -1,25 +1,15 @@
 <h1>Mypage#index</h1>
 <h1><%= @user.name%>さんのマイページ</h1>
 <ul>
-  <li>
-    <%= link_to("MOKUる", new_user_moku_path(@user))%>
-  </li>
-  <li>
-    <%= link_to("MOKUタグ一覧へ", user_moku_type_index_path(@user))%>
-  </li>
-  <li>
-    <%= link_to("成果物一覧へ（王冠から）", user_work_index_path(@user))%>
-  </li>
-  <li>
-    <%= link_to("ブックマーク一覧へ", user_book_marks_path(@user))%>
-  </li>
+  <li><%= link_to("MOKUる", new_user_moku_path(@user))%></li>
+  <li><%= link_to("MOKUタグ一覧へ", user_moku_type_index_path(@user))%></li>
+  <li><%= link_to("成果物一覧へ（王冠から）", user_work_index_path(@user))%></li>
+  <li><%= link_to("ブックマーク一覧へ", user_book_marks_path(@user))%></li>
 </ul>
 
-<ul>
-  <li>
-    PICK UP
+<h4>PICK UP<h4>
+  <ul>
     <% @work_randoms.each do |work_random| %>
-      <ul>
         <li>
         <% work = Work.find_by(id: work_random.id)%>
           <%#= link_to(work_random.title, "users/#{@user.id}/works/#{work.id}/public") %>
@@ -29,10 +19,9 @@
             <%= link_to(work_random.title, "/users/#{work.user_id}/works/#{work.id}/public") %>
           <% end %>
         </li>
-      </ul>
     <% end %>
-  </li>
-</ul>
+  </ul>
+
 
 <h4>MOKU JUST NOW</h4>
   <ul id="justNowUl"></ul>

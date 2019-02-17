@@ -1,15 +1,17 @@
-<h2>Forgot your password?</h2>
+<h2>パスワードがわからなくなってしまったら</h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
 
+  <p>パスワードリセット用のメールをお送りします。</p>
+  <p>メールアドレスを入力してください。</p>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit "送信する" %>
   </div>
 <% end %>
 

@@ -29,35 +29,34 @@ class AccountsController < ApplicationController
     user = current_user
     user.deleted = true
     user.save!
-    reset_session
-    redirect_to ("/")
 
-    # mokus = Moku.where(user_id: user.id)
-    # mokus.each do |moku|
-    #   moku.deleted = true
-    #   moku.save!
-    # end
+    mokus = Moku.where(user_id: current_user.id)
+    mokus.each do |moku|
+      moku.deleted = true
+      moku.save!
+    end
 
-    # moku_types = MokuTypes.where(user_id: user.id)
-    # moku_types.each do |moku_type|
-    #   moku_type.deleted = true
-    #   moku_type.save!
-    # end
+    moku_types = MokuType.where(user_id: current_user.id)
+    moku_types.each do |moku_type|
+      moku_type.deleted = true
+      moku_type.save!
+    end
 
-    # works = Work.where(user_id: user.id)
-    # works.each do |work|
-    #   work.delted = true
-    #   work.save!
-    # end
+    works = Work.where(user_id: current_user.id)
+    works.each do |work|
+      work.deleted = true
+      work.save!
 
-    # book_marks = BookMark.where(user_id: user.id)
-    # book_marks.each do |book_mark|
-    #   book_mark.deleted = true
-    #   book_mark.save!
+      book_marks = BookMark.where(work_id: work.id)
+      book_marks.each do |book_mark|
+        book_mark.deleted = true
+        book_mark.save!
+      end
+    end
 
-    # end
-
-
+  flash[:notice] = "ご利用ありがとうございました！またいつでも戻ってきてください！"
+  reset_session
+  redirect_to ("/")
 
   end
 

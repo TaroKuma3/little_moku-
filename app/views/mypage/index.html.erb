@@ -35,12 +35,17 @@
     <%= simple_format(@user.items) %>
 <% end %>
 
-<h4>自己紹介</h4>
+<%
+=begin%>
+このmypageは自分しかみないから自己紹介表示する必要なかった
+ <h4>自己紹介</h4>
   <% if @user.introduce.blank? %>
   　<h5>︎︎︎︎☁︎画面下部の「個人設定」から、自己紹介を登録しよう！</h5>
   <% else %>
     <%= simple_format(@user.introduce) %>
-<% end %>
+<% end %> 
+<%
+=end%>
 
 <h4>アカウントの公開表/非公開</h4>
 <%= public_to_s(@user.public) %>

@@ -47,8 +47,7 @@
 <%
 =end%>
 
-<h4>アカウントの公開表/非公開</h4>
-<%= public_to_s(@user.public) %>
+<h4><%= "#{@user.name}さんのアカウントは現在#{public_to_s(@user.public)}になっています" %></h4>
 <% if @user.admin? %>
 <%# booleanを定義している場合、？のメソッドで　tureか？と聞く。
 本来聞くメソッドが必ず必要で、今回user.rbに定義はしたんだけど、実は定義しないでもOK

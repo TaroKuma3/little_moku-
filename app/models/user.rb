@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :admin, inclusion: { in: [true, false] }
   validates :name, presence: true
   validates :public, inclusion: { in: [true, false] }
+  validates :introduce, length: {maximum: 140}
 
   def active_for_authentication?
     # super && ! self.deleted これは三項演算子による記述。砕けて書くと↓になる。

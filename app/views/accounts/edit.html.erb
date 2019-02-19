@@ -15,13 +15,13 @@ local: true) do |f| %>
   <%= f.text_field :name %>
 
   <h4>MOKUアイテム</h4>
-  <% unless @user.items %>
+  <% if @user.items.blank? %>
     作業につかう道具や機材、材料、教材などを登録しましょう！<br>
   <% end %>
     <%= f.text_area :items %>
 
   <h4>自己紹介</h4>
-  <% unless @user.introduce %>
+  <% if @user.introduce.blank? %>
     自己紹介をしましょう！<br>
   <% end %>
     <%= f.text_area :introduce %>

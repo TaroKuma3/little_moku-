@@ -19,7 +19,7 @@
 <body>
   <span id="defaultTitle"><h1>MOKUる</h1></span>
     <span id="afterStartTitle" style="display:none;"><h1>ただいまMOKUっています！</h1></span>
-    <span id="afterStartTitle" style="display:none;"><h4>終了するときは【MOKU終了！】をクリック！</h4></span>
+    <%# <span id="afterStartTitle" style="display:none;"><h4>終了するときは【MOKU終了！】をクリック！</h4></span> これいらなかった%>
     <div id="clockImage" style="display:none;">
         <img src="/assets/dial.png" class="clock"><!--文字盤-->
         <img src="/assets/hour.png" id="hour" class="clock"><!--短針-->
@@ -49,6 +49,7 @@
     selected:...オプション。どの選択肢を表示しておくか。editならcreate時のデーター引っ張ってる。newの時はHTML的に最初に書かれてるものが出る。
     %>
 
+<%# MKNへ公開されても何も不利益が出ない。mokuトモ作らなくなったから。無しにする。問答無用で載せる%>
   <span id="selectMJN"><h3>MOKU JUST NOWに公開していいですか？</h3></span>
   <%= form.select :mjn_public, options_for_public_for_bool %>
 

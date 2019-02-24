@@ -40,7 +40,7 @@
     <%# end %>
 
   <span id="selectMokuType"><h3>なにをMOKUりますか？MOKUタグを教えてください</h3></span>
-  <%= form.collection_select :moku_type, @user.moku_types, :id, :name, selected: @user.moku_types %>
+  <%= form.collection_select :moku_type, @user.active_moku_types, :id, :name, selected: @user.moku_types %>
     <%# form.collection_selectのメモ
     :moku_type...指定したモデル@mokuのどのカラムが対処？
     @user.moku_type...選択肢になるデーター。@user（そのユーザー）が持ってるmoku_type全部対象だかからmoku_types（っていうかmoku_typesテーブルだなこれ多分）

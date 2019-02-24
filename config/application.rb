@@ -18,5 +18,6 @@ module LittleMoku
 
     config.time_zone = 'Tokyo' #表示は日本時間
     config.active_record.default_timezone = :utc #DBではUTC時間
+
   end
 end

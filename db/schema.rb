@@ -44,13 +44,13 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
   create_table "faqs", force: :cascade do |t|
     t.string "questions"
     t.string "answer"
-    t.string "category"
+    t.string "category" #いらない
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
   end
 
-  create_table "likes", force: :cascade do |t|
+  create_table "likes", force: :cascade do |t| #いらない
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.boolean "deleted", default: false, null: false
   end
 
-  create_table "mokus", force: :cascade do |t|
+  create_table "mokus", force: :cascade do |t| #本番はアプリがmokuで衝突したのでdo_mokusになった
     t.datetime "started_at"
     t.datetime "finished_at"
     t.integer "moku_time"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.boolean "deleted", default: false, null: false
   end
 
-  create_table "mypage_configs", force: :cascade do |t|
+  create_table "mypage_configs", force: :cascade do |t|#いらない
     t.text "items"
     t.text "introduce"
     t.datetime "created_at", null: false
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.integer "user_id"
   end
 
-  create_table "stamps", force: :cascade do |t|
+  create_table "stamps", force: :cascade do |t|#いらない
     t.integer "moku_id"
     t.integer "work_id"
     t.datetime "created_at", null: false
@@ -143,8 +143,8 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.integer "moku_id"
     t.integer "user_id"
     t.string "title"
-    t.integer "comment_public"
-    t.integer "pick_up"
+    t.integer "comment_public" #booleanにすること！！
+    t.integer "pick_up" #booleanにすること！！
     t.boolean "deleted", default: false, null: false
   end
 

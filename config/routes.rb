@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   get 'accounts/:user_id/check' => 'accounts#check_delete'
   patch 'accounts/:user_id/delete' => 'accounts#delete'
 
+  #announcemnt
+  get '/announcements/index' => 'announcements#index'
+  get '/announcements/new' => 'announcements#new'
+  post '/announcements/create' => 'announcements#create'
+
   #book_mark
   post '/users/:user_id/works/:work_id/book_marks' => 'book_marks#create'
   delete '/users/:user_id/works/:work_id/book_marks' => 'book_marks#destroy'

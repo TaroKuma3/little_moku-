@@ -8,6 +8,8 @@ class MypageController < ApplicationController
     # @works_random = Work.where(pick_up: true).order("RANDOM()").limit(3)
     @work_randoms = Work.where(pick_up: true).where(deleted: false).order(created_at: 'desc').limit(3) #このままだと上から３つ固定なのでちょと考える
     @mokus = Moku.where(user_id: current_user.id).where(deleted: false) #カレンダーのために取得
+
+    @annouce = Announcement.all
   end
 
   #↓current_userにしてはいけない。pick upで成果物の作者を見にくる場合もアクセスされるから。

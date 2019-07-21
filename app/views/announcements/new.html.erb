@@ -1,0 +1,11 @@
+<h1>お知らせを作る</h1>
+
+<%= form_with(model: @Aannouncement,
+url: {controller: :aannouncements, action: :create, user_id: current_user.id},
+method: :post,
+local: true) do |f| %>
+
+ <h3>お知らせ内容</h3>
+<%= form.text_area :annouce %>
+
+<% end %>

@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :stamps　#なし
   has_many :faqs #管理者しか関係ない。管理者は退会してはいけないのでdependentせずこのまま。
   has_one :mypage_config# , dependent: :destroy #なし
+  has_many :announcements
 
   # before_create :insert_mypage_edit
   after_create :insert_default_moku_type

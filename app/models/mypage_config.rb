@@ -1,5 +1,6 @@
 class MypageConfig < ApplicationRecord
 belongs_to :user
+has_many :announcements
 
 # ↓MypageConfigの中身だと思ったからここに書いたけれど、ユーザーは作れても発動しなかった。
 # 理由は、ユーザーを追加するときに、だからuser.rbに書くべき内容だったから。

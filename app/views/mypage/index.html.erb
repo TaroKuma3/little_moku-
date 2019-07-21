@@ -1,10 +1,16 @@
 <h1>Mypage#index</h1>
 <h1><%= @user.name%>さんのマイページ</h1>
+
+<h4>mokuからのお知らせ</h4>
+　<% @annouce.each do |anouce| %>
+    <%= anouce.title%><%= anouce.created_at %>
+  <% end %>
 <ul>
   <li><%= link_to("MOKUる", new_user_moku_path(@user))%></li>
   <li><%= link_to("MOKUタグ一覧へ", user_moku_type_index_path(@user))%></li>
   <li><%= link_to("成果物一覧へ（王冠から）", user_work_index_path(@user))%></li>
   <li><%= link_to("ブックマーク一覧へ", user_book_marks_path(@user))%></li>
+  <li><%= link_to("おしらせ", "/announcements/index" )%></li>
 </ul>
 
 <h4>PICK UP<h4>

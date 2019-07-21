@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_034322) do
+ActiveRecord::Schema.define(version: 2019_07_21_035150) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "announcements", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "book_marks", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -44,13 +52,13 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
   create_table "faqs", force: :cascade do |t|
     t.string "questions"
     t.string "answer"
-    t.string "category" #いらない
+    t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
   end
 
-  create_table "likes", force: :cascade do |t| #いらない
+  create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -64,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.boolean "deleted", default: false, null: false
   end
 
-  create_table "mokus", force: :cascade do |t| #本番はアプリがmokuで衝突したのでdo_mokusになった
+  create_table "mokus", force: :cascade do |t|
     t.datetime "started_at"
     t.datetime "finished_at"
     t.integer "moku_time"
@@ -77,7 +85,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.boolean "deleted", default: false, null: false
   end
 
-  create_table "mypage_configs", force: :cascade do |t|#いらない
+  create_table "mypage_configs", force: :cascade do |t|
     t.text "items"
     t.text "introduce"
     t.datetime "created_at", null: false
@@ -86,7 +94,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.integer "user_id"
   end
 
-  create_table "stamps", force: :cascade do |t|#いらない
+  create_table "stamps", force: :cascade do |t|
     t.integer "moku_id"
     t.integer "work_id"
     t.datetime "created_at", null: false
@@ -143,8 +151,8 @@ ActiveRecord::Schema.define(version: 2019_02_03_034322) do
     t.integer "moku_id"
     t.integer "user_id"
     t.string "title"
-    t.integer "comment_public" #booleanにすること！！
-    t.integer "pick_up" #booleanにすること！！
+    t.integer "comment_public"
+    t.integer "pick_up"
     t.boolean "deleted", default: false, null: false
   end
 
